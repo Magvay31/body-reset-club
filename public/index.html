@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Body Reset Club — Финансовая модель</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#f7f7f5; --ink:#0a0a0a; --muted:#6b7280; --line:#e5e7eb; --pos:#047857; --neg:#dc2626; --warn:#d97706; }
+  * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+  html, body { background: var(--bg); color: var(--ink); }
+  .num { font-variant-numeric: tabular-nums; }
+  .field { width: 100%; padding: 0.5rem 0.75rem; background: #fff; border: 1px solid var(--line); border-radius: 0.5rem; text-align: right; font-variant-numeric: tabular-nums; font-size: 0.875rem; transition: border-color 0.15s; }
+  .field:focus { outline: none; border-color: #0a0a0a; box-shadow: 0 0 0 3px rgba(0,0,0,0.05); }
+  .field-text { text-align: left; }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: 1rem; padding: 1.25rem; }
+  .label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 500; }
+  .metric { font-size: 1.875rem; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.1; }
+  details > summary { list-style: none; cursor: pointer; user-select: none; }
+  details > summary::-webkit-details-marker { display: none; }
+  details > summary::after { content: '+'; float: right; color: var(--muted); font-weight: 400; font-size: 1.25rem; line-height: 1; }
+  details[open] > summary::after { content: '−'; }
+  .pos { color: var(--pos); }
+  .neg { color: var(--neg); }
+  .warn { color: var(--warn); }
+  .pill { display: inline-block; padding: 0.125rem 0.5rem; background: #f3f4f6; border-radius: 999px; font-size: 0.7rem; color: var(--muted); }
+  table th, table td { padding: 0.5rem 0.75rem; }
+  .role-card { transition: transform 0.15s, box-shadow 0.15s; }
+  .role-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(0,0,0,0.12); }
+</style>
+</head>
+<body>
+
+<header class="border-b border-gray-200 bg-white">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <div>
+      <div class="flex items-center gap-2">
+        <h1 class="text-xl font-bold">Body Reset Club</h1>
+        <span class="pill">Москва</span>
+      </div>
+      <p class="text-sm text-gray-500">Финансовая модель · клуб коррекции тела</p>
+    </div>
+    <div class="flex items-center gap-2">
+      <button id="btn-reset" class="px-3 py-2 text-sm border border-gray-200 rounded-lg hover:bg-gray-50">Сбросить</button>
+      <button id="btn-export" class="px-3 py-2 text-sm border border-gray-200 rounded-lg hover:bg-gray-50">Экспорт CSV</button>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-6 py-8 space-y-6">
+
+  <!-- Summary KPI cards -->
+  <section class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="card">
+      <div class="label">Выручка / мес</div>
+      <div class="metric" id="m-revenue">—</div>
+      <div class="text-sm text-gray-500 mt-1" id="m-revenue-sub">—</div>
+    </div>
+    <div class="card">
+      <div class="label">Операционная прибыль</div>
+      <div class="metric" id="m-profit">—</div>
+      <div class="text-sm text-gray-500 mt-1" id="m-margin">—</div>
+    </div>
+    <div class="card">
+      <div class="label">Точка безубытка</div>
+      <div class="metric" id="m-breakeven">—</div>
+      <div class="text-sm text-gray-500 mt-1">клиенток нужно</div>
+    </div>
+    <div class="card">
+      <div class="label">Загрузка мощности</div>
+      <div class="metric" id="m-utilization">—</div>
+      <div class="text-sm text-gray-500 mt-1" id="m-utilization-sub">—</div>
+    </div>
+  </section>
+
+  <!-- Inputs + Outputs -->
+  <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+    <!-- LEFT: inputs (2 cols) -->
+    <div class="lg:col-span-2 space-y-4">
+
+      <details class="card" open>
+        <summary class="font-semibold text-base flex items-center justify-between">
+          <span>Тарифы и клиенты</span>
+          <span class="text-sm text-gray-400 font-normal" id="t-total"></span>
+        </summary>
+        <div class="mt-4">
+          <div class="grid grid-cols-12 gap-3 mb-2 text-xs text-gray-400 uppercase tracking-wide">
+            <div class="col-span-4">Тариф</div>
+            <div class="col-span-3 text-right">Цена ₽/мес</div>
+            <div class="col-span-2 text-right">Клиенток</div>
+            <div class="col-span-3 text-right">Выручка</div>
+          </div>
+          <div class="space-y-2" id="tariffs-list"></div>
+        </div>
+      </details>
+
+      <details class="card" open>
+        <summary class="font-semibold text-base">Постоянные расходы</summary>
+        <div class="mt-4 grid grid-cols-2 gap-3">
+          <div>
+            <label class="label block mb-1">Аренда + расходники</label>
+            <input type="number" data-bind="fixedCosts.rent" class="field">
+          </div>
+          <div>
+            <label class="label block mb-1">ФОТ</label>
+            <input type="number" data-bind="fixedCosts.salary" class="field">
+          </div>
+          <div>
+            <label class="label block mb-1">Маркетинг</label>
+            <input type="number" data-bind="fixedCosts.marketing" class="field">
+          </div>
+          <div>
+            <label class="label block mb-1">Прочее (эквайринг, CRM, амортизация)</label>
+            <input type="number" data-bind="fixedCosts.other" class="field">
+          </div>
+        </div>
+        <div class="mt-3 text-sm text-gray-500 flex justify-between border-t border-gray-100 pt-3">
+          <span>Итого фикс</span>
+          <span class="font-semibold num text-gray-900" id="fc-total">—</span>
+        </div>
+      </details>
+
+      <details class="card">
+        <summary class="font-semibold text-base">Переменные расходы на клиентку</summary>
+        <div class="mt-4 grid grid-cols-2 gap-3">
+          <div>
+            <label class="label block mb-1">Офлайн ₽/клиентка/мес</label>
+            <input type="number" data-bind="variableCostOffline" class="field">
+          </div>
+          <div>
+            <label class="label block mb-1">Онлайн ₽/клиентка/мес</label>
+            <input type="number" data-bind="variableCostOnline" class="field">
+          </div>
+        </div>
+        <p class="text-xs text-gray-400 mt-3">Одноразка, полотенца, стирка, косметика, эквайринг, бонусы.</p>
+      </details>
+
+      <details class="card">
+        <summary class="font-semibold text-base">Воронка маркетинга</summary>
+        <div class="mt-4 grid grid-cols-2 gap-3">
+          <div>
+            <label class="label block mb-1">Стоимость лида ₽</label>
+            <input type="number" data-bind="funnel.leadCost" class="field">
+          </div>
+          <div>
+            <label class="label block mb-1">Цена пробника ₽</label>
+            <input type="number" data-bind="funnel.diagnosticPrice" class="field">
+          </div>
+          <div>
+            <label class="label block mb-1">Лид → диагностика (0–1)</label>
+            <input type="number" data-bind="funnel.leadToDiagnostic" class="field" step="0.01" min="0" max="1">
+          </div>
+          <div>
+            <label class="label block mb-1">Диагностика → абонемент (0–1)</label>
+            <input type="number" data-bind="funnel.diagnosticToSubscription" class="field" step="0.01" min="0" max="1">
+          </div>
+        </div>
+      </details>
+
+      <details class="card">
+        <summary class="font-semibold text-base">Удержание (cohort survival)</summary>
+        <div class="mt-4 grid grid-cols-2 gap-3">
+          <div>
+            <label class="label block mb-1">M1 → M2 (0–1)</label>
+            <input type="number" data-bind="retention.m1m2" class="field" step="0.01" min="0" max="1">
+          </div>
+          <div>
+            <label class="label block mb-1">M2 → M3 (0–1)</label>
+            <input type="number" data-bind="retention.m2m3" class="field" step="0.01" min="0" max="1">
+          </div>
+        </div>
+        <p class="text-xs text-gray-400 mt-3">По исходной воронке: 15 → 8 → 4 ≈ 53% / 50%.</p>
+      </details>
+
+      <details class="card">
+        <summary class="font-semibold text-base">Мощность зала</summary>
+        <div class="mt-4 grid grid-cols-2 gap-3">
+          <div>
+            <label class="label block mb-1">Рабочих дней / мес</label>
+            <input type="number" data-bind="capacity.workingDays" class="field">
+          </div>
+          <div>
+            <label class="label block mb-1">Часов / день</label>
+            <input type="number" data-bind="capacity.workingHours" class="field">
+          </div>
+          <div>
+            <label class="label block mb-1">Клиенток / час (3 зоны)</label>
+            <input type="number" data-bind="capacity.clientsPerHour" class="field">
+          </div>
+          <div>
+            <label class="label block mb-1">Визитов / клиентка / нед</label>
+            <input type="number" data-bind="capacity.visitsPerWeek" class="field">
+          </div>
+        </div>
+      </details>
+
+    </div>
+
+    <!-- RIGHT: outputs -->
+    <div class="space-y-4">
+
+      <div class="card">
+        <h3 class="font-semibold text-base mb-4">P&L (месяц)</h3>
+        <div class="space-y-2 text-sm num">
+          <div class="flex justify-between py-1">
+            <span class="text-gray-600">Выручка</span>
+            <span class="font-semibold" id="pl-revenue">—</span>
+          </div>
+          <div class="flex justify-between py-1 text-gray-500">
+            <span>− переменные</span>
+            <span id="pl-variable">—</span>
+          </div>
+          <div class="flex justify-between py-2 border-t border-gray-200">
+            <span class="text-gray-600">Валовая прибыль</span>
+            <span class="font-semibold" id="pl-gross">—</span>
+          </div>
+          <div class="flex justify-between py-1 text-gray-500">
+            <span>− фикс</span>
+            <span id="pl-fixed">—</span>
+          </div>
+          <div class="flex justify-between py-2 border-t border-gray-200">
+            <span class="font-semibold">Операционная прибыль</span>
+            <span class="font-bold text-lg" id="pl-operating">—</span>
+          </div>
+          <div class="flex justify-between text-xs text-gray-500">
+            <span>Маржинальность</span>
+            <span id="pl-margin">—</span>
+          </div>
+          <div class="flex justify-between text-xs text-gray-500 border-t border-gray-100 pt-2 mt-2">
+            <span>Годовая прибыль (steady-state)</span>
+            <span id="pl-yearly">—</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="font-semibold text-base mb-4">Юнит-экономика</h3>
+        <div class="space-y-2 text-sm num">
+          <div class="flex justify-between"><span class="text-gray-600">Средний чек</span><span id="ue-avg-price">—</span></div>
+          <div class="flex justify-between"><span class="text-gray-600">Маржа на клиентку</span><span id="ue-margin-per">—</span></div>
+          <div class="flex justify-between"><span class="text-gray-600">CAC (рыночная цена)</span><span id="ue-cac">—</span></div>
+          <div class="flex justify-between"><span class="text-gray-600">Средний LT (мес)</span><span id="ue-lifetime">—</span></div>
+          <div class="flex justify-between"><span class="text-gray-600">LTV</span><span id="ue-ltv">—</span></div>
+          <div class="flex justify-between border-t border-gray-200 pt-2">
+            <span class="font-medium">LTV / CAC</span>
+            <span class="font-bold" id="ue-ltv-cac">—</span>
+          </div>
+          <div class="flex justify-between text-xs text-gray-500">
+            <span>CAC окупается через</span>
+            <span id="ue-payback">—</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="font-semibold text-base mb-4">Воронка</h3>
+        <div class="space-y-2 text-sm">
+          <div class="flex justify-between"><span class="text-gray-600">Бюджет</span><span class="num font-medium" id="fn-budget">—</span></div>
+          <div class="flex justify-between"><span class="text-gray-600">Лиды</span><span class="num" id="fn-leads">—</span></div>
+          <div class="flex justify-between"><span class="text-gray-600">Диагностики</span><span class="num" id="fn-diagnostics">—</span></div>
+          <div class="flex justify-between border-t border-gray-200 pt-2">
+            <span class="font-medium">Новые клиентки / мес</span>
+            <span class="num font-bold" id="fn-new">—</span>
+          </div>
+          <div class="flex justify-between text-xs text-gray-500">
+            <span>Доход от пробников</span>
+            <span class="num" id="fn-diag-revenue">—</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scenarios + Sensitivity -->
+  <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+    <div class="card">
+      <h3 class="font-semibold text-base mb-4">Готовые сценарии</h3>
+      <div class="grid grid-cols-2 gap-2" id="scenarios-list"></div>
+      <p class="text-xs text-gray-400 mt-3">Нажми сценарий — модель пересоберётся. Сбрось, чтобы вернуться к дефолтам.</p>
+    </div>
+
+    <div class="card">
+      <h3 class="font-semibold text-base mb-4">Чувствительность прибыли</h3>
+      <table class="w-full text-sm">
+        <thead class="text-xs text-gray-400 uppercase tracking-wide border-b border-gray-200">
+          <tr>
+            <th class="text-left">Изменение</th>
+            <th class="text-right">Прибыль</th>
+            <th class="text-right">Δ</th>
+          </tr>
+        </thead>
+        <tbody id="sensitivity-table" class="num"></tbody>
+      </table>
+    </div>
+
+  </section>
+
+  <!-- Cohort projection -->
+  <section class="card">
+    <h3 class="font-semibold text-base mb-4">Проекция когорты (6 месяцев)</h3>
+    <p class="text-xs text-gray-400 mb-3">Что произойдёт со 100 новыми клиентками месяца 1 при заданном удержании.</p>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm num">
+        <thead class="text-xs text-gray-400 uppercase tracking-wide border-b border-gray-200">
+          <tr>
+            <th class="text-left">Месяц</th>
+            <th class="text-right">Активны</th>
+            <th class="text-right">Выручка</th>
+            <th class="text-right">Маржа</th>
+            <th class="text-right">Накоп. маржа</th>
+          </tr>
+        </thead>
+        <tbody id="cohort-table"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Cofounder roles -->
+  <section class="space-y-4">
+    <div>
+      <h2 class="text-lg font-bold">Роли кофаундеров — две девушки, две зоны</h2>
+      <p class="text-sm text-gray-500 max-w-3xl">Нельзя обеим заниматься всем — проект умрёт в каше ответственности. Делим жёстко: одна отвечает за то, чтобы клиентки <b>пришли и купили</b>, вторая — за то, чтобы они <b>получили результат и остались</b>. Бизнес взлетает только если обе зоны работают одновременно.</p>
+    </div>
+
+    <!-- ROLE 1: Commercial -->
+    <div class="card role-card">
+      <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+        <div>
+          <h3 class="font-bold text-xl">Кофаундер 1 · «Деньги и спрос»</h3>
+          <p class="text-sm text-gray-600">Коммерческий кофаундер. Отвечает за выручку, поток клиенток, загрузку слотов.</p>
+        </div>
+        <span class="pill">Главный вопрос каждый день: «Где деньги и чем сегодня заполняем слоты?»</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+        <div>
+          <div class="font-semibold mb-2 text-sm uppercase tracking-wide text-gray-500">Зоны ответственности</div>
+          <ul class="text-sm text-gray-800 space-y-2">
+            <li><b>Продажи.</b> Лиды, диагностики, оплаты, продления — ежедневная таблица.</li>
+            <li><b>Воронка.</b> Реклама → заявка → переписка → диагностика 2 900 ₽ → абонемент → продление.</li>
+            <li><b>Контент.</b> Упаковка результата: до/после, замеры, истории, рационы, ошибки питания.</li>
+            <li><b>Партнёрки.</b> Салоны красоты, фитнес, косметологи, нутрициологи, блогеры района, ЖК рядом — <b>5–10 новых касаний в неделю</b>.</li>
+            <li><b>Повторные продажи.</b> Продление до окончания абонемента, скидка на 3 мес, рефералка, мини-челленджи.</li>
+          </ul>
+        </div>
+        <div>
+          <div class="font-semibold mb-2 text-sm uppercase tracking-wide text-gray-500">Куда НЕ лезет</div>
+          <ul class="text-sm text-gray-700 space-y-1 list-disc pl-5">
+            <li>В работу с клиенткой на процедуре</li>
+            <li>В методику питания и протоколы</li>
+            <li>В разбор замеров и личные кейсы</li>
+            <li>В чат поддержки и срывы</li>
+          </ul>
+          <div class="mt-4 p-3 bg-gray-50 rounded-lg text-sm">
+            <div class="font-semibold mb-1">Базовая модель оплаты</div>
+            <p class="text-gray-700">Фикс 50–70 тыс. + <b>3–5% от выручки сверх плана</b> + доля от чистой прибыли.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPI по месяцам -->
+      <div class="mt-6">
+        <div class="font-semibold mb-3 text-sm uppercase tracking-wide text-gray-500">KPI по горизонтам</div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div class="border border-gray-200 rounded-xl p-4">
+            <div class="flex items-center justify-between mb-2">
+              <div class="font-bold">Месяц 1 · Старт</div>
+              <span class="pill">~375к выручки</span>
+            </div>
+            <ul class="text-sm text-gray-800 space-y-1.5">
+              <li>📌 <b>15 новых оплат</b></li>
+              <li>Стоимость лида ≤ 1 500 ₽</li>
+              <li>CAC ≤ 10 000 ₽</li>
+              <li>Конверсия диагностика → абонемент ≥ 40%</li>
+              <li>Средний чек ≥ 24 900 ₽</li>
+              <li>Воронка собрана и считается ежедневно</li>
+              <li>Запущены 5 партнёрских касаний</li>
+            </ul>
+          </div>
+          <div class="border-2 border-emerald-500 rounded-xl p-4 bg-emerald-50/40">
+            <div class="flex items-center justify-between mb-2">
+              <div class="font-bold">Месяц 3 · Разгон</div>
+              <span class="pill">~1 000к+ выручки</span>
+            </div>
+            <ul class="text-sm text-gray-800 space-y-1.5">
+              <li>📌 <b>25 новых оплат</b> (накоп. ≥ 60)</li>
+              <li>Активных клиенток <b>40+</b></li>
+              <li>Загрузка слотов <b>≥ 70%</b></li>
+              <li>Конверсия диагностика → абонемент <b>≥ 45%</b></li>
+              <li>CAC ≤ 9 000 ₽</li>
+              <li>Доля Pro+VIP в выручке ≥ 15%</li>
+              <li>10+ работающих партнёрок</li>
+            </ul>
+          </div>
+          <div class="border border-gray-200 rounded-xl p-4">
+            <div class="flex items-center justify-between mb-2">
+              <div class="font-bold">Месяц 6 · План</div>
+              <span class="pill">~1 800–2 000к</span>
+            </div>
+            <ul class="text-sm text-gray-800 space-y-1.5">
+              <li>📌 <b>35–40 новых оплат</b> / мес</li>
+              <li>Активных клиенток <b>60–80</b></li>
+              <li>Загрузка слотов <b>75–85%</b></li>
+              <li>LTV / CAC ≥ 3x</li>
+              <li>CAC ≤ 8 000 ₽</li>
+              <li>Доля Pro+VIP ≥ 25%</li>
+              <li>2+ предсказуемых канала трафика</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROLE 2: Product -->
+    <div class="card role-card">
+      <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+        <div>
+          <h3 class="font-bold text-xl">Кофаундер 2 · «Продукт и результат»</h3>
+          <p class="text-sm text-gray-600">Продуктовый кофаундер. Отвечает за результат клиенток, ведение группы, удержание.</p>
+        </div>
+        <span class="pill">Главный вопрос каждый день: «Кто проседает, кого дожать, кто готов продлиться?»</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+        <div>
+          <div class="font-semibold mb-2 text-sm uppercase tracking-wide text-gray-500">Зоны ответственности</div>
+          <ul class="text-sm text-gray-800 space-y-2">
+            <li><b>Методика питания.</b> Анкета, ограничения, рационы, что в кафе/срыв/завтрак. Без игры в врача.</li>
+            <li><b>Ведение группы.</b> Отчёты до 21:00, ответы куратора 2×/день, 1 эфир/неделю, замеры 1×/неделю.</li>
+            <li><b>Клиентский путь в зале.</b> Встреча → подготовка → процедуры → чек-ин → запись на следующий визит.</li>
+            <li><b>Замеры и прогресс.</b> Карта клиентки: вес, объёмы, фото, самочувствие, сон, питание, посещения.</li>
+            <li><b>Удержание.</b> Продление рождается каждую неделю через ощущение «меня ведут».</li>
+          </ul>
+        </div>
+        <div>
+          <div class="font-semibold mb-2 text-sm uppercase tracking-wide text-gray-500">Куда НЕ лезет</div>
+          <ul class="text-sm text-gray-700 space-y-1 list-disc pl-5">
+            <li>В рекламу и таргет</li>
+            <li>В переписку с холодными лидами</li>
+            <li>В договоры с подрядчиками и юр.часть</li>
+            <li>В контент, который продаёт (только в контент, который показывает результат)</li>
+          </ul>
+          <div class="mt-4 p-3 bg-gray-50 rounded-lg text-sm">
+            <div class="font-semibold mb-1">Базовая модель оплаты</div>
+            <p class="text-gray-700">Фикс 50–70 тыс. + <b>бонус за продление / NPS / удержание</b> + доля от чистой прибыли.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPI по месяцам -->
+      <div class="mt-6">
+        <div class="font-semibold mb-3 text-sm uppercase tracking-wide text-gray-500">KPI по горизонтам</div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div class="border border-gray-200 rounded-xl p-4">
+            <div class="flex items-center justify-between mb-2">
+              <div class="font-bold">Месяц 1 · Стандарт</div>
+              <span class="pill">Закладываем систему</span>
+            </div>
+            <ul class="text-sm text-gray-800 space-y-1.5">
+              <li>📌 Карта клиентки на <b>100%</b></li>
+              <li>Доходимость на пробник <b>≥ 70%</b></li>
+              <li>Посещаемость процедур <b>≥ 80%</b></li>
+              <li>Выполнение отчётов по питанию <b>≥ 60%</b></li>
+              <li>Реакция на срыв в течение 24 ч</li>
+              <li>3–5 первых отзывов / историй</li>
+              <li>0 серьёзных жалоб</li>
+            </ul>
+          </div>
+          <div class="border-2 border-emerald-500 rounded-xl p-4 bg-emerald-50/40">
+            <div class="flex items-center justify-between mb-2">
+              <div class="font-bold">Месяц 3 · Удержание</div>
+              <span class="pill">LT ≥ 1.8 мес</span>
+            </div>
+            <ul class="text-sm text-gray-800 space-y-1.5">
+              <li>📌 <b>Продление M1→M2 ≥ 55%</b></li>
+              <li>Продление M2→M3 ≥ 50%</li>
+              <li>Посещаемость процедур ≥ 85%</li>
+              <li>Выполнение отчётов ≥ 70%</li>
+              <li>NPS ≥ 8</li>
+              <li><b>5–7 кейсов до/после</b> в мес</li>
+              <li>Отказы / возвраты ≤ 5%</li>
+            </ul>
+          </div>
+          <div class="border border-gray-200 rounded-xl p-4">
+            <div class="flex items-center justify-between mb-2">
+              <div class="font-bold">Месяц 6 · Качество</div>
+              <span class="pill">LT ≥ 2.5 мес</span>
+            </div>
+            <ul class="text-sm text-gray-800 space-y-1.5">
+              <li>📌 <b>Продление M1→M2 ≥ 65%</b></li>
+              <li>Продление M2→M3 ≥ 55%</li>
+              <li>Посещаемость процедур ≥ 90%</li>
+              <li>NPS ≥ 9</li>
+              <li>Методика оцифрована и тиражируется</li>
+              <li>15+ публичных кейсов до/после</li>
+              <li>Готов протокол для второй точки</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Связь KPI с моделью -->
+    <div class="card bg-gray-900 text-white border-gray-900">
+      <h3 class="font-bold text-base mb-3">Как KPI стыкуются с юнит-экономикой</h3>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
+        <div>
+          <div class="text-xs uppercase tracking-wide text-gray-400 mb-1">Если 15 оплат/мес × M3</div>
+          <div class="text-lg font-bold">≈ 60 активных</div>
+          <div class="text-gray-400">При M1→M2 53%, M2→M3 50%</div>
+        </div>
+        <div>
+          <div class="text-xs uppercase tracking-wide text-gray-400 mb-1">При CAC 10к и LTV 41к</div>
+          <div class="text-lg font-bold">LTV / CAC ≈ 4x</div>
+          <div class="text-gray-400">Окупаемость CAC < 1 мес</div>
+        </div>
+        <div>
+          <div class="text-xs uppercase tracking-wide text-gray-400 mb-1">При 60 клиентках микс</div>
+          <div class="text-lg font-bold">≈ 1 100к прибыли</div>
+          <div class="text-gray-400">Без онлайн-хвоста</div>
+        </div>
+        <div>
+          <div class="text-xs uppercase tracking-wide text-gray-400 mb-1">Точка безубытка</div>
+          <div class="text-lg font-bold">~32 клиентки</div>
+          <div class="text-gray-400">На основном тарифе</div>
+        </div>
+      </div>
+      <p class="text-xs text-gray-400 mt-4">Коммерческая отвечает за вход в воронку (CAC, оплаты, загрузку). Продуктовая отвечает за выход из неё (LT, LTV, повторы). Их KPI <b>невозможно подменить друг на друга</b> — это страховка от каши ответственности.</p>
+    </div>
+
+    <!-- Ритм встреч -->
+    <div class="card bg-amber-50 border-amber-200">
+      <h3 class="font-bold text-base mb-2">Совместный ритм</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+        <div>
+          <div class="font-semibold mb-1">Еженедельная встреча · 60 мин</div>
+          <p class="text-gray-700">Выручка факт/план · лиды · диагностики · оплаты · продления · загрузка · проблемные клиентки · кейсы · контент-план · что мешает росту.</p>
+        </div>
+        <div>
+          <div class="font-semibold mb-1">Дашборд · ежедневно</div>
+          <p class="text-gray-700">Клиентка / тариф / дата старта / посещения / питание / результат / риск ухода / следующая продажа — Google Sheets.</p>
+        </div>
+        <div>
+          <div class="font-semibold mb-1">Месячный пересмотр · 2 часа</div>
+          <p class="text-gray-700">P&L по этой модели, разбор воронки, корректировка тарифов, переоценка расходов, апдейт квартальных KPI.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Что нельзя -->
+    <div class="card border-red-200 bg-red-50/40">
+      <h3 class="font-bold text-base mb-3 text-red-900">Чего нельзя делать</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+        <div>
+          <div class="font-semibold">1. Обеим заниматься всем</div>
+          <p class="text-gray-700">«Я сторис сняла, ты клиентке ответила, а кто принял оплату и кто внёс замеры?» — это хаос, не бизнес.</p>
+        </div>
+        <div>
+          <div class="font-semibold">2. Продавать без продукта</div>
+          <p class="text-gray-700">Коммерческая нальёт клиентов, но при слабом продукте они уйдут через месяц. Деньги сгорят на CAC.</p>
+        </div>
+        <div>
+          <div class="font-semibold">3. Делать прекрасный продукт без продаж</div>
+          <p class="text-gray-700">Продуктовая идеально ведёт 8 девочек — бизнес сдыхает, потому что нужно 40–60.</p>
+        </div>
+        <div>
+          <div class="font-semibold">4. Путать дружбу и управление</div>
+          <p class="text-gray-700">Зафиксировать письменно: кто главный по какой зоне, какие KPI, как делится прибыль, кто решает в конфликте.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Кого ещё нанять -->
+    <div class="card">
+      <h3 class="font-bold text-base mb-3">Кого нанять / закрыть бартером (минимум)</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+        <div>
+          <div class="font-semibold mb-1">Администратор зала</div>
+          <p class="text-gray-600">Записи, напоминания, встреча, оплаты, расписание, полотенца. Без него обе кофаундерши тонут в операционке.</p>
+        </div>
+        <div>
+          <div class="font-semibold mb-1">Контент-мейкер / съёмка</div>
+          <p class="text-gray-600">Reels, до/после, истории, рилзы процедур. Иначе маркетинг-бюджет горит впустую.</p>
+        </div>
+        <div>
+          <div class="font-semibold mb-1">Нутрициолог-партнёр</div>
+          <p class="text-gray-600">Чтобы «питание» было методикой, а не «съешь курицу и гречку». Можно % или фикс.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Делёж прибыли -->
+    <div class="card border-gray-300">
+      <h3 class="font-bold text-base mb-3">Как делить прибыль</h3>
+      <p class="text-sm text-gray-700 mb-3">Сначала бизнес покрывает: аренду, ФОТ, маркетинг, расходники, налоги, резерв, амортизацию. Потом из чистой прибыли:</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="p-4 bg-gray-50 rounded-lg">
+          <div class="text-3xl font-bold num">50%</div>
+          <div class="text-sm text-gray-600">Оставляем в бизнесе (резерв, развитие, вторая точка)</div>
+        </div>
+        <div class="p-4 bg-gray-50 rounded-lg">
+          <div class="text-3xl font-bold num">50%</div>
+          <div class="text-sm text-gray-600">Распределяем между партнёрами по долям</div>
+        </div>
+      </div>
+      <ul class="text-sm text-gray-700 space-y-1 list-disc pl-5 mt-4">
+        <li>Equity делите <b>по вкладу + риску</b>, не «50/50 потому что подруги». Зафиксировать письменно.</li>
+        <li>Vesting 4 года, cliff 1 год — выход до года = потеря доли.</li>
+        <li>Зарплата кофаундерш — фиксированная, одинаковая, маленькая (50–70 тыс. в первые 6 мес).</li>
+        <li>Дивиденды — только после операционной прибыли +500к ₽ <b>три месяца подряд</b>.</li>
+        <li>Решения до 100к — каждая в своей зоне. Свыше — только совместно.</li>
+      </ul>
+    </div>
+
+  </section>
+
+  <footer class="text-xs text-gray-400 text-center py-6">
+    Модель сохраняется локально в браузере. Цифры — гипотезы для проверки, не оферта.
+  </footer>
+
+</main>
+
+<script src="/app.js"></script>
+</body>
+</html>
