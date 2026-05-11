@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Body Reset Club — Финансовая модель</title>
+<title>Body Reset Club · Мытищи — Бизнес-план + финансовая модель</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  :root { --bg:#f7f7f5; --ink:#0a0a0a; --muted:#6b7280; --line:#e5e7eb; --pos:#047857; --neg:#dc2626; --warn:#d97706; }
+  :root { --bg:#f7f7f5; --ink:#0a0a0a; --muted:#6b7280; --line:#e5e7eb; --pos:#047857; --neg:#dc2626; --warn:#d97706; --accent:#4f46e5; }
   * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
-  html, body { background: var(--bg); color: var(--ink); }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--ink); }
   .num { font-variant-numeric: tabular-nums; }
   .field { width: 100%; padding: 0.5rem 0.75rem; background: #fff; border: 1px solid var(--line); border-radius: 0.5rem; text-align: right; font-variant-numeric: tabular-nums; font-size: 0.875rem; transition: border-color 0.15s; }
   .field:focus { outline: none; border-color: #0a0a0a; box-shadow: 0 0 0 3px rgba(0,0,0,0.05); }
-  .field-text { text-align: left; }
   .card { background: #fff; border: 1px solid var(--line); border-radius: 1rem; padding: 1.25rem; }
   .label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 500; }
   .metric { font-size: 1.875rem; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.1; }
@@ -28,439 +28,1239 @@
   .warn { color: var(--warn); }
   .pill { display: inline-block; padding: 0.125rem 0.5rem; background: #f3f4f6; border-radius: 999px; font-size: 0.7rem; color: var(--muted); }
   table th, table td { padding: 0.5rem 0.75rem; }
+  section[id] { scroll-margin-top: 80px; }
+  .section-title { font-size: 1.875rem; font-weight: 800; letter-spacing: -0.02em; }
+  .section-sub { color: var(--muted); margin-top: 0.25rem; font-size: 0.9rem; max-width: 56rem; }
+  .nav-link { color: #6b7280; transition: color 0.15s; }
+  .nav-link:hover { color: #0a0a0a; }
+  .tariff-card { transition: transform 0.15s, box-shadow 0.15s; }
+  .tariff-card:hover { transform: translateY(-2px); box-shadow: 0 10px 30px -10px rgba(0,0,0,0.15); }
+  .check::before { content: '✓'; color: var(--pos); margin-right: 0.5rem; font-weight: bold; }
+  .cross::before { content: '✗'; color: var(--neg); margin-right: 0.5rem; font-weight: bold; }
+  .month-badge { display: inline-flex; align-items: center; justify-content: center; width: 2.5rem; height: 2.5rem; border-radius: 0.75rem; background: #0a0a0a; color: #fff; font-weight: 700; font-size: 0.875rem; }
+  .month-badge.prep { background: #d97706; }
+  .month-badge.live { background: #047857; }
   .role-card { transition: transform 0.15s, box-shadow 0.15s; }
   .role-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(0,0,0,0.12); }
+  .kpi-cell-good { background: rgba(4, 120, 87, 0.07); color: var(--pos); }
+  .kpi-cell-warn { background: rgba(217, 119, 6, 0.07); color: var(--warn); }
+  .kpi-cell-neutral { background: #f9fafb; color: #374151; }
 </style>
 </head>
 <body>
 
-<header class="border-b border-gray-200 bg-white">
-  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-    <div>
-      <div class="flex items-center gap-2">
-        <h1 class="text-xl font-bold">Body Reset Club</h1>
-        <span class="pill">Мытищи</span>
-      </div>
-      <p class="text-sm text-gray-500">Финансовая модель · клуб коррекции тела</p>
+<!-- STICKY HEADER + NAV -->
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-gray-200">
+  <div class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between flex-wrap gap-3">
+    <div class="flex items-center gap-3">
+      <h1 class="text-base font-bold">Body Reset Club</h1>
+      <span class="pill">Мытищи · бизнес-план</span>
     </div>
+    <nav class="flex items-center gap-4 text-sm flex-wrap">
+      <a href="#overview" class="nav-link">Обзор</a>
+      <a href="#tariffs" class="nav-link">Тарифы</a>
+      <a href="#model" class="nav-link">Модель</a>
+      <a href="#plan" class="nav-link">План 6 мес</a>
+      <a href="#kpi" class="nav-link">KPI</a>
+      <a href="#bench" class="nav-link">Бенчмарки</a>
+      <a href="#risks" class="nav-link">Риски</a>
+      <a href="#legal" class="nav-link">Юридика</a>
+      <a href="#team" class="nav-link">Команда</a>
+      <a href="#review" class="nav-link">Проверка</a>
+    </nav>
     <div class="flex items-center gap-2">
-      <button id="btn-reset" class="px-3 py-2 text-sm border border-gray-200 rounded-lg hover:bg-gray-50">Сбросить</button>
-      <button id="btn-export" class="px-3 py-2 text-sm border border-gray-200 rounded-lg hover:bg-gray-50">Экспорт CSV</button>
+      <button id="btn-reset" class="px-3 py-1.5 text-sm border border-gray-200 rounded-lg hover:bg-gray-50">Сбросить</button>
+      <button id="btn-export" class="px-3 py-1.5 text-sm border border-gray-200 rounded-lg hover:bg-gray-50">CSV</button>
     </div>
   </div>
 </header>
 
-<main class="max-w-7xl mx-auto px-6 py-8 space-y-6">
+<main class="max-w-7xl mx-auto px-6 py-8 space-y-16">
 
-  <!-- Summary KPI cards -->
-  <section class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-    <div class="card">
-      <div class="label">Выручка / мес</div>
-      <div class="metric" id="m-revenue">—</div>
-      <div class="text-sm text-gray-500 mt-1" id="m-revenue-sub">—</div>
-    </div>
-    <div class="card">
-      <div class="label">Операционная прибыль</div>
-      <div class="metric" id="m-profit">—</div>
-      <div class="text-sm text-gray-500 mt-1" id="m-margin">—</div>
-    </div>
-    <div class="card">
-      <div class="label">Точка безубытка</div>
-      <div class="metric" id="m-breakeven">—</div>
-      <div class="text-sm text-gray-500 mt-1">клиенток нужно</div>
-    </div>
-    <div class="card">
-      <div class="label">Загрузка мощности</div>
-      <div class="metric" id="m-utilization">—</div>
-      <div class="text-sm text-gray-500 mt-1" id="m-utilization-sub">—</div>
-    </div>
-  </section>
-
-  <!-- Inputs + Outputs -->
-  <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-    <!-- LEFT: inputs (2 cols) -->
-    <div class="lg:col-span-2 space-y-4">
-
-      <details class="card" open>
-        <summary class="font-semibold text-base flex items-center justify-between">
-          <span>Тарифы и клиенты</span>
-          <span class="text-sm text-gray-400 font-normal" id="t-total"></span>
-        </summary>
-        <div class="mt-4">
-          <div class="grid grid-cols-12 gap-3 mb-2 text-xs text-gray-400 uppercase tracking-wide">
-            <div class="col-span-4">Тариф</div>
-            <div class="col-span-3 text-right">Цена ₽/мес</div>
-            <div class="col-span-2 text-right">Клиенток</div>
-            <div class="col-span-3 text-right">Выручка</div>
-          </div>
-          <div class="space-y-2" id="tariffs-list"></div>
-        </div>
-      </details>
-
-      <details class="card" open>
-        <summary class="font-semibold text-base">Постоянные расходы</summary>
-        <div class="mt-4 grid grid-cols-2 gap-3">
-          <div>
-            <label class="label block mb-1">Аренда + расходники</label>
-            <input type="number" data-bind="fixedCosts.rent" class="field">
-          </div>
-          <div>
-            <label class="label block mb-1">ФОТ</label>
-            <input type="number" data-bind="fixedCosts.salary" class="field">
-          </div>
-          <div>
-            <label class="label block mb-1">Маркетинг</label>
-            <input type="number" data-bind="fixedCosts.marketing" class="field">
-          </div>
-          <div>
-            <label class="label block mb-1">Прочее (эквайринг, CRM, амортизация)</label>
-            <input type="number" data-bind="fixedCosts.other" class="field">
-          </div>
-        </div>
-        <div class="mt-3 text-sm text-gray-500 flex justify-between border-t border-gray-100 pt-3">
-          <span>Итого фикс</span>
-          <span class="font-semibold num text-gray-900" id="fc-total">—</span>
-        </div>
-      </details>
-
-      <details class="card">
-        <summary class="font-semibold text-base">Переменные расходы на клиентку</summary>
-        <div class="mt-4 grid grid-cols-2 gap-3">
-          <div>
-            <label class="label block mb-1">Офлайн ₽/клиентка/мес</label>
-            <input type="number" data-bind="variableCostOffline" class="field">
-          </div>
-          <div>
-            <label class="label block mb-1">Онлайн ₽/клиентка/мес</label>
-            <input type="number" data-bind="variableCostOnline" class="field">
-          </div>
-        </div>
-        <p class="text-xs text-gray-400 mt-3">Одноразка, полотенца, стирка, косметика, эквайринг, бонусы.</p>
-      </details>
-
-      <details class="card">
-        <summary class="font-semibold text-base">Воронка маркетинга</summary>
-        <div class="mt-4 grid grid-cols-2 gap-3">
-          <div>
-            <label class="label block mb-1">Стоимость лида ₽</label>
-            <input type="number" data-bind="funnel.leadCost" class="field">
-          </div>
-          <div>
-            <label class="label block mb-1">Цена пробника ₽</label>
-            <input type="number" data-bind="funnel.diagnosticPrice" class="field">
-          </div>
-          <div>
-            <label class="label block mb-1">Лид → диагностика (0–1)</label>
-            <input type="number" data-bind="funnel.leadToDiagnostic" class="field" step="0.01" min="0" max="1">
-          </div>
-          <div>
-            <label class="label block mb-1">Диагностика → абонемент (0–1)</label>
-            <input type="number" data-bind="funnel.diagnosticToSubscription" class="field" step="0.01" min="0" max="1">
-          </div>
-        </div>
-      </details>
-
-      <details class="card">
-        <summary class="font-semibold text-base">Удержание (cohort survival)</summary>
-        <div class="mt-4 grid grid-cols-2 gap-3">
-          <div>
-            <label class="label block mb-1">M1 → M2 (0–1)</label>
-            <input type="number" data-bind="retention.m1m2" class="field" step="0.01" min="0" max="1">
-          </div>
-          <div>
-            <label class="label block mb-1">M2 → M3 (0–1)</label>
-            <input type="number" data-bind="retention.m2m3" class="field" step="0.01" min="0" max="1">
-          </div>
-        </div>
-        <p class="text-xs text-gray-400 mt-3">По исходной воронке: 15 → 8 → 4 ≈ 53% / 50%.</p>
-      </details>
-
-      <details class="card">
-        <summary class="font-semibold text-base">Мощность зала</summary>
-        <div class="mt-4 grid grid-cols-2 gap-3">
-          <div>
-            <label class="label block mb-1">Рабочих дней / мес</label>
-            <input type="number" data-bind="capacity.workingDays" class="field">
-          </div>
-          <div>
-            <label class="label block mb-1">Часов / день</label>
-            <input type="number" data-bind="capacity.workingHours" class="field">
-          </div>
-          <div>
-            <label class="label block mb-1">Клиенток / час (3 зоны)</label>
-            <input type="number" data-bind="capacity.clientsPerHour" class="field">
-          </div>
-          <div>
-            <label class="label block mb-1">Визитов / клиентка / нед</label>
-            <input type="number" data-bind="capacity.visitsPerWeek" class="field">
-          </div>
-        </div>
-      </details>
-
+  <!-- ========== OVERVIEW ========== -->
+  <section id="overview" class="space-y-6">
+    <div class="space-y-3">
+      <span class="pill">Шаг 1</span>
+      <h2 class="section-title">Обзор: что мы строим</h2>
+      <p class="section-sub">Клуб коррекции тела в Мытищах — не салон, не курс похудения. <b>Месячный абонемент</b>: 8 посещений зала с процедурами + индивидуальное питание + чат-сопровождение + замеры. Главное отличие от салонов рядом — <b>ведут за руку</b>: не «приходи когда хочешь», а «придёшь во вторник в 19:00, ел не то — разберём в пятницу».</p>
     </div>
 
-    <!-- RIGHT: outputs -->
-    <div class="space-y-4">
-
+    <!-- Summary KPI cards -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
       <div class="card">
-        <h3 class="font-semibold text-base mb-4">P&L (месяц)</h3>
-        <div class="space-y-2 text-sm num">
-          <div class="flex justify-between py-1">
-            <span class="text-gray-600">Выручка</span>
-            <span class="font-semibold" id="pl-revenue">—</span>
-          </div>
-          <div class="flex justify-between py-1 text-gray-500">
-            <span>− переменные</span>
-            <span id="pl-variable">—</span>
-          </div>
-          <div class="flex justify-between py-2 border-t border-gray-200">
-            <span class="text-gray-600">Валовая прибыль</span>
-            <span class="font-semibold" id="pl-gross">—</span>
-          </div>
-          <div class="flex justify-between py-1 text-gray-500">
-            <span>− фикс</span>
-            <span id="pl-fixed">—</span>
-          </div>
-          <div class="flex justify-between py-2 border-t border-gray-200">
-            <span class="font-semibold">Операционная прибыль</span>
-            <span class="font-bold text-lg" id="pl-operating">—</span>
-          </div>
-          <div class="flex justify-between text-xs text-gray-500">
-            <span>Маржинальность</span>
-            <span id="pl-margin">—</span>
-          </div>
-          <div class="flex justify-between text-xs text-gray-500 border-t border-gray-100 pt-2 mt-2">
-            <span>Годовая прибыль (steady-state)</span>
-            <span id="pl-yearly">—</span>
-          </div>
-        </div>
+        <div class="label">Выручка / мес</div>
+        <div class="metric" id="m-revenue">—</div>
+        <div class="text-sm text-gray-500 mt-1" id="m-revenue-sub">—</div>
       </div>
-
       <div class="card">
-        <h3 class="font-semibold text-base mb-4">Юнит-экономика</h3>
-        <div class="space-y-2 text-sm num">
-          <div class="flex justify-between"><span class="text-gray-600">Средний чек</span><span id="ue-avg-price">—</span></div>
-          <div class="flex justify-between"><span class="text-gray-600">Маржа на клиентку</span><span id="ue-margin-per">—</span></div>
-          <div class="flex justify-between"><span class="text-gray-600">CAC (рыночная цена)</span><span id="ue-cac">—</span></div>
-          <div class="flex justify-between"><span class="text-gray-600">Средний LT (мес)</span><span id="ue-lifetime">—</span></div>
-          <div class="flex justify-between"><span class="text-gray-600">LTV</span><span id="ue-ltv">—</span></div>
-          <div class="flex justify-between border-t border-gray-200 pt-2">
-            <span class="font-medium">LTV / CAC</span>
-            <span class="font-bold" id="ue-ltv-cac">—</span>
-          </div>
-          <div class="flex justify-between text-xs text-gray-500">
-            <span>CAC окупается через</span>
-            <span id="ue-payback">—</span>
-          </div>
-        </div>
+        <div class="label">Операц. прибыль</div>
+        <div class="metric" id="m-profit">—</div>
+        <div class="text-sm text-gray-500 mt-1" id="m-margin">—</div>
       </div>
-
       <div class="card">
-        <h3 class="font-semibold text-base mb-4">Воронка</h3>
-        <div class="space-y-2 text-sm">
-          <div class="flex justify-between"><span class="text-gray-600">Бюджет</span><span class="num font-medium" id="fn-budget">—</span></div>
-          <div class="flex justify-between"><span class="text-gray-600">Лиды</span><span class="num" id="fn-leads">—</span></div>
-          <div class="flex justify-between"><span class="text-gray-600">Диагностики</span><span class="num" id="fn-diagnostics">—</span></div>
-          <div class="flex justify-between border-t border-gray-200 pt-2">
-            <span class="font-medium">Новые клиентки / мес</span>
-            <span class="num font-bold" id="fn-new">—</span>
-          </div>
-          <div class="flex justify-between text-xs text-gray-500">
-            <span>Доход от пробников</span>
-            <span class="num" id="fn-diag-revenue">—</span>
-          </div>
+        <div class="label">Точка безубытка</div>
+        <div class="metric" id="m-breakeven">—</div>
+        <div class="text-sm text-gray-500 mt-1">клиенток нужно</div>
+      </div>
+      <div class="card">
+        <div class="label">Загрузка мощности</div>
+        <div class="metric" id="m-utilization">—</div>
+        <div class="text-sm text-gray-500 mt-1" id="m-utilization-sub">—</div>
+      </div>
+    </div>
+
+    <div class="card bg-gray-900 text-white border-gray-900">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div>
+          <div class="text-xs uppercase tracking-wide text-gray-400 mb-1">Кому продаём</div>
+          <div class="font-bold">Женщины 28–45</div>
+          <div class="text-sm text-gray-300">Доход 60–150к, дети, нет времени на спортзал. Локально — Мытищи + ближние районы.</div>
+        </div>
+        <div>
+          <div class="text-xs uppercase tracking-wide text-gray-400 mb-1">Что продаём</div>
+          <div class="font-bold">Ведение, не процедуры</div>
+          <div class="text-sm text-gray-300">«Меня ведут месяц: ем нормально, прихожу 2×/нед, замеры, не сливаюсь.»</div>
+        </div>
+        <div>
+          <div class="text-xs uppercase tracking-wide text-gray-400 mb-1">Цель 6 месяцев</div>
+          <div class="font-bold">60 активных клиенток</div>
+          <div class="text-sm text-gray-300">Прибыль 400–500к/мес 3 месяца подряд, решение о второй точке.</div>
+        </div>
+        <div>
+          <div class="text-xs uppercase tracking-wide text-gray-400 mb-1">Нужно денег на старт</div>
+          <div class="font-bold">4.5–5.5 млн ₽</div>
+          <div class="text-sm text-gray-300">CAPEX 600к + ремонт 400к + 6 мес OPEX-подушка ≈3.5 млн.</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Scenarios + Sensitivity -->
-  <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-    <div class="card">
-      <h3 class="font-semibold text-base mb-4">Готовые сценарии</h3>
-      <div class="grid grid-cols-2 gap-2" id="scenarios-list"></div>
-      <p class="text-xs text-gray-400 mt-3">Нажми сценарий — модель пересоберётся. Сбрось, чтобы вернуться к дефолтам.</p>
+  <!-- ========== TARIFFS ========== -->
+  <section id="tariffs" class="space-y-6">
+    <div class="space-y-3">
+      <span class="pill">Шаг 2</span>
+      <h2 class="section-title">Что мы продаём: 4 тарифа</h2>
+      <p class="section-sub">Это не цена за процедуру. Это цена за <b>месяц ведения</b>. Каждый тариф — отдельный продукт со своей аудиторией. Главный продукт — <b>Body Club</b> (80% выручки). Pro/VIP — премиум-хвост для клиенток, которым нужно личное внимание. Start — дешёвый онлайн-вход в воронку.</p>
     </div>
 
-    <div class="card">
-      <h3 class="font-semibold text-base mb-4">Чувствительность прибыли</h3>
-      <table class="w-full text-sm">
-        <thead class="text-xs text-gray-400 uppercase tracking-wide border-b border-gray-200">
-          <tr>
-            <th class="text-left">Изменение</th>
-            <th class="text-right">Прибыль</th>
-            <th class="text-right">Δ</th>
-          </tr>
-        </thead>
-        <tbody id="sensitivity-table" class="num"></tbody>
-      </table>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+      <!-- START -->
+      <div class="card tariff-card border-gray-200">
+        <div class="flex items-center justify-between mb-2">
+          <div class="font-bold text-lg">Start</div>
+          <span class="pill">Онлайн</span>
+        </div>
+        <div class="text-2xl font-bold num">11 900 ₽<span class="text-sm font-normal text-gray-500">/мес</span></div>
+        <p class="text-xs text-gray-500 mt-1">Только онлайн-питание. Без зала.</p>
+
+        <div class="mt-4 text-sm space-y-1.5">
+          <div class="check">Анкета и индивидуальный рацион</div>
+          <div class="check">Чат-куратор, ответы 2×/день</div>
+          <div class="check">Замеры через приложение 1×/нед</div>
+          <div class="check">1 групповой эфир в неделю</div>
+          <div class="check">Дневник питания и привычек</div>
+          <div class="cross text-gray-400">Процедуры в зале</div>
+          <div class="cross text-gray-400">Личный созвон</div>
+        </div>
+
+        <div class="mt-4 pt-3 border-t border-gray-100 text-xs">
+          <div class="font-semibold text-gray-700">Для кого:</div>
+          <p class="text-gray-600 mt-1">Живёт далеко, хочет попробовать систему, не готова сразу 23к.</p>
+        </div>
+      </div>
+
+      <!-- BODY CLUB -->
+      <div class="card tariff-card border-2 border-emerald-500 bg-emerald-50/30 relative">
+        <span class="absolute -top-3 left-4 bg-emerald-500 text-white text-xs font-bold px-3 py-0.5 rounded-full">ОСНОВНОЙ · 80% продаж</span>
+        <div class="flex items-center justify-between mb-2 mt-2">
+          <div class="font-bold text-lg">Body Club</div>
+          <span class="pill">Офлайн</span>
+        </div>
+        <div class="text-2xl font-bold num">22 900 ₽<span class="text-sm font-normal text-gray-500">/мес</span></div>
+        <p class="text-xs text-gray-500 mt-1">8 визитов + питание + ведение в чате.</p>
+
+        <div class="mt-4 text-sm space-y-1.5">
+          <div class="check"><b>Всё из Start</b> +</div>
+          <div class="check">8 посещений студии (2×/нед)</div>
+          <div class="check">На каждом визите 60–70 мин:<br><span class="text-xs text-gray-600 ml-4">10 мин подготовка · 20 мин LPG · 20 мин кедровая бочка · 20 мин гидромассаж</span></div>
+          <div class="check">Замеры в студии 1×/нед</div>
+          <div class="check">Контроль фото еды</div>
+          <div class="check">Чат клуба с другими клиентками</div>
+          <div class="cross text-gray-400">Личный созвон с экспертом</div>
+        </div>
+
+        <div class="mt-4 pt-3 border-t border-gray-200 text-xs">
+          <div class="font-semibold text-gray-700">Для кого:</div>
+          <p class="text-gray-600 mt-1">Целевая клиентка: 32 года, ребёнок, работа, хочет «убрать отёки и наконец нормально есть».</p>
+        </div>
+      </div>
+
+      <!-- PRO -->
+      <div class="card tariff-card border-gray-200">
+        <div class="flex items-center justify-between mb-2">
+          <div class="font-bold text-lg">Pro</div>
+          <span class="pill">Премиум</span>
+        </div>
+        <div class="text-2xl font-bold num">29 900 ₽<span class="text-sm font-normal text-gray-500">/мес</span></div>
+        <p class="text-xs text-gray-500 mt-1">Body Club + личное ведение.</p>
+
+        <div class="mt-4 text-sm space-y-1.5">
+          <div class="check"><b>Всё из Body Club</b> +</div>
+          <div class="check">10 визитов (а не 8)</div>
+          <div class="check">Личный созвон 1×/нед (30 мин)</div>
+          <div class="check">Индивидуальная корректировка рациона</div>
+          <div class="check">Приоритетная запись</div>
+          <div class="check">Анализатор состава тела</div>
+          <div class="check">Ежедневные отчёты по питанию</div>
+        </div>
+
+        <div class="mt-4 pt-3 border-t border-gray-100 text-xs">
+          <div class="font-semibold text-gray-700">Для кого:</div>
+          <p class="text-gray-600 mt-1">Серьёзный настрой, ценит «ведут лично», а не «один из 40 в чате».</p>
+        </div>
+      </div>
+
+      <!-- VIP -->
+      <div class="card tariff-card border-gray-900 bg-gray-900 text-white">
+        <div class="flex items-center justify-between mb-2">
+          <div class="font-bold text-lg">VIP</div>
+          <span class="pill bg-white text-gray-900">Индив.</span>
+        </div>
+        <div class="text-2xl font-bold num">44 900 ₽<span class="text-sm font-normal text-gray-400">/мес</span></div>
+        <p class="text-xs text-gray-400 mt-1">Полностью индивидуальное сопровождение.</p>
+
+        <div class="mt-4 text-sm space-y-1.5">
+          <div class="check"><b>Всё из Pro</b> +</div>
+          <div class="check">12 визитов</div>
+          <div class="check">Закрытые слоты (только VIP)</div>
+          <div class="check">Партнёрский разбор анализов с нутрициологом</div>
+          <div class="check">Персональный план на месяц</div>
+          <div class="check">Личный куратор в WhatsApp</div>
+          <div class="check">Гарантированный результат или возврат*</div>
+        </div>
+
+        <div class="mt-4 pt-3 border-t border-gray-700 text-xs">
+          <div class="font-semibold text-gray-300">Цель:</div>
+          <p class="text-gray-400 mt-1">2–5 клиенток. Тянут средний чек и приводят подруг.</p>
+        </div>
+      </div>
+
     </div>
 
+    <div class="card bg-amber-50 border-amber-200">
+      <h3 class="font-bold text-base mb-2">Почему именно такие цены</h3>
+      <ul class="text-sm text-gray-700 space-y-1.5 list-disc pl-5">
+        <li><b>LPG в Мытищах</b> в среднем 1 800–2 500 ₽ за сеанс (BodyDream, Stilistic, Персона). 8 визитов × 3 процедуры = 24 мини-процедуры. Если по рынку — это ~50 000 ₽. Мы продаём за 22 900 ₽, но добавляем питание и ведение — это другой продукт.</li>
+        <li><b>Bодй Club 22 900</b> — это «дёшево» относительно процедур, но «дорого» относительно купонов. Это намеренно: купонная аудитория нам не подходит — они не дойдут до результата и не продлятся.</li>
+        <li><b>Pro 29 900</b> — +30% к основному, но даёт +50% по марже за счёт меньших переменных и большего LTV.</li>
+        <li><b>VIP 44 900</b> — якорь. Делает Body Club дешёвым в восприятии («всего 23, а есть тариф за 45»).</li>
+      </ul>
+    </div>
   </section>
 
-  <!-- Cohort projection -->
-  <section class="card">
-    <h3 class="font-semibold text-base mb-4">Проекция когорты (6 месяцев)</h3>
-    <p class="text-xs text-gray-400 mb-3">Что произойдёт со 100 новыми клиентками месяца 1 при заданном удержании.</p>
-    <div class="overflow-x-auto">
+  <!-- ========== FINANCIAL MODEL ========== -->
+  <section id="model" class="space-y-6">
+    <div class="space-y-3">
+      <span class="pill">Шаг 3</span>
+      <h2 class="section-title">Как проект делает деньги</h2>
+      <p class="section-sub">Все цифры можно крутить — модель пересчитывается мгновенно. Тарифы, аренда, ФОТ, маркетинг, конверсии, удержание, мощность. Нажми сценарий справа, чтобы увидеть готовые комбинации (Мытищи · M1, M3, M6, разбор PDF).</p>
+    </div>
+
+    <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+      <!-- LEFT: inputs (2 cols) -->
+      <div class="lg:col-span-2 space-y-4">
+
+        <details class="card" open>
+          <summary class="font-semibold text-base flex items-center justify-between">
+            <span>Тарифы и количество клиенток</span>
+            <span class="text-sm text-gray-400 font-normal" id="t-total"></span>
+          </summary>
+          <div class="mt-4">
+            <div class="grid grid-cols-12 gap-3 mb-2 text-xs text-gray-400 uppercase tracking-wide">
+              <div class="col-span-4">Тариф</div>
+              <div class="col-span-3 text-right">Цена ₽/мес</div>
+              <div class="col-span-2 text-right">Клиенток</div>
+              <div class="col-span-3 text-right">Выручка</div>
+            </div>
+            <div class="space-y-2" id="tariffs-list"></div>
+          </div>
+        </details>
+
+        <details class="card" open>
+          <summary class="font-semibold text-base">Постоянные расходы</summary>
+          <div class="mt-4 grid grid-cols-2 gap-3">
+            <div>
+              <label class="label block mb-1">Аренда + расходники</label>
+              <input type="number" data-bind="fixedCosts.rent" class="field">
+            </div>
+            <div>
+              <label class="label block mb-1">ФОТ (2 спеца + админ)</label>
+              <input type="number" data-bind="fixedCosts.salary" class="field">
+            </div>
+            <div>
+              <label class="label block mb-1">Маркетинг</label>
+              <input type="number" data-bind="fixedCosts.marketing" class="field">
+            </div>
+            <div>
+              <label class="label block mb-1">Прочее (CRM, эквайринг, бухг.)</label>
+              <input type="number" data-bind="fixedCosts.other" class="field">
+            </div>
+          </div>
+          <div class="mt-3 text-sm text-gray-500 flex justify-between border-t border-gray-100 pt-3">
+            <span>Итого фикс</span>
+            <span class="font-semibold num text-gray-900" id="fc-total">—</span>
+          </div>
+        </details>
+
+        <details class="card">
+          <summary class="font-semibold text-base">Переменные расходы на клиентку</summary>
+          <div class="mt-4 grid grid-cols-2 gap-3">
+            <div>
+              <label class="label block mb-1">Офлайн ₽/клиентка/мес</label>
+              <input type="number" data-bind="variableCostOffline" class="field">
+            </div>
+            <div>
+              <label class="label block mb-1">Онлайн ₽/клиентка/мес</label>
+              <input type="number" data-bind="variableCostOnline" class="field">
+            </div>
+          </div>
+          <p class="text-xs text-gray-400 mt-3">Одноразка, полотенца, стирка, косметика, эквайринг (2.5%), бонус мастеру.</p>
+        </details>
+
+        <details class="card">
+          <summary class="font-semibold text-base">Воронка маркетинга</summary>
+          <div class="mt-4 grid grid-cols-2 gap-3">
+            <div>
+              <label class="label block mb-1">Стоимость лида ₽</label>
+              <input type="number" data-bind="funnel.leadCost" class="field">
+            </div>
+            <div>
+              <label class="label block mb-1">Цена пробника ₽</label>
+              <input type="number" data-bind="funnel.diagnosticPrice" class="field">
+            </div>
+            <div>
+              <label class="label block mb-1">Лид → диагностика (0–1)</label>
+              <input type="number" data-bind="funnel.leadToDiagnostic" class="field" step="0.01" min="0" max="1">
+            </div>
+            <div>
+              <label class="label block mb-1">Диагностика → абонемент (0–1)</label>
+              <input type="number" data-bind="funnel.diagnosticToSubscription" class="field" step="0.01" min="0" max="1">
+            </div>
+          </div>
+        </details>
+
+        <details class="card">
+          <summary class="font-semibold text-base">Удержание (продление)</summary>
+          <div class="mt-4 grid grid-cols-2 gap-3">
+            <div>
+              <label class="label block mb-1">M1 → M2 (0–1)</label>
+              <input type="number" data-bind="retention.m1m2" class="field" step="0.01" min="0" max="1">
+            </div>
+            <div>
+              <label class="label block mb-1">M2 → M3 (0–1)</label>
+              <input type="number" data-bind="retention.m2m3" class="field" step="0.01" min="0" max="1">
+            </div>
+          </div>
+          <p class="text-xs text-gray-400 mt-3">Бенчмарк wellness: 60% / 55% при активном ведении. Salon без ведения — 30% / 25%.</p>
+        </details>
+
+        <details class="card">
+          <summary class="font-semibold text-base">Мощность зала</summary>
+          <div class="mt-4 grid grid-cols-2 gap-3">
+            <div>
+              <label class="label block mb-1">Рабочих дней / мес</label>
+              <input type="number" data-bind="capacity.workingDays" class="field">
+            </div>
+            <div>
+              <label class="label block mb-1">Часов / день</label>
+              <input type="number" data-bind="capacity.workingHours" class="field">
+            </div>
+            <div>
+              <label class="label block mb-1">Клиенток / час</label>
+              <input type="number" data-bind="capacity.clientsPerHour" class="field">
+            </div>
+            <div>
+              <label class="label block mb-1">Визитов / клиентка / нед</label>
+              <input type="number" data-bind="capacity.visitsPerWeek" class="field">
+            </div>
+          </div>
+        </details>
+
+      </div>
+
+      <!-- RIGHT: outputs -->
+      <div class="space-y-4">
+
+        <div class="card">
+          <h3 class="font-semibold text-base mb-4">P&L (месяц)</h3>
+          <div class="space-y-2 text-sm num">
+            <div class="flex justify-between py-1">
+              <span class="text-gray-600">Выручка</span>
+              <span class="font-semibold" id="pl-revenue">—</span>
+            </div>
+            <div class="flex justify-between py-1 text-gray-500">
+              <span>− переменные</span>
+              <span id="pl-variable">—</span>
+            </div>
+            <div class="flex justify-between py-2 border-t border-gray-200">
+              <span class="text-gray-600">Валовая прибыль</span>
+              <span class="font-semibold" id="pl-gross">—</span>
+            </div>
+            <div class="flex justify-between py-1 text-gray-500">
+              <span>− фикс</span>
+              <span id="pl-fixed">—</span>
+            </div>
+            <div class="flex justify-between py-2 border-t border-gray-200">
+              <span class="font-semibold">Операционная прибыль</span>
+              <span class="font-bold text-lg" id="pl-operating">—</span>
+            </div>
+            <div class="flex justify-between text-xs text-gray-500">
+              <span>Маржинальность</span>
+              <span id="pl-margin">—</span>
+            </div>
+            <div class="flex justify-between text-xs text-gray-500 border-t border-gray-100 pt-2 mt-2">
+              <span>Годовая прибыль (steady-state)</span>
+              <span id="pl-yearly">—</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="font-semibold text-base mb-4">Юнит-экономика</h3>
+          <div class="space-y-2 text-sm num">
+            <div class="flex justify-between"><span class="text-gray-600">Средний чек</span><span id="ue-avg-price">—</span></div>
+            <div class="flex justify-between"><span class="text-gray-600">Маржа на клиентку</span><span id="ue-margin-per">—</span></div>
+            <div class="flex justify-between"><span class="text-gray-600">CAC</span><span id="ue-cac">—</span></div>
+            <div class="flex justify-between"><span class="text-gray-600">Средний LT (мес)</span><span id="ue-lifetime">—</span></div>
+            <div class="flex justify-between"><span class="text-gray-600">LTV</span><span id="ue-ltv">—</span></div>
+            <div class="flex justify-between border-t border-gray-200 pt-2">
+              <span class="font-medium">LTV / CAC</span>
+              <span class="font-bold" id="ue-ltv-cac">—</span>
+            </div>
+            <div class="flex justify-between text-xs text-gray-500">
+              <span>Окупаемость CAC</span>
+              <span id="ue-payback">—</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="font-semibold text-base mb-4">Воронка</h3>
+          <div class="space-y-2 text-sm">
+            <div class="flex justify-between"><span class="text-gray-600">Бюджет</span><span class="num font-medium" id="fn-budget">—</span></div>
+            <div class="flex justify-between"><span class="text-gray-600">Лиды</span><span class="num" id="fn-leads">—</span></div>
+            <div class="flex justify-between"><span class="text-gray-600">Диагностики</span><span class="num" id="fn-diagnostics">—</span></div>
+            <div class="flex justify-between border-t border-gray-200 pt-2">
+              <span class="font-medium">Новые клиентки / мес</span>
+              <span class="num font-bold" id="fn-new">—</span>
+            </div>
+            <div class="flex justify-between text-xs text-gray-500">
+              <span>Доход от пробников</span>
+              <span class="num" id="fn-diag-revenue">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+      <div class="card">
+        <h3 class="font-semibold text-base mb-4">Готовые сценарии</h3>
+        <div class="grid grid-cols-2 gap-2" id="scenarios-list"></div>
+        <p class="text-xs text-gray-400 mt-3">Нажми сценарий — модель пересоберётся.</p>
+      </div>
+
+      <div class="card">
+        <h3 class="font-semibold text-base mb-4">Чувствительность прибыли</h3>
+        <table class="w-full text-sm">
+          <thead class="text-xs text-gray-400 uppercase tracking-wide border-b border-gray-200">
+            <tr>
+              <th class="text-left">Изменение</th>
+              <th class="text-right">Прибыль</th>
+              <th class="text-right">Δ</th>
+            </tr>
+          </thead>
+          <tbody id="sensitivity-table" class="num"></tbody>
+        </table>
+      </div>
+
+    </section>
+
+    <section class="card">
+      <h3 class="font-semibold text-base mb-4">Проекция когорты (6 месяцев)</h3>
+      <p class="text-xs text-gray-400 mb-3">Что произойдёт со 100 новыми клиентками месяца 1 при заданном удержании.</p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm num">
+          <thead class="text-xs text-gray-400 uppercase tracking-wide border-b border-gray-200">
+            <tr>
+              <th class="text-left">Месяц</th>
+              <th class="text-right">Активны</th>
+              <th class="text-right">Выручка</th>
+              <th class="text-right">Маржа</th>
+              <th class="text-right">Накоп. маржа</th>
+            </tr>
+          </thead>
+          <tbody id="cohort-table"></tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+
+  <!-- ========== 6-MONTH PLAN ========== -->
+  <section id="plan" class="space-y-6">
+    <div class="space-y-3">
+      <span class="pill">Шаг 4</span>
+      <h2 class="section-title">План на 6 месяцев: что делать каждый месяц</h2>
+      <p class="section-sub">Конкретные действия по месяцам — от «купили оборудование, ещё не открылись» до «60 активных клиенток, думаем о второй точке». Каждый месяц: цель, действия, KPI, чем заканчиваем.</p>
+    </div>
+
+    <div class="space-y-3">
+
+      <!-- M-2: PREP -->
+      <div class="card border-amber-300">
+        <div class="flex items-start gap-4">
+          <div class="month-badge prep">M−2</div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+              <div>
+                <div class="font-bold text-lg">Подготовка инфраструктуры</div>
+                <div class="text-sm text-gray-500">8 недель до открытия. Никаких клиенток, только стройка.</div>
+              </div>
+              <span class="pill bg-amber-100 text-amber-800">Затраты: 1.5–2 млн ₽</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 text-sm">
+              <div>
+                <div class="font-semibold mb-1">Юр.и финансовая база</div>
+                <ul class="text-gray-700 space-y-1 list-disc pl-5">
+                  <li>Регистрация ИП на УСН 6%, ОКВЭД 96.04, 96.02, 96.09</li>
+                  <li>Открытие р/с (Тинькофф / Сбер)</li>
+                  <li>Договор оферта на сайте</li>
+                  <li>Договор аренды (с льготным периодом на ремонт 1 мес)</li>
+                  <li>Подключение эквайринга</li>
+                  <li>Бухгалтерия на аутсорс (10–15к/мес)</li>
+                </ul>
+              </div>
+              <div>
+                <div class="font-semibold mb-1">Помещение + оборудование</div>
+                <ul class="text-gray-700 space-y-1 list-disc pl-5">
+                  <li>Помещение 60–80 м², 1 этаж ЖК, мощность 15+ кВт, вода</li>
+                  <li>Ремонт: вентиляция, душевая, зонирование (400–500к)</li>
+                  <li>Закупка: 3 LPG-аппарата (по 150–200к), гидро ванна (300к), кедровая бочка (120к). Бюджет CAPEX 600–800к</li>
+                  <li>Расходники на месяц вперёд (40к)</li>
+                  <li>Вывеска и навигация (30к)</li>
+                </ul>
+              </div>
+              <div>
+                <div class="font-semibold mb-1">Команда</div>
+                <ul class="text-gray-700 space-y-1 list-disc pl-5">
+                  <li>Найм 2 специалистов LPG (оклад 60к + % за визиты)</li>
+                  <li>Найм 1 администратора (50–55к)</li>
+                  <li>Партнёр-нутрициолог (% или фикс 15–20к)</li>
+                  <li>Обучение специалистов 1 нед</li>
+                  <li>Прописать стандарты сервиса (скрипты встречи, чек-ин, продажа)</li>
+                </ul>
+              </div>
+              <div>
+                <div class="font-semibold mb-1">Маркетинг до открытия</div>
+                <ul class="text-gray-700 space-y-1 list-disc pl-5">
+                  <li>Лендинг + квиз + форма записи на пробник</li>
+                  <li>IG + TG ведём с 8-й недели до открытия</li>
+                  <li>Контент: «строим студию», «знакомимся с командой», «рабочий процесс»</li>
+                  <li>Прогрев аудитории Мытищ — 1 000 подписчиков до старта</li>
+                  <li>Запуск таргета за 2 недели до открытия (50–80к)</li>
+                </ul>
+              </div>
+            </div>
+            <div class="mt-4 p-3 bg-amber-50 rounded-lg text-sm">
+              <b>Чем заканчиваем M−2:</b> работающий зал, 2 спеца + 1 админ, эквайринг, IG ≥1000 подписчиков, 30+ предзаписей на пробник.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- M1 -->
+      <div class="card border-gray-300">
+        <div class="flex items-start gap-4">
+          <div class="month-badge live">M1</div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+              <div>
+                <div class="font-bold text-lg">Тихий старт</div>
+                <div class="text-sm text-gray-500">Открыли двери. Учимся работать. Ошибки делаем на 5 клиентках, а не на 30.</div>
+              </div>
+              <span class="pill">Цель: 8–12 платных</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 text-sm">
+              <div>
+                <div class="font-semibold mb-1">Действия</div>
+                <ul class="text-gray-700 space-y-1 list-disc pl-5">
+                  <li>Неделя 1–2: запуск для друзей и микро-блогеров со скидкой 50% (5–6 клиенток). Главное — сбор обратной связи, не выручка.</li>
+                  <li>Неделя 2–3: первые продажи на полную цену через сторис и таргет</li>
+                  <li>Ежедневно: разбор воронки в Google Sheets</li>
+                  <li>В пятницу — еженедельная встреча кофаундеров: что работает, что не работает</li>
+                  <li>Сбор отзывов и первых до/после (хотя бы 1-нед.)</li>
+                </ul>
+              </div>
+              <div>
+                <div class="font-semibold mb-1">KPI к концу M1</div>
+                <ul class="text-gray-700 space-y-1 list-disc pl-5">
+                  <li>8–12 платных Body Club</li>
+                  <li>3–5 первых публичных отзывов</li>
+                  <li>100% клиенток в CRM</li>
+                  <li>Маркетинг бюджет потрачен: 100к</li>
+                  <li>CAC ≤ 14к (на первом мес ок выше нормы)</li>
+                  <li>Конверсия диагностика→абонемент ≥ 30%</li>
+                </ul>
+              </div>
+            </div>
+            <div class="mt-4 p-3 bg-gray-50 rounded-lg text-sm">
+              <b>Чем заканчиваем M1:</b> рабочий цикл «лид → диагностика → абонемент → сопровождение», 8–12 клиенток, первый «работающий» скрипт продаж.<br>
+              <b>Ожидаемый убыток M1: −350 до −450к</b> (низкая загрузка, ramp-up расходы).
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- M2 -->
+      <div class="card border-gray-300">
+        <div class="flex items-start gap-4">
+          <div class="month-badge live">M2</div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+              <div>
+                <div class="font-bold text-lg">Воронка и контент-машина</div>
+                <div class="text-sm text-gray-500">Учимся стабильно лить трафик. Появляются первые кейсы.</div>
+              </div>
+              <span class="pill">Цель: 18–22 активных</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 text-sm">
+              <div>
+                <div class="font-semibold mb-1">Действия</div>
+                <ul class="text-gray-700 space-y-1 list-disc pl-5">
+                  <li>Контент-машина: 3 reels в неделю + ежедневные истории</li>
+                  <li>5 микро-блогеров Мытищ (бартер + 5–10к)</li>
+                  <li>2 партнёрских касания (салон красоты, фитнес)</li>
+                  <li>A/B тест офферов в таргете</li>
+                  <li>Запуск рассылки тёплой базе</li>
+                  <li>Первый эфир в IG/TG «как мы работаем»</li>
+                </ul>
+              </div>
+              <div>
+                <div class="font-semibold mb-1">KPI к концу M2</div>
+                <ul class="text-gray-700 space-y-1 list-disc pl-5">
+                  <li>15 новых оплат</li>
+                  <li>50%+ клиенток M1 продлились</li>
+                  <li>Маркетинг 150к, CAC ≤ 12к</li>
+                  <li>10 кейсов до/после (хотя бы 2-нед)</li>
+                  <li>Конверсия диагностика → абонемент ≥ 40%</li>
+                </ul>
+              </div>
+            </div>
+            <div class="mt-4 p-3 bg-gray-50 rounded-lg text-sm">
+              <b>Чем заканчиваем M2:</b> 18–22 активных, контент-машина работает, первая партнёрка приносит клиенток.<br>
+              <b>Ожидаемый убыток M2: −150 до −250к</b>.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- M3 -->
+      <div class="card border-emerald-300">
+        <div class="flex items-start gap-4">
+          <div class="month-badge live">M3</div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+              <div>
+                <div class="font-bold text-lg">Стабилизация и продление</div>
+                <div class="text-sm text-gray-500">Первое значимое продление. Появляются клиентки 3-го месяца. Видим, держится ли продукт.</div>
+              </div>
+              <span class="pill bg-emerald-100 text-emerald-800">Operating break-even</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 text-sm">
+              <div>
+                <div class="font-semibold mb-1">Действия</div>
+                <ul class="text-gray-700 space-y-1 list-disc pl-5">
+                  <li>Запуск программы «3 месяца со скидкой» (64 900 ₽)</li>
+                  <li>Реферальная программа: −20% за приведённую подругу</li>
+                  <li>Первый апселл на Pro (2–3 клиентки)</li>
+                  <li>Расширение партнёрок до 5</li>
+                  <li>Закрытие первой воронки целиком, считаем CAC по каналу</li>
+                </ul>
+              </div>
+              <div>
+                <div class="font-semibold mb-1">KPI к концу M3</div>
+                <ul class="text-gray-700 space-y-1 list-disc pl-5">
+                  <li>25 новых оплат, 28–32 активных</li>
+                  <li>Продление M1→M2 ≥ 55%</li>
+                  <li>3 клиентки на Pro</li>
+                  <li>7+ кейсов опубликованы</li>
+                  <li>Operating break-even (выходим в плюс на операционке)</li>
+                  <li>CAC ≤ 9к</li>
+                </ul>
+              </div>
+            </div>
+            <div class="mt-4 p-3 bg-emerald-50 rounded-lg text-sm">
+              <b>Чем заканчиваем M3:</b> модель доказана. <b>Прибыль ≈ 0…+100к</b>. Если убыток &gt;200к — пересматриваем оффер / цены / каналы.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- M4 -->
+      <div class="card border-gray-300">
+        <div class="flex items-start gap-4">
+          <div class="month-badge live">M4</div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+              <div>
+                <div class="font-bold text-lg">Pro/VIP апселл + системы</div>
+                <div class="text-sm text-gray-500">Достроить премиум-хвост. Снять с операционки кофаундеров.</div>
+              </div>
+              <span class="pill">Цель: 40+ активных</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 text-sm">
+              <div>
+                <div class="font-semibold mb-1">Действия</div>
+                <ul class="text-gray-700 space-y-1 list-disc pl-5">
+                  <li>Активный апселл с Body Club → Pro (личный созвон с куратором)</li>
+                  <li>Запуск VIP (1–2 клиентки)</li>
+                  <li>Найм второго администратора или контент-мейкера</li>
+                  <li>Loyalty: «4-й месяц со скидкой 25%»</li>
+                  <li>Контент-производство на потоке (1 reel/день)</li>
+                  <li>Систематизация: все процессы в Notion / Trello</li>
+                </ul>
+              </div>
+              <div>
+                <div class="font-semibold mb-1">KPI к концу M4</div>
+                <ul class="text-gray-700 space-y-1 list-disc pl-5">
+                  <li>30 новых оплат, 40+ активных</li>
+                  <li>4 Pro, 1 VIP — доля премиум 15%+</li>
+                  <li>Загрузка ≥ 65%</li>
+                  <li>LTV/CAC ≥ 3.5x</li>
+                  <li>Прибыль 200–300к</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- M5 -->
+      <div class="card border-gray-300">
+        <div class="flex items-start gap-4">
+          <div class="month-badge live">M5</div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+              <div>
+                <div class="font-bold text-lg">Оптимизация юнит-экономики</div>
+                <div class="text-sm text-gray-500">Считаем каждый канал. Закрываем дыры в воронке. Готовим масштабирование.</div>
+              </div>
+              <span class="pill">Цель: 50+ активных</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 text-sm">
+              <div>
+                <div class="font-semibold mb-1">Действия</div>
+                <ul class="text-gray-700 space-y-1 list-disc pl-5">
+                  <li>Анализ ROI по каналам — отключаем плохие, льём в хорошие</li>
+                  <li>Запуск программ «возврата» для отвалившихся (win-back)</li>
+                  <li>NPS-опрос всех активных, разбор низких оценок</li>
+                  <li>Снижение CAC через органические каналы</li>
+                  <li>Подготовка к сезонности: лето = пауза, делаем легкие пакеты</li>
+                </ul>
+              </div>
+              <div>
+                <div class="font-semibold mb-1">KPI к концу M5</div>
+                <ul class="text-gray-700 space-y-1 list-disc pl-5">
+                  <li>40 новых оплат, 50+ активных</li>
+                  <li>2 предсказуемых канала трафика</li>
+                  <li>LTV/CAC ≥ 4x</li>
+                  <li>CAC ≤ 7к</li>
+                  <li>NPS ≥ 9</li>
+                  <li>Прибыль 350–450к</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- M6 -->
+      <div class="card border-emerald-500 bg-emerald-50/30">
+        <div class="flex items-start gap-4">
+          <div class="month-badge live">M6</div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+              <div>
+                <div class="font-bold text-lg">Решение о масштабе</div>
+                <div class="text-sm text-gray-500">Прибыль стабильно 400–500к. Решаем: вторая точка / расширение / стабильность.</div>
+              </div>
+              <span class="pill bg-emerald-500 text-white">3 мес подряд +400к</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 text-sm">
+              <div>
+                <div class="font-semibold mb-1">Действия</div>
+                <ul class="text-gray-700 space-y-1 list-disc pl-5">
+                  <li>Метрики 3-х месяцев подряд (M4, M5, M6) — стабильны ли?</li>
+                  <li>Методика оцифрована, готова для тиражирования</li>
+                  <li>Решение о росте: вторая точка / второй кабинет / расширение онлайн</li>
+                  <li>Подготовка инвестора (если решили расти) или дивиденды (если стабильность)</li>
+                  <li>Первая команда «на смену» — кофаундеры могут уйти в отпуск</li>
+                </ul>
+              </div>
+              <div>
+                <div class="font-semibold mb-1">KPI к концу M6</div>
+                <ul class="text-gray-700 space-y-1 list-disc pl-5">
+                  <li>45 новых оплат, 60+ активных</li>
+                  <li>Доля Pro+VIP ≥ 25%</li>
+                  <li>Прибыль 400–500к</li>
+                  <li>Загрузка 75–85%</li>
+                  <li>LTV ≥ 55к, LTV/CAC ≥ 5x</li>
+                  <li>15+ публичных кейсов до/после</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== KPI TRACKER ========== -->
+  <section id="kpi" class="space-y-6">
+    <div class="space-y-3">
+      <span class="pill">Шаг 5</span>
+      <h2 class="section-title">KPI-трекер по месяцам</h2>
+      <p class="section-sub">Это единственная таблица, которая должна быть всегда под рукой. Каждую пятницу — заполнить факт. Если три KPI красные подряд — менять подход, а не «ещё месяц подождём».</p>
+    </div>
+
+    <div class="card overflow-x-auto">
       <table class="w-full text-sm num">
-        <thead class="text-xs text-gray-400 uppercase tracking-wide border-b border-gray-200">
+        <thead class="text-xs text-gray-500 uppercase tracking-wide border-b border-gray-200">
           <tr>
-            <th class="text-left">Месяц</th>
-            <th class="text-right">Активны</th>
-            <th class="text-right">Выручка</th>
-            <th class="text-right">Маржа</th>
-            <th class="text-right">Накоп. маржа</th>
-          </tr>
-        </thead>
-        <tbody id="cohort-table"></tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- PDF reality check -->
-  <section class="space-y-4">
-    <div>
-      <h2 class="text-lg font-bold">Разбор внешней модели (PDF из ИИ-конструктора)</h2>
-      <p class="text-sm text-gray-500 max-w-3xl">Их модель показывает выручку 1.1 млн ₽, чистую прибыль 410к и окупаемость 2 мес. Цифры выглядят красиво, но 3 фатальные дыры превращают это в презентацию для инвестора, а не в операционный план.</p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-      <div class="card border-red-200 bg-red-50/40">
-        <div class="text-xs uppercase tracking-wide text-red-700 font-semibold mb-1">Дыра #1</div>
-        <div class="font-bold text-lg mb-2">Маркетинг = 0 ₽</div>
-        <p class="text-sm text-gray-700">На старте без узнаваемости нельзя нагнать 15 новых клиенток/мес бесплатно. Реалистично для Мытищ: <b>150–200к ₽/мес</b>. Иначе откуда поток?</p>
-      </div>
-      <div class="card border-red-200 bg-red-50/40">
-        <div class="text-xs uppercase tracking-wide text-red-700 font-semibold mb-1">Дыра #2</div>
-        <div class="font-bold text-lg mb-2">Отток = 0 %/мес, LT = 8 мес</div>
-        <p class="text-sm text-gray-700">Wellness retention никогда не идеален. Реалистично: <b>отток 8–15%/мес</b>, средний LT на старте 3–5 мес. LT 8 мес — это после года работы и сильного продукта.</p>
-      </div>
-      <div class="card border-red-200 bg-red-50/40">
-        <div class="text-xs uppercase tracking-wide text-red-700 font-semibold mb-1">Дыра #3</div>
-        <div class="font-bold text-lg mb-2">Окупаемость 2 мес</div>
-        <p class="text-sm text-gray-700">Считают с пика 36 клиенток. На самом деле ramp-up займёт 4–6 мес (М1: 8–12 кл, М3: 22–30, М6: 36+). <b>Реальная окупаемость: 10–14 мес.</b></p>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3 class="font-bold text-base mb-3">Точечный разбор: где их цифры расходятся с реальностью</h3>
-      <table class="w-full text-sm num">
-        <thead class="text-xs text-gray-400 uppercase tracking-wide border-b border-gray-200">
-          <tr>
-            <th class="text-left py-2">Параметр</th>
-            <th class="text-right py-2">PDF</th>
-            <th class="text-right py-2">Реалистично (Мытищи)</th>
-            <th class="text-left py-2 pl-4">Комментарий</th>
+            <th class="text-left py-2">KPI</th>
+            <th class="text-right">M1</th>
+            <th class="text-right">M2</th>
+            <th class="text-right">M3</th>
+            <th class="text-right">M4</th>
+            <th class="text-right">M5</th>
+            <th class="text-right">M6</th>
           </tr>
         </thead>
         <tbody>
           <tr class="border-t border-gray-100">
-            <td class="text-left py-2 font-medium">Аренда</td>
-            <td class="text-right">95 000 ₽</td>
-            <td class="text-right pos">95 000 ₽</td>
-            <td class="text-left pl-4 text-gray-600 num-off" style="font-variant-numeric: normal;">Норм для Мытищ (60–80 м²).</td>
+            <td class="text-left font-medium">Новые оплаты</td>
+            <td class="text-right kpi-cell-neutral">10</td>
+            <td class="text-right kpi-cell-neutral">15</td>
+            <td class="text-right kpi-cell-warn">25</td>
+            <td class="text-right kpi-cell-warn">30</td>
+            <td class="text-right kpi-cell-good">40</td>
+            <td class="text-right kpi-cell-good">45</td>
           </tr>
           <tr class="border-t border-gray-100">
-            <td class="text-left py-2 font-medium">ФОТ</td>
-            <td class="text-right">182 000 ₽</td>
-            <td class="text-right neg">240 000–280 000 ₽</td>
-            <td class="text-left pl-4 text-gray-600" style="font-variant-numeric: normal;">Нет администратора. Без админа кофаундер тонет в записях и оплатах.</td>
+            <td class="text-left font-medium">Активных клиенток</td>
+            <td class="text-right kpi-cell-neutral">12</td>
+            <td class="text-right kpi-cell-neutral">22</td>
+            <td class="text-right kpi-cell-warn">30</td>
+            <td class="text-right kpi-cell-warn">40</td>
+            <td class="text-right kpi-cell-good">50</td>
+            <td class="text-right kpi-cell-good">60</td>
           </tr>
           <tr class="border-t border-gray-100">
-            <td class="text-left py-2 font-medium">Маркетинг</td>
-            <td class="text-right neg">0 ₽</td>
-            <td class="text-right pos">150 000–200 000 ₽</td>
-            <td class="text-left pl-4 text-gray-600" style="font-variant-numeric: normal;">Главный провал PDF. Без бюджета 15 новых/мес нереально.</td>
+            <td class="text-left font-medium">Выручка</td>
+            <td class="text-right kpi-cell-neutral">270к</td>
+            <td class="text-right kpi-cell-neutral">510к</td>
+            <td class="text-right kpi-cell-warn">700к</td>
+            <td class="text-right kpi-cell-warn">920к</td>
+            <td class="text-right kpi-cell-good">1.15м</td>
+            <td class="text-right kpi-cell-good">1.4м</td>
+          </tr>
+          <tr class="border-t border-gray-100 bg-gray-50">
+            <td class="text-left font-bold">Прибыль / убыток</td>
+            <td class="text-right neg">−400к</td>
+            <td class="text-right neg">−200к</td>
+            <td class="text-right">+50к</td>
+            <td class="text-right pos">+200к</td>
+            <td class="text-right pos">+400к</td>
+            <td class="text-right pos font-bold">+500к</td>
           </tr>
           <tr class="border-t border-gray-100">
-            <td class="text-left py-2 font-medium">Расходники / визит</td>
-            <td class="text-right">500 ₽</td>
-            <td class="text-right neg">800–1 200 ₽</td>
-            <td class="text-left pl-4 text-gray-600" style="font-variant-numeric: normal;">Не учтены эквайринг 2–3%, бонусы мастеру, стирка, косметика.</td>
+            <td class="text-left font-medium">CAC, ₽</td>
+            <td class="text-right kpi-cell-neutral">14к</td>
+            <td class="text-right kpi-cell-warn">12к</td>
+            <td class="text-right kpi-cell-warn">9к</td>
+            <td class="text-right kpi-cell-good">8к</td>
+            <td class="text-right kpi-cell-good">7к</td>
+            <td class="text-right kpi-cell-good">7к</td>
           </tr>
           <tr class="border-t border-gray-100">
-            <td class="text-left py-2 font-medium">CAC</td>
-            <td class="text-right neg">0 ₽</td>
-            <td class="text-right pos">6 000–12 000 ₽</td>
-            <td class="text-left pl-4 text-gray-600" style="font-variant-numeric: normal;">Следствие маркетинг=0.</td>
+            <td class="text-left font-medium">LTV, ₽</td>
+            <td class="text-right">—</td>
+            <td class="text-right kpi-cell-neutral">35к</td>
+            <td class="text-right kpi-cell-warn">38к</td>
+            <td class="text-right kpi-cell-good">45к</td>
+            <td class="text-right kpi-cell-good">50к</td>
+            <td class="text-right kpi-cell-good">55к</td>
           </tr>
           <tr class="border-t border-gray-100">
-            <td class="text-left py-2 font-medium">Отток / мес</td>
-            <td class="text-right neg">0 %</td>
-            <td class="text-right pos">8–15 %</td>
-            <td class="text-left pl-4 text-gray-600" style="font-variant-numeric: normal;">Wellness retention никогда не 100%. Реальная воронка: 15→8→4 (53%/50%).</td>
+            <td class="text-left font-medium">LTV / CAC</td>
+            <td class="text-right">—</td>
+            <td class="text-right kpi-cell-warn">2.9x</td>
+            <td class="text-right kpi-cell-good">4.2x</td>
+            <td class="text-right kpi-cell-good">5.6x</td>
+            <td class="text-right kpi-cell-good">7.1x</td>
+            <td class="text-right kpi-cell-good">7.9x</td>
           </tr>
           <tr class="border-t border-gray-100">
-            <td class="text-left py-2 font-medium">Средний LT</td>
-            <td class="text-right neg">8 мес</td>
-            <td class="text-right pos">1.7–2.5 мес</td>
-            <td class="text-left pl-4 text-gray-600" style="font-variant-numeric: normal;">На старте. К году можно вытянуть до 4–5 мес.</td>
+            <td class="text-left font-medium">Продление M1→M2</td>
+            <td class="text-right">—</td>
+            <td class="text-right kpi-cell-warn">50%</td>
+            <td class="text-right kpi-cell-warn">55%</td>
+            <td class="text-right kpi-cell-good">60%</td>
+            <td class="text-right kpi-cell-good">65%</td>
+            <td class="text-right kpi-cell-good">65%</td>
           </tr>
           <tr class="border-t border-gray-100">
-            <td class="text-left py-2 font-medium">LTV / CAC</td>
-            <td class="text-right neg">∞ (CAC=0)</td>
-            <td class="text-right pos">3–4 x</td>
-            <td class="text-left pl-4 text-gray-600" style="font-variant-numeric: normal;">Здоровый бизнес ≥ 3x. Считается при реальном CAC.</td>
+            <td class="text-left font-medium">Загрузка слотов</td>
+            <td class="text-right kpi-cell-neutral">25%</td>
+            <td class="text-right kpi-cell-neutral">40%</td>
+            <td class="text-right kpi-cell-warn">55%</td>
+            <td class="text-right kpi-cell-warn">65%</td>
+            <td class="text-right kpi-cell-good">75%</td>
+            <td class="text-right kpi-cell-good">80%</td>
           </tr>
           <tr class="border-t border-gray-100">
-            <td class="text-left py-2 font-medium">Загрузка 70% сразу</td>
-            <td class="text-right neg">да</td>
-            <td class="text-right pos">30→50→70% за 4–6 мес</td>
-            <td class="text-left pl-4 text-gray-600" style="font-variant-numeric: normal;">Не бывает «открыли — сразу полная загрузка».</td>
+            <td class="text-left font-medium">NPS</td>
+            <td class="text-right">—</td>
+            <td class="text-right kpi-cell-neutral">7.5</td>
+            <td class="text-right kpi-cell-warn">8.0</td>
+            <td class="text-right kpi-cell-good">8.5</td>
+            <td class="text-right kpi-cell-good">9.0</td>
+            <td class="text-right kpi-cell-good">9.0</td>
           </tr>
           <tr class="border-t border-gray-100">
-            <td class="text-left py-2 font-medium">Окупаемость инвестиций</td>
-            <td class="text-right neg">2 мес</td>
-            <td class="text-right pos">10–14 мес</td>
-            <td class="text-left pl-4 text-gray-600" style="font-variant-numeric: normal;">Считают по пику, а не накопительно с учётом ramp-up.</td>
-          </tr>
-          <tr class="border-t border-gray-100">
-            <td class="text-left py-2 font-medium">Подушка на старт</td>
-            <td class="text-right neg">2.76 млн</td>
-            <td class="text-right pos">4.5–5.5 млн</td>
-            <td class="text-left pl-4 text-gray-600" style="font-variant-numeric: normal;">3 мес OPEX мало. Нужен 6–9 мес запас до выхода на безубыток.</td>
-          </tr>
-          <tr class="border-t border-gray-100">
-            <td class="text-left py-2 font-medium">5 аппаратов в 1 кабинете одновременно</td>
-            <td class="text-right warn">да</td>
-            <td class="text-right">2 кабинета</td>
-            <td class="text-left pl-4 text-gray-600" style="font-variant-numeric: normal;">5 женщин одновременно = шум, тесно, мало интимности. Wellness любит более камерную атмосферу.</td>
+            <td class="text-left font-medium">Кейсы до/после публ.</td>
+            <td class="text-right">—</td>
+            <td class="text-right">3</td>
+            <td class="text-right">7</td>
+            <td class="text-right">10</td>
+            <td class="text-right">13</td>
+            <td class="text-right">15</td>
           </tr>
         </tbody>
       </table>
     </div>
 
     <div class="card bg-gray-900 text-white border-gray-900">
-      <h3 class="font-bold text-base mb-3">Перевод PDF в честные цифры (нажми сценарий в блоке выше)</h3>
+      <h3 class="font-bold text-base mb-3">Что делать каждый день / неделю / месяц</h3>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
         <div>
-          <div class="text-xs uppercase tracking-wide text-gray-400 mb-1">PDF: «их план»</div>
-          <div class="text-2xl font-bold pos">+410 000 ₽/мес</div>
-          <div class="text-gray-400 mt-1">Маркетинг 0, CAC 0, отток 0, окуп. 2 мес</div>
+          <div class="font-semibold mb-2 text-amber-300">Каждый день · 10 мин</div>
+          <ul class="text-gray-300 space-y-1 list-disc pl-5">
+            <li>Сколько лидов пришло</li>
+            <li>Сколько записались на пробник</li>
+            <li>Сколько дошли</li>
+            <li>Сколько оплат сегодня</li>
+            <li>Сколько свободных слотов завтра</li>
+          </ul>
         </div>
         <div>
-          <div class="text-xs uppercase tracking-wide text-gray-400 mb-1">Реалити-чек</div>
-          <div class="text-2xl font-bold warn">≈ 100–180к ₽/мес</div>
-          <div class="text-gray-400 mt-1">Те же 30–36 клиенток, но маркетинг 180к + ФОТ 240к + расходники 800₽</div>
+          <div class="font-semibold mb-2 text-amber-300">Каждую неделю · 60 мин</div>
+          <ul class="text-gray-300 space-y-1 list-disc pl-5">
+            <li>Сверка плана выручки</li>
+            <li>Анализ воронки и CAC по каналам</li>
+            <li>Разбор проблемных клиенток</li>
+            <li>Контент-план на следующую неделю</li>
+            <li>Сколько кейсов до/после готово</li>
+          </ul>
         </div>
         <div>
-          <div class="text-xs uppercase tracking-wide text-gray-400 mb-1">Реалистичный сценарий М6 (Мытищи)</div>
-          <div class="text-2xl font-bold pos">≈ 540 000 ₽/мес</div>
-          <div class="text-gray-400 mt-1">61 клиентка (36 Body Club + 8 Pro + 2 VIP + 15 онлайн), маркетинг 180к</div>
+          <div class="font-semibold mb-2 text-amber-300">Каждый месяц · 2 часа</div>
+          <ul class="text-gray-300 space-y-1 list-disc pl-5">
+            <li>P&L по этой модели</li>
+            <li>Сверка KPI с плановыми (вся таблица)</li>
+            <li>Удержание M1→M2, M2→M3</li>
+            <li>Пересмотр маркетинг-бюджета</li>
+            <li>Решения на следующий месяц</li>
+          </ul>
         </div>
       </div>
-      <p class="text-xs text-gray-400 mt-4">Нажмите сценарий <b>«PDF: их план»</b> или <b>«Реалити-чек PDF»</b> в блоке готовых сценариев — модель пересоберётся под их цифры, и вы увидите разницу вживую.</p>
     </div>
   </section>
 
-  <!-- Cofounder roles -->
-  <section class="space-y-4">
-    <div>
-      <h2 class="text-lg font-bold">Роли кофаундеров — две девушки, две зоны</h2>
-      <p class="text-sm text-gray-500 max-w-3xl">Нельзя обеим заниматься всем — проект умрёт в каше ответственности. Делим жёстко: одна отвечает за то, чтобы клиентки <b>пришли и купили</b>, вторая — за то, чтобы они <b>получили результат и остались</b>. Бизнес взлетает только если обе зоны работают одновременно.</p>
+  <!-- ========== BENCHMARKS ========== -->
+  <section id="bench" class="space-y-6">
+    <div class="space-y-3">
+      <span class="pill">Шаг 6</span>
+      <h2 class="section-title">Бенчмарки рынка (что нормально для Мытищ и РФ)</h2>
+      <p class="section-sub">Цифры собраны из рынка: BodyDream Мытищи, Stilistic, Персона, AQUASLIM, MEDSI, статьи РБК и Forbes, кейсы агентств. Если ваши цифры далеко от этих — это либо новый продукт, либо ошибка в модели.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+      <div class="card">
+        <h3 class="font-bold text-base mb-3">Розничные цены в Мытищах</h3>
+        <table class="w-full text-sm num">
+          <thead class="text-xs text-gray-400 uppercase tracking-wide border-b border-gray-200">
+            <tr><th class="text-left">Услуга</th><th class="text-right">Сеанс</th><th class="text-right">Абонемент 10</th></tr>
+          </thead>
+          <tbody>
+            <tr class="border-t border-gray-100"><td class="text-left">LPG-массаж</td><td class="text-right">1 800–2 500 ₽</td><td class="text-right">24–28к</td></tr>
+            <tr class="border-t border-gray-100"><td class="text-left">Гидромассаж</td><td class="text-right">1 500–2 500 ₽</td><td class="text-right">18–25к</td></tr>
+            <tr class="border-t border-gray-100"><td class="text-left">Кедровая бочка</td><td class="text-right">700–1 200 ₽</td><td class="text-right">8–12к</td></tr>
+            <tr class="border-t border-gray-100"><td class="text-left">Прессотерапия (для сравн.)</td><td class="text-right">1 100–1 500 ₽</td><td class="text-right">11–14к</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h3 class="font-bold text-base mb-3">Зарплаты Мытищи / Москва</h3>
+        <table class="w-full text-sm num">
+          <thead class="text-xs text-gray-400 uppercase tracking-wide border-b border-gray-200">
+            <tr><th class="text-left">Роль</th><th class="text-right">Оклад/мес</th><th class="text-right">% от выручки</th></tr>
+          </thead>
+          <tbody>
+            <tr class="border-t border-gray-100"><td class="text-left">Спец LPG / косметолог</td><td class="text-right">45–75к</td><td class="text-right">30–40%</td></tr>
+            <tr class="border-t border-gray-100"><td class="text-left">Массажист</td><td class="text-right">60–100к</td><td class="text-right">40–50%</td></tr>
+            <tr class="border-t border-gray-100"><td class="text-left">Администратор</td><td class="text-right">50–70к</td><td class="text-right">—</td></tr>
+            <tr class="border-t border-gray-100"><td class="text-left">SMM-маркетолог</td><td class="text-right">30–50к</td><td class="text-right">—</td></tr>
+            <tr class="border-t border-gray-100"><td class="text-left">Уборщица</td><td class="text-right">25–35к</td><td class="text-right">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h3 class="font-bold text-base mb-3">Аренда и оборудование</h3>
+        <ul class="text-sm space-y-2">
+          <li class="flex justify-between"><span>Аренда Мытищи, ₽/м²/мес</span><span class="num font-medium">1 200–2 200 ₽</span></li>
+          <li class="flex justify-between"><span>Помещение 60–80 м²</span><span class="num font-medium">75–175к ₽/мес</span></li>
+          <li class="flex justify-between"><span>LPG-аппарат (1 шт)</span><span class="num font-medium">150–250к ₽</span></li>
+          <li class="flex justify-between"><span>Гидромассажная ванна</span><span class="num font-medium">250–350к ₽</span></li>
+          <li class="flex justify-between"><span>Кедровая бочка</span><span class="num font-medium">80–150к ₽</span></li>
+          <li class="flex justify-between"><span>Анализатор тела</span><span class="num font-medium">30–80к ₽</span></li>
+          <li class="flex justify-between"><span>Мебель + ресепшн</span><span class="num font-medium">80–150к ₽</span></li>
+          <li class="flex justify-between border-t border-gray-100 pt-2 font-bold"><span>CAPEX итого</span><span class="num">600–1 000к ₽</span></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="font-bold text-base mb-3">Воронка маркетинга</h3>
+        <ul class="text-sm space-y-2">
+          <li class="flex justify-between"><span>CPL Я.Директ wellness Мытищи</span><span class="num font-medium">500–900 ₽</span></li>
+          <li class="flex justify-between"><span>CPL VK Ads wellness</span><span class="num font-medium">300–700 ₽</span></li>
+          <li class="flex justify-between"><span>Конверсия лид → диагностика</span><span class="num font-medium">28–35%</span></li>
+          <li class="flex justify-between"><span>Конверсия диагн. → абонемент</span><span class="num font-medium">40–50%</span></li>
+          <li class="flex justify-between"><span>CAC новой клиентки (норма)</span><span class="num font-medium">8 000–12 000 ₽</span></li>
+          <li class="flex justify-between"><span>CAC payback (норма)</span><span class="num font-medium">≤ 12 мес</span></li>
+          <li class="flex justify-between border-t border-gray-100 pt-2 font-bold"><span>LTV / CAC (здоровый)</span><span class="num">≥ 3 : 1</span></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="font-bold text-base mb-3">Структура расходов (% от выручки) — норма РФ wellness</h3>
+        <ul class="text-sm space-y-2">
+          <li class="flex justify-between"><span>ФОТ (мастера + админ)</span><span class="num font-medium">40–50%</span></li>
+          <li class="flex justify-between"><span>Аренда</span><span class="num font-medium">5–10%</span></li>
+          <li class="flex justify-between"><span>Расходники (одноразка, стирка, эквайринг)</span><span class="num font-medium">7–12%</span></li>
+          <li class="flex justify-between"><span>Маркетинг (зрелая студия)</span><span class="num font-medium">3–5%</span></li>
+          <li class="flex justify-between"><span>Маркетинг (новой студии 1-й год)</span><span class="num font-medium">8–12%</span></li>
+          <li class="flex justify-between border-t border-gray-100 pt-2 font-bold"><span>Чистая маржа норма / хорошая</span><span class="num">5–10% / 15–25%</span></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="font-bold text-base mb-3">Retention и LT</h3>
+        <ul class="text-sm space-y-2">
+          <li class="flex justify-between"><span>Monthly churn год 1</span><span class="num font-medium">8–12%</span></li>
+          <li class="flex justify-between"><span>Monthly churn зрелый</span><span class="num font-medium">5–7%</span></li>
+          <li class="flex justify-between"><span>LT salon walk-in</span><span class="num font-medium">2–4 мес</span></li>
+          <li class="flex justify-between"><span>LT subscription + ведение</span><span class="num font-medium">8–14 мес</span></li>
+          <li class="flex justify-between"><span>Закрылись за 18 мес (РФ статистика)</span><span class="num font-medium neg">≈ 30%</span></li>
+          <li class="flex justify-between border-t border-gray-100 pt-2 font-bold"><span>Топ-3 причины закрытия</span><span class="num">cash-flow / маркетинг / HR</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== RISKS ========== -->
+  <section id="risks" class="space-y-6">
+    <div class="space-y-3">
+      <span class="pill">Шаг 7</span>
+      <h2 class="section-title">Риски и как их закрывать</h2>
+      <p class="section-sub">10 самых опасных рисков для wellness-студии в Подмосковье. Под каждым — митигация. Это не паранойя, это страховка. По статистике РФ, 30% салонов закрываются в первые 18 месяцев — мы хотим в оставшиеся 70%.</p>
+    </div>
+
+    <div class="card overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead class="text-xs text-gray-500 uppercase tracking-wide border-b border-gray-200">
+          <tr>
+            <th class="text-left py-2">Риск</th>
+            <th class="text-center">Вероятность</th>
+            <th class="text-center">Удар</th>
+            <th class="text-left pl-4">Митигация</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-t border-gray-100">
+            <td class="text-left py-3 font-medium">Не набираем клиенток за M1–M3</td>
+            <td class="text-center"><span class="pill bg-red-100 text-red-700">Высокая</span></td>
+            <td class="text-center"><span class="pill bg-red-100 text-red-700">Высокий</span></td>
+            <td class="text-left pl-4 text-gray-700">Подушка 6 мес OPEX (3.5+ млн). План B: −20% к ценам на M2 как промо. Бартер с микро-блогерами.</td>
+          </tr>
+          <tr class="border-t border-gray-100">
+            <td class="text-left py-3 font-medium">Сезонность: январь + лето</td>
+            <td class="text-center"><span class="pill bg-red-100 text-red-700">Высокая</span></td>
+            <td class="text-center"><span class="pill bg-amber-100 text-amber-700">Средний</span></td>
+            <td class="text-left pl-4 text-gray-700">Январь: онлайн-программы + детокс. Июнь–август: краткие 2-нед пакеты, отпускной режим, ремонт оборудования.</td>
+          </tr>
+          <tr class="border-t border-gray-100">
+            <td class="text-left py-3 font-medium">Оба специалиста уходят с базой</td>
+            <td class="text-center"><span class="pill bg-amber-100 text-amber-700">Средняя</span></td>
+            <td class="text-center"><span class="pill bg-red-100 text-red-700">Высокий</span></td>
+            <td class="text-left pl-4 text-gray-700">Договор с неконкуренцией 6 мес. Клиентки в CRM на бренде, не на спеце. Контакты — на номере студии. 2 спеца, не 1.</td>
+          </tr>
+          <tr class="border-t border-gray-100">
+            <td class="text-left py-3 font-medium">Сильный конкурент рядом</td>
+            <td class="text-center"><span class="pill bg-amber-100 text-amber-700">Средняя</span></td>
+            <td class="text-center"><span class="pill bg-amber-100 text-amber-700">Средний</span></td>
+            <td class="text-left pl-4 text-gray-700">Отстройка через «клуб + питание + ведение» (не салон). Программа лояльности от M3. Долгосрочные абонементы 3 мес.</td>
+          </tr>
+          <tr class="border-t border-gray-100">
+            <td class="text-left py-3 font-medium">Оборудование ломается (LPG)</td>
+            <td class="text-center"><span class="pill bg-amber-100 text-amber-700">Средняя</span></td>
+            <td class="text-center"><span class="pill bg-amber-100 text-amber-700">Средний</span></td>
+            <td class="text-left pl-4 text-gray-700">Сервисный контракт с момента покупки. 3 LPG-аппарата (а не 1) — если один сломан, не встаёт. Запас расходников на 1 мес.</td>
+          </tr>
+          <tr class="border-t border-gray-100">
+            <td class="text-left py-3 font-medium">Юр.претензии за «обещание похудения»</td>
+            <td class="text-center"><span class="pill bg-green-100 text-green-700">Низкая</span></td>
+            <td class="text-center"><span class="pill bg-red-100 text-red-700">Высокий</span></td>
+            <td class="text-left pl-4 text-gray-700">Никогда не обещать «минус N кг» в рекламе. Договор оферта + информированное согласие на каждом визите. Тексты — на проверку юристу до публикации.</td>
+          </tr>
+          <tr class="border-t border-gray-100">
+            <td class="text-left py-3 font-medium">Эквайринг блокируется</td>
+            <td class="text-center"><span class="pill bg-green-100 text-green-700">Низкая</span></td>
+            <td class="text-center"><span class="pill bg-amber-100 text-amber-700">Средний</span></td>
+            <td class="text-left pl-4 text-gray-700">Резервный счёт + эквайринг в другом банке. СБП как fallback. Не принимать &gt;500к на ИП без понятной структуры платежей.</td>
+          </tr>
+          <tr class="border-t border-gray-100">
+            <td class="text-left py-3 font-medium">Кофаундер выходит из проекта</td>
+            <td class="text-center"><span class="pill bg-amber-100 text-amber-700">Средняя</span></td>
+            <td class="text-center"><span class="pill bg-red-100 text-red-700">Высокий</span></td>
+            <td class="text-left pl-4 text-gray-700">Vesting 4 года, cliff 1 год. Выход до года — обнуление доли. Совместное соглашение по управлению (shareholders agreement) на берегу.</td>
+          </tr>
+          <tr class="border-t border-gray-100">
+            <td class="text-left py-3 font-medium">Кассовый разрыв</td>
+            <td class="text-center"><span class="pill bg-red-100 text-red-700">Высокая</span></td>
+            <td class="text-center"><span class="pill bg-red-100 text-red-700">Высокий</span></td>
+            <td class="text-left pl-4 text-gray-700">Резерв 1 мес OPEX всегда в кассе. Еженедельный cash-flow. Не уходить «в минус» по личным деньгам кофаундерш.</td>
+          </tr>
+          <tr class="border-t border-gray-100">
+            <td class="text-left py-3 font-medium">Завышенные ожидания клиенток («не похудела»)</td>
+            <td class="text-center"><span class="pill bg-red-100 text-red-700">Высокая</span></td>
+            <td class="text-center"><span class="pill bg-amber-100 text-amber-700">Средний</span></td>
+            <td class="text-left pl-4 text-gray-700">Чёткое позиционирование «клуб», не «похудение». Замеры объёмов (не веса). Контракт на 4 недели, не на «−10 кг». Управление ожиданиями на пробнике.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ========== LEGAL ========== -->
+  <section id="legal" class="space-y-6">
+    <div class="space-y-3">
+      <span class="pill">Шаг 8</span>
+      <h2 class="section-title">Юридика и налоги: чек-лист</h2>
+      <p class="section-sub">Минимальный набор документов и решений, чтобы не получить штраф или приостановку деятельности. Это не юридическая консультация — на сложных решениях обратитесь к юристу. Но 80% типовых ситуаций здесь.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="card">
+        <h3 class="font-bold text-base mb-3">Форма и налоги</h3>
+        <ul class="text-sm space-y-2">
+          <li class="check">ИП на УСН 6% (доходы) — самая простая форма</li>
+          <li class="check">ОКВЭД: 96.04 (физкультурно-оздоровительная), 96.02 (косметические услуги), 96.09 (прочие персональные)</li>
+          <li class="check">Фиксированные взносы ИП: ≈49 000 ₽/год</li>
+          <li class="check">ПФР 22% + ФОМС 5.1% + ФСС 2.9% = 30% на ФОТ</li>
+          <li class="check">НДФЛ 13% с зарплат сотрудников</li>
+          <li class="check">Онлайн-касса (54-ФЗ) — обязательно с момента 1-й продажи</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="font-bold text-base mb-3">Что НЕ требует медлицензии</h3>
+        <ul class="text-sm space-y-2">
+          <li class="check">LPG-массаж (вибромассаж — relax, не лечение)</li>
+          <li class="check">Кедровая (фито) бочка</li>
+          <li class="check">Гидромассаж (без избыточного давления)</li>
+          <li class="check">Консультации по питанию (без диагнозов)</li>
+          <li class="cross text-gray-400">Инъекции, чистки — требуют медлицензии</li>
+          <li class="cross text-gray-400">«Лечит ожирение / целлюлит как болезнь» — медицина</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="font-bold text-base mb-3">Документы для клиенток</h3>
+        <ul class="text-sm space-y-2">
+          <li class="check">Договор оферта (на сайте, юр. сильный)</li>
+          <li class="check">Информированное согласие на процедуру (на первом визите, с перечнем противопоказаний)</li>
+          <li class="check">Согласие на обработку перс. данных (152-ФЗ)</li>
+          <li class="check">Согласие на фото/видео для соцсетей (отдельно!)</li>
+          <li class="check">Прайс-лист на видном месте</li>
+          <li class="check">Правила оказания услуг (включая отмену и возврат)</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="font-bold text-base mb-3">Договоры и подрядчики</h3>
+        <ul class="text-sm space-y-2">
+          <li class="check">Договор аренды с льготным периодом</li>
+          <li class="check">Эквайринг + СБП</li>
+          <li class="check">Бухгалтерия на аутсорс</li>
+          <li class="check">СЭС: договор на дезинфекцию (1×/квартал)</li>
+          <li class="check">Утилизация отходов (класс А, обычный мусор)</li>
+          <li class="check">Сервисный контракт на оборудование</li>
+          <li class="check">Договор с нутрициологом-партнёром</li>
+        </ul>
+      </div>
+
+      <div class="card border-red-200 bg-red-50/40">
+        <h3 class="font-bold text-base mb-3 text-red-900">Что НЕЛЬЗЯ в рекламе (38-ФЗ)</h3>
+        <ul class="text-sm space-y-2">
+          <li class="cross">Гарантировать «минус N кг»</li>
+          <li class="cross">«Лечит» / «избавит от болезни» (без медлицензии)</li>
+          <li class="cross">Сравнивать конкурентов («лучше чем X»)</li>
+          <li class="cross">Использовать чужие фото до/после</li>
+          <li class="cross">Использовать слово «бесплатно», если есть условия</li>
+          <li class="cross">Размещать в местах для несовершеннолетних</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="font-bold text-base mb-3">СанПин (что проверять)</h3>
+        <ul class="text-sm space-y-2">
+          <li class="check">Вентиляция: приточно-вытяжная</li>
+          <li class="check">Душевая для клиенток (после гидро/бочки)</li>
+          <li class="check">Раздельные шкафы для чистого/грязного белья</li>
+          <li class="check">УФ-облучатель в кабинете</li>
+          <li class="check">Журнал дезинфекции</li>
+          <li class="check">Аптечка первой помощи</li>
+          <li class="check">Уголок потребителя</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TEAM ========== -->
+  <section id="team" class="space-y-6">
+    <div class="space-y-3">
+      <span class="pill">Шаг 9</span>
+      <h2 class="section-title">Роли кофаундеров — две девушки, две зоны</h2>
+      <p class="section-sub">Нельзя обеим заниматься всем — проект умрёт в каше ответственности. Делим жёстко: одна отвечает за то, чтобы клиентки <b>пришли и купили</b>, вторая — за то, чтобы они <b>получили результат и остались</b>.</p>
     </div>
 
     <!-- ROLE 1: Commercial -->
@@ -470,7 +1270,7 @@
           <h3 class="font-bold text-xl">Кофаундер 1 · «Деньги и спрос»</h3>
           <p class="text-sm text-gray-600">Коммерческий кофаундер. Отвечает за выручку, поток клиенток, загрузку слотов.</p>
         </div>
-        <span class="pill">Главный вопрос каждый день: «Где деньги и чем сегодня заполняем слоты?»</span>
+        <span class="pill">«Где деньги и чем заполняем слоты?»</span>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
@@ -478,74 +1278,70 @@
           <div class="font-semibold mb-2 text-sm uppercase tracking-wide text-gray-500">Зоны ответственности</div>
           <ul class="text-sm text-gray-800 space-y-2">
             <li><b>Продажи.</b> Лиды, диагностики, оплаты, продления — ежедневная таблица.</li>
-            <li><b>Воронка.</b> Реклама → заявка → переписка → диагностика 2 900 ₽ → абонемент → продление.</li>
-            <li><b>Контент.</b> Упаковка результата: до/после, замеры, истории, рационы, ошибки питания.</li>
-            <li><b>Партнёрки.</b> Салоны красоты, фитнес, косметологи, нутрициологи, блогеры района, ЖК рядом — <b>5–10 новых касаний в неделю</b>.</li>
-            <li><b>Повторные продажи.</b> Продление до окончания абонемента, скидка на 3 мес, рефералка, мини-челленджи.</li>
+            <li><b>Воронка.</b> Реклама → заявка → переписка → диагностика 2 500 ₽ → абонемент → продление.</li>
+            <li><b>Контент.</b> Упаковка результата: до/после, замеры, истории, рационы.</li>
+            <li><b>Партнёрки.</b> Салоны, фитнес, косметологи, нутрициологи, блогеры — <b>5–10 касаний/нед</b>.</li>
+            <li><b>Повторные продажи.</b> Продление до окончания абонемента, скидка на 3 мес, рефералка.</li>
           </ul>
         </div>
         <div>
           <div class="font-semibold mb-2 text-sm uppercase tracking-wide text-gray-500">Куда НЕ лезет</div>
           <ul class="text-sm text-gray-700 space-y-1 list-disc pl-5">
             <li>В работу с клиенткой на процедуре</li>
-            <li>В методику питания и протоколы</li>
-            <li>В разбор замеров и личные кейсы</li>
+            <li>В методику питания</li>
             <li>В чат поддержки и срывы</li>
           </ul>
           <div class="mt-4 p-3 bg-gray-50 rounded-lg text-sm">
-            <div class="font-semibold mb-1">Базовая модель оплаты</div>
-            <p class="text-gray-700">Фикс 50–70 тыс. + <b>3–5% от выручки сверх плана</b> + доля от чистой прибыли.</p>
+            <div class="font-semibold mb-1">Оплата</div>
+            <p class="text-gray-700">Фикс 50–70к + <b>3–5% от выручки сверх плана</b> + доля от чистой прибыли.</p>
           </div>
         </div>
       </div>
 
-      <!-- KPI по месяцам -->
       <div class="mt-6">
         <div class="font-semibold mb-3 text-sm uppercase tracking-wide text-gray-500">KPI по горизонтам</div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
           <div class="border border-gray-200 rounded-xl p-4">
             <div class="flex items-center justify-between mb-2">
-              <div class="font-bold">Месяц 1 · Старт</div>
-              <span class="pill">~375к выручки</span>
+              <div class="font-bold">M1 · Старт</div>
+              <span class="pill">~270к</span>
             </div>
             <ul class="text-sm text-gray-800 space-y-1.5">
-              <li>📌 <b>15 новых оплат</b></li>
-              <li>Стоимость лида ≤ 1 500 ₽</li>
-              <li>CAC ≤ 10 000 ₽</li>
-              <li>Конверсия диагностика → абонемент ≥ 40%</li>
-              <li>Средний чек ≥ 24 900 ₽</li>
-              <li>Воронка собрана и считается ежедневно</li>
-              <li>Запущены 5 партнёрских касаний</li>
+              <li>📌 <b>10 новых оплат</b></li>
+              <li>CPL ≤ 1 500 ₽</li>
+              <li>CAC ≤ 14 000 ₽</li>
+              <li>Конверсия диагностика → абонемент ≥ 30%</li>
+              <li>Воронка собирается ежедневно</li>
+              <li>5 партнёрских касаний</li>
             </ul>
           </div>
           <div class="border-2 border-emerald-500 rounded-xl p-4 bg-emerald-50/40">
             <div class="flex items-center justify-between mb-2">
-              <div class="font-bold">Месяц 3 · Разгон</div>
-              <span class="pill">~1 000к+ выручки</span>
+              <div class="font-bold">M3 · Разгон</div>
+              <span class="pill">~700к</span>
             </div>
             <ul class="text-sm text-gray-800 space-y-1.5">
-              <li>📌 <b>25 новых оплат</b> (накоп. ≥ 60)</li>
-              <li>Активных клиенток <b>40+</b></li>
-              <li>Загрузка слотов <b>≥ 70%</b></li>
-              <li>Конверсия диагностика → абонемент <b>≥ 45%</b></li>
+              <li>📌 <b>25 новых оплат</b> (накоп. ≥ 50)</li>
+              <li>Активных <b>30+</b></li>
+              <li>Загрузка <b>≥ 55%</b></li>
               <li>CAC ≤ 9 000 ₽</li>
-              <li>Доля Pro+VIP в выручке ≥ 15%</li>
+              <li>Доля Pro+VIP ≥ 10%</li>
               <li>10+ работающих партнёрок</li>
             </ul>
           </div>
           <div class="border border-gray-200 rounded-xl p-4">
             <div class="flex items-center justify-between mb-2">
-              <div class="font-bold">Месяц 6 · План</div>
-              <span class="pill">~1 800–2 000к</span>
+              <div class="font-bold">M6 · План</div>
+              <span class="pill">~1.4 млн</span>
             </div>
             <ul class="text-sm text-gray-800 space-y-1.5">
-              <li>📌 <b>35–40 новых оплат</b> / мес</li>
-              <li>Активных клиенток <b>60–80</b></li>
-              <li>Загрузка слотов <b>75–85%</b></li>
-              <li>LTV / CAC ≥ 3x</li>
-              <li>CAC ≤ 8 000 ₽</li>
+              <li>📌 <b>45 новых оплат</b> / мес</li>
+              <li>Активных <b>60+</b></li>
+              <li>Загрузка <b>75–85%</b></li>
+              <li>LTV / CAC ≥ 5x</li>
+              <li>CAC ≤ 7 000 ₽</li>
               <li>Доля Pro+VIP ≥ 25%</li>
-              <li>2+ предсказуемых канала трафика</li>
+              <li>2+ предсказуемых канала</li>
             </ul>
           </div>
         </div>
@@ -559,204 +1355,322 @@
           <h3 class="font-bold text-xl">Кофаундер 2 · «Продукт и результат»</h3>
           <p class="text-sm text-gray-600">Продуктовый кофаундер. Отвечает за результат клиенток, ведение группы, удержание.</p>
         </div>
-        <span class="pill">Главный вопрос каждый день: «Кто проседает, кого дожать, кто готов продлиться?»</span>
+        <span class="pill">«Кто проседает, кого дожать, кто готов продлиться?»</span>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
         <div>
           <div class="font-semibold mb-2 text-sm uppercase tracking-wide text-gray-500">Зоны ответственности</div>
           <ul class="text-sm text-gray-800 space-y-2">
-            <li><b>Методика питания.</b> Анкета, ограничения, рационы, что в кафе/срыв/завтрак. Без игры в врача.</li>
-            <li><b>Ведение группы.</b> Отчёты до 21:00, ответы куратора 2×/день, 1 эфир/неделю, замеры 1×/неделю.</li>
-            <li><b>Клиентский путь в зале.</b> Встреча → подготовка → процедуры → чек-ин → запись на следующий визит.</li>
-            <li><b>Замеры и прогресс.</b> Карта клиентки: вес, объёмы, фото, самочувствие, сон, питание, посещения.</li>
-            <li><b>Удержание.</b> Продление рождается каждую неделю через ощущение «меня ведут».</li>
+            <li><b>Методика питания.</b> Анкета, ограничения, рационы, что в кафе/срыв. Без игры в врача.</li>
+            <li><b>Ведение группы.</b> Отчёты до 21:00, ответы 2×/день, 1 эфир/нед, замеры 1×/нед.</li>
+            <li><b>Клиентский путь.</b> Встреча → подготовка → процедуры → чек-ин → запись.</li>
+            <li><b>Замеры и прогресс.</b> Карта клиентки: вес, объёмы, фото, питание, посещения.</li>
+            <li><b>Удержание.</b> Продление рождается каждую неделю через «меня ведут».</li>
           </ul>
         </div>
         <div>
           <div class="font-semibold mb-2 text-sm uppercase tracking-wide text-gray-500">Куда НЕ лезет</div>
           <ul class="text-sm text-gray-700 space-y-1 list-disc pl-5">
             <li>В рекламу и таргет</li>
-            <li>В переписку с холодными лидами</li>
-            <li>В договоры с подрядчиками и юр.часть</li>
-            <li>В контент, который продаёт (только в контент, который показывает результат)</li>
+            <li>В договоры и юр.часть</li>
+            <li>В контент-продажу</li>
           </ul>
           <div class="mt-4 p-3 bg-gray-50 rounded-lg text-sm">
-            <div class="font-semibold mb-1">Базовая модель оплаты</div>
-            <p class="text-gray-700">Фикс 50–70 тыс. + <b>бонус за продление / NPS / удержание</b> + доля от чистой прибыли.</p>
+            <div class="font-semibold mb-1">Оплата</div>
+            <p class="text-gray-700">Фикс 50–70к + <b>бонус за продление / NPS / удержание</b> + доля от чистой прибыли.</p>
           </div>
         </div>
       </div>
 
-      <!-- KPI по месяцам -->
       <div class="mt-6">
         <div class="font-semibold mb-3 text-sm uppercase tracking-wide text-gray-500">KPI по горизонтам</div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
           <div class="border border-gray-200 rounded-xl p-4">
             <div class="flex items-center justify-between mb-2">
-              <div class="font-bold">Месяц 1 · Стандарт</div>
+              <div class="font-bold">M1 · Стандарт</div>
               <span class="pill">Закладываем систему</span>
             </div>
             <ul class="text-sm text-gray-800 space-y-1.5">
               <li>📌 Карта клиентки на <b>100%</b></li>
-              <li>Доходимость на пробник <b>≥ 70%</b></li>
-              <li>Посещаемость процедур <b>≥ 80%</b></li>
-              <li>Выполнение отчётов по питанию <b>≥ 60%</b></li>
-              <li>Реакция на срыв в течение 24 ч</li>
-              <li>3–5 первых отзывов / историй</li>
-              <li>0 серьёзных жалоб</li>
+              <li>Доходимость на пробник <b>≥ 65%</b></li>
+              <li>Посещаемость процедур <b>≥ 75%</b></li>
+              <li>Выполнение отчётов <b>≥ 60%</b></li>
+              <li>Реакция на срыв в 24 ч</li>
+              <li>3–5 первых отзывов</li>
             </ul>
           </div>
           <div class="border-2 border-emerald-500 rounded-xl p-4 bg-emerald-50/40">
             <div class="flex items-center justify-between mb-2">
-              <div class="font-bold">Месяц 3 · Удержание</div>
+              <div class="font-bold">M3 · Удержание</div>
               <span class="pill">LT ≥ 1.8 мес</span>
             </div>
             <ul class="text-sm text-gray-800 space-y-1.5">
               <li>📌 <b>Продление M1→M2 ≥ 55%</b></li>
               <li>Продление M2→M3 ≥ 50%</li>
-              <li>Посещаемость процедур ≥ 85%</li>
+              <li>Посещаемость ≥ 85%</li>
               <li>Выполнение отчётов ≥ 70%</li>
               <li>NPS ≥ 8</li>
-              <li><b>5–7 кейсов до/после</b> в мес</li>
-              <li>Отказы / возвраты ≤ 5%</li>
+              <li>5–7 кейсов до/после</li>
             </ul>
           </div>
           <div class="border border-gray-200 rounded-xl p-4">
             <div class="flex items-center justify-between mb-2">
-              <div class="font-bold">Месяц 6 · Качество</div>
+              <div class="font-bold">M6 · Качество</div>
               <span class="pill">LT ≥ 2.5 мес</span>
             </div>
             <ul class="text-sm text-gray-800 space-y-1.5">
               <li>📌 <b>Продление M1→M2 ≥ 65%</b></li>
               <li>Продление M2→M3 ≥ 55%</li>
-              <li>Посещаемость процедур ≥ 90%</li>
               <li>NPS ≥ 9</li>
-              <li>Методика оцифрована и тиражируется</li>
-              <li>15+ публичных кейсов до/после</li>
-              <li>Готов протокол для второй точки</li>
+              <li>Методика оцифрована</li>
+              <li>15+ публичных кейсов</li>
+              <li>Готов протокол для 2-й точки</li>
             </ul>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Связь KPI с моделью -->
-    <div class="card bg-gray-900 text-white border-gray-900">
-      <h3 class="font-bold text-base mb-3">Как KPI стыкуются с юнит-экономикой</h3>
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
-        <div>
-          <div class="text-xs uppercase tracking-wide text-gray-400 mb-1">Если 15 оплат/мес × M3</div>
-          <div class="text-lg font-bold">≈ 60 активных</div>
-          <div class="text-gray-400">При M1→M2 53%, M2→M3 50%</div>
-        </div>
-        <div>
-          <div class="text-xs uppercase tracking-wide text-gray-400 mb-1">При CAC 10к и LTV 41к</div>
-          <div class="text-lg font-bold">LTV / CAC ≈ 4x</div>
-          <div class="text-gray-400">Окупаемость CAC < 1 мес</div>
-        </div>
-        <div>
-          <div class="text-xs uppercase tracking-wide text-gray-400 mb-1">При 60 клиентках микс</div>
-          <div class="text-lg font-bold">≈ 1 100к прибыли</div>
-          <div class="text-gray-400">Без онлайн-хвоста</div>
-        </div>
-        <div>
-          <div class="text-xs uppercase tracking-wide text-gray-400 mb-1">Точка безубытка</div>
-          <div class="text-lg font-bold">~32 клиентки</div>
-          <div class="text-gray-400">На основном тарифе</div>
-        </div>
-      </div>
-      <p class="text-xs text-gray-400 mt-4">Коммерческая отвечает за вход в воронку (CAC, оплаты, загрузку). Продуктовая отвечает за выход из неё (LT, LTV, повторы). Их KPI <b>невозможно подменить друг на друга</b> — это страховка от каши ответственности.</p>
-    </div>
-
-    <!-- Ритм встреч -->
     <div class="card bg-amber-50 border-amber-200">
       <h3 class="font-bold text-base mb-2">Совместный ритм</h3>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
         <div>
           <div class="font-semibold mb-1">Еженедельная встреча · 60 мин</div>
-          <p class="text-gray-700">Выручка факт/план · лиды · диагностики · оплаты · продления · загрузка · проблемные клиентки · кейсы · контент-план · что мешает росту.</p>
+          <p class="text-gray-700">Выручка/план · лиды · оплаты · продления · загрузка · проблемные клиентки · контент-план.</p>
         </div>
         <div>
           <div class="font-semibold mb-1">Дашборд · ежедневно</div>
-          <p class="text-gray-700">Клиентка / тариф / дата старта / посещения / питание / результат / риск ухода / следующая продажа — Google Sheets.</p>
+          <p class="text-gray-700">Google Sheets: клиентка / тариф / посещения / питание / результат / риск ухода.</p>
         </div>
         <div>
           <div class="font-semibold mb-1">Месячный пересмотр · 2 часа</div>
-          <p class="text-gray-700">P&L по этой модели, разбор воронки, корректировка тарифов, переоценка расходов, апдейт квартальных KPI.</p>
+          <p class="text-gray-700">P&L, разбор воронки, корректировка тарифов и бюджета, апдейт KPI.</p>
         </div>
       </div>
     </div>
 
-    <!-- Что нельзя -->
     <div class="card border-red-200 bg-red-50/40">
       <h3 class="font-bold text-base mb-3 text-red-900">Чего нельзя делать</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-        <div>
-          <div class="font-semibold">1. Обеим заниматься всем</div>
-          <p class="text-gray-700">«Я сторис сняла, ты клиентке ответила, а кто принял оплату и кто внёс замеры?» — это хаос, не бизнес.</p>
-        </div>
-        <div>
-          <div class="font-semibold">2. Продавать без продукта</div>
-          <p class="text-gray-700">Коммерческая нальёт клиентов, но при слабом продукте они уйдут через месяц. Деньги сгорят на CAC.</p>
-        </div>
-        <div>
-          <div class="font-semibold">3. Делать прекрасный продукт без продаж</div>
-          <p class="text-gray-700">Продуктовая идеально ведёт 8 девочек — бизнес сдыхает, потому что нужно 40–60.</p>
-        </div>
-        <div>
-          <div class="font-semibold">4. Путать дружбу и управление</div>
-          <p class="text-gray-700">Зафиксировать письменно: кто главный по какой зоне, какие KPI, как делится прибыль, кто решает в конфликте.</p>
-        </div>
+        <div><b>Обеим заниматься всем</b> — это хаос, не бизнес.</div>
+        <div><b>Продавать без продукта</b> — клиенты уйдут через мес, деньги сгорят на CAC.</div>
+        <div><b>Делать прекрасный продукт без продаж</b> — идеально вести 8 девочек, бизнес сдохнет.</div>
+        <div><b>Путать дружбу и управление</b> — зафиксировать письменно: кто главный, какие KPI, как делится прибыль.</div>
       </div>
     </div>
 
-    <!-- Кого ещё нанять -->
-    <div class="card">
-      <h3 class="font-bold text-base mb-3">Кого нанять / закрыть бартером (минимум)</h3>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-        <div>
-          <div class="font-semibold mb-1">Администратор зала</div>
-          <p class="text-gray-600">Записи, напоминания, встреча, оплаты, расписание, полотенца. Без него обе кофаундерши тонут в операционке.</p>
-        </div>
-        <div>
-          <div class="font-semibold mb-1">Контент-мейкер / съёмка</div>
-          <p class="text-gray-600">Reels, до/после, истории, рилзы процедур. Иначе маркетинг-бюджет горит впустую.</p>
-        </div>
-        <div>
-          <div class="font-semibold mb-1">Нутрициолог-партнёр</div>
-          <p class="text-gray-600">Чтобы «питание» было методикой, а не «съешь курицу и гречку». Можно % или фикс.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Делёж прибыли -->
     <div class="card border-gray-300">
       <h3 class="font-bold text-base mb-3">Как делить прибыль</h3>
-      <p class="text-sm text-gray-700 mb-3">Сначала бизнес покрывает: аренду, ФОТ, маркетинг, расходники, налоги, резерв, амортизацию. Потом из чистой прибыли:</p>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="p-4 bg-gray-50 rounded-lg">
-          <div class="text-3xl font-bold num">50%</div>
-          <div class="text-sm text-gray-600">Оставляем в бизнесе (резерв, развитие, вторая точка)</div>
-        </div>
-        <div class="p-4 bg-gray-50 rounded-lg">
-          <div class="text-3xl font-bold num">50%</div>
-          <div class="text-sm text-gray-600">Распределяем между партнёрами по долям</div>
-        </div>
-      </div>
-      <ul class="text-sm text-gray-700 space-y-1 list-disc pl-5 mt-4">
-        <li>Equity делите <b>по вкладу + риску</b>, не «50/50 потому что подруги». Зафиксировать письменно.</li>
+      <ul class="text-sm text-gray-700 space-y-1 list-disc pl-5">
+        <li>Equity — <b>по вкладу + риску</b>, не «50/50 потому что подруги».</li>
         <li>Vesting 4 года, cliff 1 год — выход до года = потеря доли.</li>
-        <li>Зарплата кофаундерш — фиксированная, одинаковая, маленькая (50–70 тыс. в первые 6 мес).</li>
-        <li>Дивиденды — только после операционной прибыли +500к ₽ <b>три месяца подряд</b>.</li>
+        <li>Зарплата кофаундерш — маленькая (50–70к) первые 6 мес.</li>
+        <li>Дивиденды — только после операц. +500к/мес <b>3 месяца подряд</b>.</li>
         <li>Решения до 100к — каждая в своей зоне. Свыше — только совместно.</li>
       </ul>
     </div>
+  </section>
 
+  <!-- ========== PDF REVIEW ========== -->
+  <section id="review" class="space-y-6">
+    <div class="space-y-3">
+      <span class="pill">Шаг 10</span>
+      <h2 class="section-title">Разбор внешней модели (PDF из ИИ-конструктора)</h2>
+      <p class="section-sub">Их модель показывает выручку 1.1 млн ₽, чистую прибыль 410к и окупаемость 2 мес. Цифры красивые, но 3 фатальные дыры превращают это в презентацию для инвестора, а не операционный план.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <div class="card border-red-200 bg-red-50/40">
+        <div class="text-xs uppercase tracking-wide text-red-700 font-semibold mb-1">Дыра #1</div>
+        <div class="font-bold text-lg mb-2">Маркетинг = 0 ₽</div>
+        <p class="text-sm text-gray-700">На старте без узнаваемости нельзя нагнать 15 новых/мес бесплатно. Реалистично для Мытищ: <b>150–200к ₽/мес</b>.</p>
+      </div>
+      <div class="card border-red-200 bg-red-50/40">
+        <div class="text-xs uppercase tracking-wide text-red-700 font-semibold mb-1">Дыра #2</div>
+        <div class="font-bold text-lg mb-2">Отток = 0 %, LT = 8 мес</div>
+        <p class="text-sm text-gray-700">Wellness retention никогда не идеален. Реалистично: <b>отток 8–12%/мес</b>, LT 1.8–2.5 мес на старте.</p>
+      </div>
+      <div class="card border-red-200 bg-red-50/40">
+        <div class="text-xs uppercase tracking-wide text-red-700 font-semibold mb-1">Дыра #3</div>
+        <div class="font-bold text-lg mb-2">Окупаемость 2 мес</div>
+        <p class="text-sm text-gray-700">Считают с пика. Реально ramp-up 4–6 мес. <b>Реальная окупаемость: 10–14 мес</b>, подушка 4.5–5.5 млн (не 2.76).</p>
+      </div>
+    </div>
+
+    <div class="card bg-gray-900 text-white border-gray-900">
+      <h3 class="font-bold text-base mb-3">Перевод PDF в честные цифры</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+        <div>
+          <div class="text-xs uppercase tracking-wide text-gray-400 mb-1">PDF: «их план»</div>
+          <div class="text-2xl font-bold pos">+410 000 ₽/мес</div>
+          <div class="text-gray-400 mt-1">Маркетинг 0, CAC 0, отток 0, окуп. 2 мес</div>
+        </div>
+        <div>
+          <div class="text-xs uppercase tracking-wide text-gray-400 mb-1">Реалити-чек</div>
+          <div class="text-2xl font-bold warn">≈ 100–180к ₽/мес</div>
+          <div class="text-gray-400 mt-1">Те же 30 клиенток, но маркетинг 180к + ФОТ 240к + расходники 800₽/визит</div>
+        </div>
+        <div>
+          <div class="text-xs uppercase tracking-wide text-gray-400 mb-1">Реалистичный M6 (Мытищи)</div>
+          <div class="text-2xl font-bold pos">≈ 500 000 ₽/мес</div>
+          <div class="text-gray-400 mt-1">60 активных, маркетинг 180к, доля Pro+VIP 25%</div>
+        </div>
+      </div>
+      <p class="text-xs text-gray-400 mt-4">Нажмите сценарий <b>«PDF: их план»</b> или <b>«Реалити-чек PDF»</b> в финансовой модели — увидите разницу вживую.</p>
+    </div>
+  </section>
+
+  <!-- ========== MULTI-AGENT VALIDATION ========== -->
+  <section id="agents" class="space-y-6">
+    <div class="space-y-3">
+      <span class="pill">Шаг 11</span>
+      <h2 class="section-title">Мультиагентная проверка плана</h2>
+      <p class="section-sub">План прошёл через 3 параллельных AI-агентов в ролях: исследователь рынка (рыночные бенчмарки), юнит-экономист (расчёт устойчивости), хардкорный критик (поиск дыр). Ниже — реальные findings без сглаживания.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="card">
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="font-bold">📊 Исследователь рынка</h3>
+          <span class="pill bg-green-100 text-green-700">Подтверждает</span>
+        </div>
+        <ul class="text-sm text-gray-700 space-y-2 mt-2">
+          <li>✓ Цена <b>22 900 ₽</b> в коридоре между бюджетом (15–18к) и средне-премиумом (24–35к). BodyDream Мытищи берёт 24к за 10 LPG БЕЗ питания.</li>
+          <li>✓ Прямых аналогов формата «питание + комплекс + ведение» в Мытищах <b>нет</b>.</li>
+          <li>✓ CAC для МО: 1 500–2 500 ₽ (fitnessdata.ru 2025).</li>
+          <li>✓ Retention M1→M2 для wellness с замерами: 55–65%.</li>
+          <li>✓ Аренда 70 м² Мытищи: 91–112к ₽/мес (Аструм, ЦИАН).</li>
+          <li>✓ Сезонность: пик январь+сентябрь, провал июнь–июль (−25–35%).</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="font-bold">💰 Юнит-экономист</h3>
+          <span class="pill bg-amber-100 text-amber-700">Усиливает</span>
+        </div>
+        <ul class="text-sm text-gray-700 space-y-2 mt-2">
+          <li>✓ Удержание 50%/45% занижено для «coaching»-модели (+25% LTV над salon walk-in). Можно поднять до 60%/55%.</li>
+          <li>✓ LT 1.8 мес на старте → 3–4 мес к M9.</li>
+          <li>✓ <b>Operating break-even — М3–M6</b>, не М1. Первые 3 мес операц.убыток 200–400к/мес — норма.</li>
+          <li>✓ Окупаемость CAPEX: 9–14 мес. PDF-прогноз «2 мес» — ложь.</li>
+          <li>✓ ФОТ 40–50% от выручки на старте — норма; маркетинг 8–12% на 1-й год.</li>
+          <li>⚠ <b>80% салонов закрываются за 18 мес.</b> Топ-3 причины: cash-flow / маркетинг / HR.</li>
+        </ul>
+      </div>
+
+      <div class="card border-red-300 bg-red-50/30">
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="font-bold">🔥 Жёсткий критик</h3>
+          <span class="pill bg-red-100 text-red-700">REJECT в текущей форме</span>
+        </div>
+        <ul class="text-sm text-gray-700 space-y-2 mt-2">
+          <li>❌ <b>Body Club 22 900 — субсидируете клиента</b>. 8×(LPG+бочка+гидро) по рознице = 32к. Конверсия будет 3–6%, не 15–20%.</li>
+          <li>❌ <b>«Деньги и спрос» у новичка</b> = почти гарантированный кассовый разрыв. Нужен фракционный финдир (20–30к/мес).</li>
+          <li>❌ Маркетинг 180к × 6 мес = 1.08 млн при CAC ≥10к = ровно 100 клиенток брутто. <b>Запас 8% — нулевой.</b></li>
+          <li>❌ Подушка 4.5 млн на 6 мес = <b>мало</b>. Реально 6.5–7.5 млн на 9 мес OPEX.</li>
+          <li>❌ <b>Уход мастеров с базой</b> — не «средний риск», а почти гарантия к M5. Контракт о неконкуренции в РФ не работает в суде.</li>
+          <li>❌ Каннибализация: Body Club 22.9 → даунгрейд в Start 11.9 = −48% ARPU.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card bg-gray-900 text-white border-gray-900">
+      <h3 class="font-bold text-base mb-3">Что меняем по итогам мультиагентной проверки</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+        <div>
+          <div class="font-semibold text-amber-300 mb-2">Главные корректировки</div>
+          <ul class="text-gray-200 space-y-2 list-disc pl-5">
+            <li><b>30 кастдевов в Мытищах до аренды.</b> Прямой вопрос: «За сколько реально купите за месяц с питанием?». Это валидация ценника.</li>
+            <li><b>Pre-sale 15 абонементов до открытия.</b> Если за 4 нед не собрали 10 предоплат — ценник или оффер сломаны.</li>
+            <li><b>Фракционный финдир</b> на 6 мес (20–30к/мес). Еженедельный P&L + cash-flow на 12 нед вперёд.</li>
+            <li><b>Подушка 6.5–7.5 млн</b> на 9 мес OPEX (а не 4.5 на 6 мес).</li>
+            <li><b>Старт с trial 3 900 ₽ за неделю</b> — точка входа в воронку, не «диагностика за 2 500».</li>
+            <li><b>Body Club Lite</b> (4 визита, 13 900 ₽) — защита от даунгрейда в Start.</li>
+          </ul>
+        </div>
+        <div>
+          <div class="font-semibold text-amber-300 mb-2">Антимастер-стратегия</div>
+          <ul class="text-gray-200 space-y-2 list-disc pl-5">
+            <li>Все коммуникации с клиенткой <b>через систему студии</b>, не через личный телефон мастера.</li>
+            <li><b>Ротация мастеров</b>: клиентка работает с 2–3 спецами, не с одним.</li>
+            <li><b>Доля в студии через 12 мес</b> для мастера с tenure — revenue share 5–10%.</li>
+            <li><b>Бренд в коммуникациях</b>: «Body Reset Club говорит:», не «Маша говорит:».</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pivot Triggers -->
+    <div class="card border-red-300">
+      <h3 class="font-bold text-base mb-3 text-red-900">🚨 Pivot Triggers — заранее прописанные решения</h3>
+      <p class="text-sm text-gray-600 mb-4">Принимать по триггеру, не по эмоции. Записать в shareholders agreement до открытия.</p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead class="text-xs text-gray-500 uppercase tracking-wide border-b border-gray-200">
+            <tr>
+              <th class="text-left py-2">Триггер</th>
+              <th class="text-left">Сигнал</th>
+              <th class="text-left">Действие</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-t border-gray-100">
+              <td class="text-left py-3 font-medium">Pre-sale провал</td>
+              <td>За 4 нед до открытия &lt;10 предоплат</td>
+              <td class="pos">Не открываться. Пересобрать оффер/цены. Сэкономить 1.5+ млн.</td>
+            </tr>
+            <tr class="border-t border-gray-100">
+              <td class="text-left py-3 font-medium">M3 провал</td>
+              <td>&lt;20 активных клиенток (план 28)</td>
+              <td class="warn">Сократить ФОТ (1 спец), sublease 30 м², гибрид «онлайн + 1 кабинет».</td>
+            </tr>
+            <tr class="border-t border-gray-100">
+              <td class="text-left py-3 font-medium">M4 провал</td>
+              <td>&lt;30 активных, прибыль &lt; −300к</td>
+              <td class="neg">Закрытие. Возврат подушки. Изучаем уроки.</td>
+            </tr>
+            <tr class="border-t border-gray-100">
+              <td class="text-left py-3 font-medium">CAC не падает</td>
+              <td>М3 CAC &gt;15к при ≥15 новых/мес</td>
+              <td class="warn">Перенести 60% бюджета на органику/партнёрства, отключить платный таргет.</td>
+            </tr>
+            <tr class="border-t border-gray-100">
+              <td class="text-left py-3 font-medium">Удержание провал</td>
+              <td>M1→M2 &lt;40% (план 50–55%)</td>
+              <td class="warn">Stop-sales. Все ресурсы — на продукт. Не льём в дырявое ведро.</td>
+            </tr>
+            <tr class="border-t border-gray-100">
+              <td class="text-left py-3 font-medium">Кэш &lt; 1 мес OPEX</td>
+              <td>Резерв упал ниже 550к</td>
+              <td class="neg">Stop-сжигание. Сокращение ФОТ, переговоры о рассрочке аренды.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card bg-emerald-50 border-emerald-200">
+      <h3 class="font-bold text-base mb-3 text-emerald-900">Итоговое заключение</h3>
+      <div class="space-y-2 text-sm text-gray-800">
+        <p><b>Проект идти можно</b>, но только при следующих условиях (все одновременно):</p>
+        <ol class="list-decimal pl-5 space-y-1">
+          <li>Подушка <b>6.5+ млн</b> на 9 мес OPEX (не 4.5 на 6).</li>
+          <li><b>30 кастдевов + pre-sale 10–15</b> до подписания аренды.</li>
+          <li>Фракционный финдир на 6 мес (20–30к/мес) — обязателен.</li>
+          <li>Pivot triggers прописаны и зафиксированы юридически.</li>
+          <li>Антимастер-стратегия: бренд впереди мастера, ротация, revenue share через 12 мес.</li>
+          <li>Старт в <b>феврале–марте</b> (выход на устойчивость к летнему провалу).</li>
+        </ol>
+        <p class="mt-3">Без хотя бы одного из этих пунктов — <b>не запускаться</b>. Это лотерея 20/80 не в вашу пользу. С полным набором — реалистичный шанс выйти в плюс на M4–M5 и в стабильность на M9–M12.</p>
+      </div>
+    </div>
   </section>
 
   <footer class="text-xs text-gray-400 text-center py-6">
-    Модель сохраняется локально в браузере. Цифры — гипотезы для проверки, не оферта.
+    Модель сохраняется локально в браузере. Цифры — гипотезы для проверки, не оферта.<br>
+    Сделано в Claude Code · обновляется автоматически при пуше в GitHub.
   </footer>
 
 </main>
