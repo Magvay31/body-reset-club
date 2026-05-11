@@ -470,3 +470,46 @@ document.getElementById('btn-export').addEventListener('click', exportCSV);
 
 load();
 renderAll();
+
+// ---------- CHECKLIST ----------
+const CHECKLIST_KEY = 'bodyclub-checklist-v1';
+function loadChecklist() {
+  try { return JSON.parse(localStorage.getItem(CHECKLIST_KEY) || '{}'); }
+  catch (e) { return {}; }
+}
+function saveChecklist(s) {
+  try { localStorage.setItem(CHECKLIST_KEY, JSON.stringify(s)); } catch (e) {}
+}
+function initChecklist() {
+  const state = loadChecklist();
+  const boxes = document.querySelectorAll('input[type="checkbox"][data-task]');
+  boxes.forEach(cb => {
+    cb.checked = !!state[cb.dataset.task];
+    cb.addEventListener('change', () => {
+      const s = loadChecklist();
+      s[cb.dataset.task] = cb.checked;
+      saveChecklist(s);
+      updateChecklistProgress();
+    });
+  });
+  updateChecklistProgress();
+}
+function updateChecklistProgress() {
+  ['c', 'p', 'j'].forEach(prefix => {
+    const tasks = document.querySelectorAll(`input[data-task^="${prefix}-"]`);
+    const done = Array.from(tasks).filter(t => t.checked).length;
+    const total = tasks.length;
+    const pct = total > 0 ? (done / total * 100) : 0;
+    const progEl = document.getElementById(`cl-${prefix}-progress`);
+    const barEl = document.getElementById(`cl-${prefix}-bar`);
+    if (progEl) progEl.textContent = `${done} / ${total}`;
+    if (barEl) barEl.style.width = pct + '%';
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initChecklist);
+} else {
+  initChecklist();
+}
+

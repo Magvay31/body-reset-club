@@ -61,6 +61,7 @@
       <a href="#tariffs" class="nav-link">Тарифы</a>
       <a href="#model" class="nav-link">Модель</a>
       <a href="#plan" class="nav-link">План 6 мес</a>
+      <a href="#checklist" class="nav-link">Чек-листы</a>
       <a href="#kpi" class="nav-link">KPI</a>
       <a href="#bench" class="nav-link">Бенчмарки</a>
       <a href="#risks" class="nav-link">Риски</a>
@@ -128,8 +129,8 @@
         </div>
         <div>
           <div class="text-xs uppercase tracking-wide text-gray-400 mb-1">Нужно денег на старт</div>
-          <div class="font-bold">4.5–5.5 млн ₽</div>
-          <div class="text-sm text-gray-300">CAPEX 600к + ремонт 400к + 6 мес OPEX-подушка ≈3.5 млн.</div>
+          <div class="font-bold">5.8–7.5 млн ₽</div>
+          <div class="text-sm text-gray-300">CAPEX 2.08 млн (ремонт 800к + LPG 80к + бочка 600к + гидро 600к) + 6–9 мес OPEX-подушка 3.3–4.95 млн.</div>
         </div>
       </div>
     </div>
@@ -529,7 +530,7 @@
                 <div class="font-bold text-lg">Подготовка инфраструктуры</div>
                 <div class="text-sm text-gray-500">8 недель до открытия. Никаких клиенток, только стройка.</div>
               </div>
-              <span class="pill bg-amber-100 text-amber-800">Затраты: 1.5–2 млн ₽</span>
+              <span class="pill bg-amber-100 text-amber-800">Затраты: 2.2–2.5 млн ₽</span>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 text-sm">
               <div>
@@ -544,14 +545,17 @@
                 </ul>
               </div>
               <div>
-                <div class="font-semibold mb-1">Помещение + оборудование</div>
+                <div class="font-semibold mb-1">Помещение + оборудование (CAPEX 2.08 млн ₽)</div>
                 <ul class="text-gray-700 space-y-1 list-disc pl-5">
                   <li>Помещение 60–80 м², 1 этаж ЖК, мощность 15+ кВт, вода</li>
-                  <li>Ремонт: вентиляция, душевая, зонирование (400–500к)</li>
-                  <li>Закупка: 3 LPG-аппарата (по 150–200к), гидро ванна (300к), кедровая бочка (120к). Бюджет CAPEX 600–800к</li>
-                  <li>Расходники на месяц вперёд (40к)</li>
-                  <li>Вывеска и навигация (30к)</li>
+                  <li>Ремонт: вентиляция, душевая, зонирование — <b>800 000 ₽</b></li>
+                  <li>LPG-аппарат массажный — <b>80 000 ₽</b></li>
+                  <li>Кедровая бочка (премиум, фитокапсула) — <b>600 000 ₽</b></li>
+                  <li>Гидромассажная ванна — <b>600 000 ₽</b></li>
+                  <li>Расходники на месяц вперёд — 40 000 ₽</li>
+                  <li>Вывеска и навигация — 30 000 ₽</li>
                 </ul>
+                <p class="text-xs text-gray-500 mt-2"><b>Внимание:</b> практики советуют рассмотреть б/у бочку и гидро с гарантией — экономия 30–40% (≈400к), для клиентки результат тот же.</p>
               </div>
               <div>
                 <div class="font-semibold mb-1">Команда</div>
@@ -826,6 +830,222 @@
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ========== INTERACTIVE CHECKLISTS ========== -->
+  <section id="checklist" class="space-y-6">
+    <div class="space-y-3">
+      <span class="pill">Шаг 4.5</span>
+      <h2 class="section-title">Чек-листы по ролям (отмечай — сохранится в браузере)</h2>
+      <p class="section-sub">Конкретные задачи каждой кофаундерше + совместные. Нажимай галочку, когда сделано — прогресс автоматически сохраняется. В сумме ≈80 задач: что подписать, что закупить, что прописать, с кем договориться.</p>
+    </div>
+
+    <!-- Overall progress -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="card">
+        <div class="flex items-center justify-between mb-2">
+          <div class="label">Кофаундер 1 · Деньги</div>
+          <div class="text-sm num font-semibold" id="cl-c-progress">— / —</div>
+        </div>
+        <div class="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+          <div class="h-full bg-emerald-500 transition-all" id="cl-c-bar" style="width:0%"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="flex items-center justify-between mb-2">
+          <div class="label">Кофаундер 2 · Продукт</div>
+          <div class="text-sm num font-semibold" id="cl-p-progress">— / —</div>
+        </div>
+        <div class="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+          <div class="h-full bg-emerald-500 transition-all" id="cl-p-bar" style="width:0%"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="flex items-center justify-between mb-2">
+          <div class="label">Совместный (юр / фин)</div>
+          <div class="text-sm num font-semibold" id="cl-j-progress">— / —</div>
+        </div>
+        <div class="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+          <div class="h-full bg-emerald-500 transition-all" id="cl-j-bar" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMMERCIAL CHECKLIST -->
+    <div class="card">
+      <h3 class="font-bold text-lg mb-1">Кофаундер 1 · «Деньги и спрос»</h3>
+      <p class="text-sm text-gray-500 mb-4">Лидген, продажи, контент, партнёрки, удержание выручки.</p>
+
+      <details class="border-t border-gray-100 pt-3" open>
+        <summary class="font-semibold text-sm flex justify-between"><span>M−2 · Подготовка спроса (до открытия)</span><span class="text-gray-400 num">11 задач</span></summary>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m2-1" class="mt-1"><span>Зарегистрировать ИП на УСН 6%, ОКВЭД 96.04 + 96.02 + 96.09. Открыть р/с в Тинькофф/Сбер</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m2-2" class="mt-1"><span>Подключить эквайринг + СБП. Запасной банк для резервного счёта</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m2-3" class="mt-1"><span>Сделать лендинг с квизом (Tilda + Marquiz/Flexbe), 6 вопросов → подбор программы</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m2-4" class="mt-1"><span>Завести IG, TG-канал, Я.Карты, 2ГИС-карточку. Заполнить на 100% (20 фото, видео-обзор)</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m2-5" class="mt-1"><span>Снять 50 reels-заготовок за 1 день съёмок (4 рубрики × 12+)</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m2-6" class="mt-1"><span>Провести <b>30 кастдевов</b> в Мытищах: за сколько реально купят, что важно. Зафиксировать в Notion</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m2-7" class="mt-1"><span>Запустить <b>pre-sale</b> со скидкой −30%, цель <b>10–15 предоплат</b> до открытия. Pivot trigger: &lt;10 = не открываться</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m2-8" class="mt-1"><span>Договориться с <b>3 микро-блогерами Мытищ</b> на бартер (10–50к подписчиков)</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m2-9" class="mt-1"><span>Договориться с <b>5 партнёрами</b>: 1 фитнес, 2 детских центра, 1 нутрициолог, 1 ЖК (УК района)</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m2-10" class="mt-1"><span>Подготовить контент-план M−2 → M2 (8 недель, 5 рубрик): «строим студию», «знакомство», «FAQ», «процессы», «лайфстайл»</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m2-11" class="mt-1"><span>Запустить таргет VK Ads + Я.Директ РСЯ за 2 недели до открытия (тестовый бюджет 80к)</span></label></li>
+        </ul>
+      </details>
+
+      <details class="border-t border-gray-100 pt-3 mt-3">
+        <summary class="font-semibold text-sm flex justify-between"><span>M1 · Тихий старт</span><span class="text-gray-400 num">7 задач</span></summary>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m1-1" class="mt-1"><span>Закрыть 8–12 первых платных абонементов Body Club</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m1-2" class="mt-1"><span>Собрать 3–5 публичных отзывов (видео-кружочки в TG, не текст)</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m1-3" class="mt-1"><span>Контент-машина: 4 reels + 3 поста + 5 stories в неделю</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m1-4" class="mt-1"><span>Ежедневный учёт воронки: лиды / диагностики / оплаты в YCLIENTS</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m1-5" class="mt-1"><span>Первый отчёт по CAC по каждому каналу к 25-му числу</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m1-6" class="mt-1"><span>Подключить Я.Карты Приоритет (12–15к/мес) + 2ГИС Премиум</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m1-7" class="mt-1"><span>Снять 10 reels процесса с первыми клиентками (с согласием на видео)</span></label></li>
+        </ul>
+      </details>
+
+      <details class="border-t border-gray-100 pt-3 mt-3">
+        <summary class="font-semibold text-sm flex justify-between"><span>M2–M3 · Воронка и продление</span><span class="text-gray-400 num">10 задач</span></summary>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m23-1" class="mt-1"><span>15 новых оплат в M2, 25 в M3</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m23-2" class="mt-1"><span>Запустить рассылку тёплой базе (тех, кто был на диагностике, но не купил)</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m23-3" class="mt-1"><span>A/B тест офферов: −3000 vs пробник 990 vs +программа питания</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m23-4" class="mt-1"><span>15+ отзывов на Я.Картах (рейтинг ≥4.8) — обязательно для алгоритма</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m23-5" class="mt-1"><span>Запустить программу «3 месяца за 64 900 ₽» к M3</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m23-6" class="mt-1"><span>Запустить реферальную программу: подружка приходит — −2 визита в подарок</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m23-7" class="mt-1"><span>Первый Pro апселл — 2–3 клиентки</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m23-8" class="mt-1"><span>CAC по каналу &lt; 9 000 ₽ к M3</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m23-9" class="mt-1"><span>Расширить партнёрки до 10 активных</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m23-10" class="mt-1"><span>5–7 микроблогеров охватили (платно + бартер)</span></label></li>
+        </ul>
+      </details>
+
+      <details class="border-t border-gray-100 pt-3 mt-3">
+        <summary class="font-semibold text-sm flex justify-between"><span>M4–M6 · Рост и масштаб</span><span class="text-gray-400 num">8 задач</span></summary>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m46-1" class="mt-1"><span>Снижение CAC до 7 000 ₽ через органику и партнёрки</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m46-2" class="mt-1"><span>2 предсказуемых канала трафика (стабильный CAC ±15%)</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m46-3" class="mt-1"><span>Loyalty: 4-й месяц подряд — −25%</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m46-4" class="mt-1"><span>Доля Pro+VIP в выручке ≥ 25%</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m46-5" class="mt-1"><span>NPS-опрос всех клиенток, разбор оценок &lt;7</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m46-6" class="mt-1"><span>30+ кейсов до/после в IG/TG</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m46-7" class="mt-1"><span>Win-back для отвалившихся: персональные предложения</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="c-m46-8" class="mt-1"><span>План масштабирования готов (вторая точка / второй кабинет / онлайн-направление)</span></label></li>
+        </ul>
+      </details>
+    </div>
+
+    <!-- PRODUCT CHECKLIST -->
+    <div class="card">
+      <h3 class="font-bold text-lg mb-1">Кофаундер 2 · «Продукт и результат»</h3>
+      <p class="text-sm text-gray-500 mb-4">Методика, мастера, ведение, замеры, удержание клиенток.</p>
+
+      <details class="border-t border-gray-100 pt-3" open>
+        <summary class="font-semibold text-sm flex justify-between"><span>M−2 · Подготовка продукта</span><span class="text-gray-400 num">13 задач</span></summary>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m2-1" class="mt-1"><span>Описать методику программы: анкета на входе, рацион, режим визитов, протокол замеров</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m2-2" class="mt-1"><span>Прописать <b>10 регламентов</b>: встреча клиентки · подготовка кабинета · первичная консультация · поведение в зале · разговор о результате (визит 4, 8) · обработка жалоб · продление абонемента · закрытие смены · санитарный регламент · соцсети и фото</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m2-3" class="mt-1"><span>Найти и нанять <b>2 мастеров LPG</b> (оклад 35–45к + 3–5к за продление абонемента «их» клиенткой)</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m2-4" class="mt-1"><span>Обучить мастеров на оборудовании за 1 неделю до открытия</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m2-5" class="mt-1"><span>Договор с мастерами: ИП самозанятые + НДА + неконкуренция в радиусе 5 км × 12 мес</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m2-6" class="mt-1"><span>Купить и настроить <b>YCLIENTS</b> (не amoCRM/Bitrix). Завести услуги, абонементы, расходники, тарифы мастеров</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m2-7" class="mt-1"><span>Шаблон карты клиентки: замеры (талия/бёдра/бицепс) на 1, 4, 8 визите + фото + противопоказания + цель + источник</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m2-8" class="mt-1"><span>Договориться с нутрициологом-партнёром (% или фикс 15–20к)</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m2-9" class="mt-1"><span>Закупить расходники на <b>2 месяца вперёд</b> (не 1): одноразка, гель, химия, шапочки, простыни</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m2-10" class="mt-1"><span>Купить запасной LPG-костюм (порвётся через 3 мес)</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m2-11" class="mt-1"><span>Подготовить чат-сценарии в WA Business + TG: 1–2 сообщения/день, личный диалог, реакция в течение 4ч</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m2-12" class="mt-1"><span>Договор на дезинфекцию с СЭС (1×/квартал). Журнал дезинфекции готов</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m2-13" class="mt-1"><span>Договор на утилизацию отходов класса А (обычный мусор) + класс Б (если есть медицинские)</span></label></li>
+        </ul>
+      </details>
+
+      <details class="border-t border-gray-100 pt-3 mt-3">
+        <summary class="font-semibold text-sm flex justify-between"><span>M1 · Запуск стандарта</span><span class="text-gray-400 num">7 задач</span></summary>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m1-1" class="mt-1"><span>Запустить чат поддержки (стандарт: 1–2 сообщения/день, не 24/7!)</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m1-2" class="mt-1"><span>100% клиенток в карте YCLIENTS с замерами и фото «до»</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m1-3" class="mt-1"><span>Доходимость пробника ≥ 65%</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m1-4" class="mt-1"><span>Посещаемость процедур ≥ 80%</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m1-5" class="mt-1"><span>3 первых отзыва / истории с реальными замерами</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m1-6" class="mt-1"><span>Ротация мастеров: визиты 1,3,5,7 — мастер A; визиты 2,4,6,8 — мастер B</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m1-7" class="mt-1"><span>День +1 после первого визита — сообщение от админа «как самочувствие?»</span></label></li>
+        </ul>
+      </details>
+
+      <details class="border-t border-gray-100 pt-3 mt-3">
+        <summary class="font-semibold text-sm flex justify-between"><span>M2–M3 · Удержание</span><span class="text-gray-400 num">8 задач</span></summary>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m23-1" class="mt-1"><span>10 кейсов 2-недельных до/после с <b>таблицей замеров</b> (см/кг/% жира), не только фото</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m23-2" class="mt-1"><span>NPS ≥ 7.5 в M2, ≥ 8 в M3 (опрос на 6-м и 8-м визите)</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m23-3" class="mt-1"><span>Выполнение отчётов по питанию ≥ 70%</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m23-4" class="mt-1"><span>Запустить еженедельный эфир «закрытое сообщество»</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m23-5" class="mt-1"><span>Договор о возврате/заморозке прописан грамотно (юрист). Невозвратная часть — резерв специалиста</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m23-6" class="mt-1"><span>Продление M1→M2 ≥ 55% (главный KPI M3)</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m23-7" class="mt-1"><span>5–7 публичных кейсов до/после</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m23-8" class="mt-1"><span>Расширенные замеры (анализатор тела) — закупка к M3</span></label></li>
+        </ul>
+      </details>
+
+      <details class="border-t border-gray-100 pt-3 mt-3">
+        <summary class="font-semibold text-sm flex justify-between"><span>M4–M6 · Качество как система</span><span class="text-gray-400 num">7 задач</span></summary>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m46-1" class="mt-1"><span>Продление M1→M2 ≥ 65%</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m46-2" class="mt-1"><span>NPS ≥ 9 стабильно</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m46-3" class="mt-1"><span>15+ публичных кейсов до/после с замерами</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m46-4" class="mt-1"><span>Методика оцифрована в Notion, готова к тиражированию</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m46-5" class="mt-1"><span>0 серьёзных жалоб 3 мес подряд</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m46-6" class="mt-1"><span>Замены мастеров и админа отработаны без потери качества</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="p-m46-7" class="mt-1"><span>Готов запуск второго мастера/кабинета (документация + расчёты)</span></label></li>
+        </ul>
+      </details>
+    </div>
+
+    <!-- JOINT CHECKLIST -->
+    <div class="card">
+      <h3 class="font-bold text-lg mb-1">Совместный · юр / фин / общее</h3>
+      <p class="text-sm text-gray-500 mb-4">То, что подписываете и решаете вдвоём.</p>
+
+      <details class="border-t border-gray-100 pt-3" open>
+        <summary class="font-semibold text-sm flex justify-between"><span>M−2 · Подготовка инфраструктуры</span><span class="text-gray-400 num">12 задач</span></summary>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="j-m2-1" class="mt-1"><span>Подписать <b>shareholders agreement</b> у юриста: доли, vesting 4 года, cliff 1 год, <b>pivot triggers</b>, выход партнёра</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="j-m2-2" class="mt-1"><span>Найти помещение 60–80 м² в Мытищах: 1 этаж ЖК, мощность 15+ кВт, вода, вытяжка</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="j-m2-3" class="mt-1"><span>Подписать договор аренды с льготным периодом на ремонт (1 мес) и опцион продления</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="j-m2-4" class="mt-1"><span>Заплатить за ремонт: вентиляция + душевая + зонирование — <b>800 000 ₽</b></span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="j-m2-5" class="mt-1"><span>Закупить оборудование: LPG-аппарат <b>80 000 ₽</b> + кедровая бочка <b>600 000 ₽</b> + гидрованна <b>600 000 ₽</b> (или б/у с гарантией −30%)</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="j-m2-6" class="mt-1"><span>Купить мебель + ресепшн (80–150к), вывеска (30к), весы + анализатор тела (30–80к)</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="j-m2-7" class="mt-1"><span>Нанять администратора (50–70к + бонус за продление)</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="j-m2-8" class="mt-1"><span>Нанять <b>фракционного финдира</b> на 6 мес (20–30к/мес). Еженедельный P&L + cash-flow 12 нед</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="j-m2-9" class="mt-1"><span>Подготовить у юриста: договор оферта на сайте + информированное согласие на процедуру + согласие на ПД + согласие на фото/видео</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="j-m2-10" class="mt-1"><span>Договор с прачечной (или купить промышленную стиралку + сушку)</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="j-m2-11" class="mt-1"><span>Страховка имущества и оборудования (ремонт от потопа/пожара)</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="j-m2-12" class="mt-1"><span>Бизнес-Telegram + WhatsApp Business на <b>отдельную SIM-карту студии</b>, не на личный телефон</span></label></li>
+        </ul>
+      </details>
+
+      <details class="border-t border-gray-100 pt-3 mt-3">
+        <summary class="font-semibold text-sm flex justify-between"><span>Ежемесячный ритм</span><span class="text-gray-400 num">6 задач</span></summary>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="j-r-1" class="mt-1"><span>Еженедельная встреча кофаундеров — понедельник 10:00, 60 мин (повестка из 10 пунктов)</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="j-r-2" class="mt-1"><span>Ежедневный обмен цифрами в чате до 21:00 (лиды/диагностики/оплаты)</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="j-r-3" class="mt-1"><span>Месячный пересмотр P&L с финдиром — последняя пятница, 2 часа</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="j-r-4" class="mt-1"><span>Квартальный пересмотр shareholders agreement и долей</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="j-r-5" class="mt-1"><span>Утренняя планёрка с админом + мастерами (письменно в чате)</span></label></li>
+          <li><label class="flex items-start gap-2 cursor-pointer"><input type="checkbox" data-task="j-r-6" class="mt-1"><span>Один из кофаундеров физически в зале 9–21 первые 3 мес (по очереди)</span></label></li>
+        </ul>
+      </details>
+    </div>
+
+    <div class="card bg-emerald-50 border-emerald-200">
+      <h3 class="font-bold text-base mb-2">Как пользоваться чек-листом</h3>
+      <ul class="text-sm text-gray-700 space-y-1 list-disc pl-5">
+        <li>Прогресс сохраняется автоматически в браузере — открыл завтра, всё на месте.</li>
+        <li>Цель не «отметить всё», а вовремя поймать, что отстаёшь. Если в M-2 пройдено &lt;60% — двигать дату открытия.</li>
+        <li>Каждый понедельник на встрече смотрите свой % и обсуждаете блокеры.</li>
+      </ul>
     </div>
   </section>
 
@@ -1292,8 +1512,8 @@
             <li>В чат поддержки и срывы</li>
           </ul>
           <div class="mt-4 p-3 bg-gray-50 rounded-lg text-sm">
-            <div class="font-semibold mb-1">Оплата</div>
-            <p class="text-gray-700">Фикс 50–70к + <b>3–5% от выручки сверх плана</b> + доля от чистой прибыли.</p>
+            <div class="font-semibold mb-1">Оплата — только из чистой прибыли</div>
+            <p class="text-gray-700">Никакой зарплаты, никаких бонусов за KPI. Только доля от чистой прибыли 50/50 с напарницей (после расчёта всех расходов + резерва).</p>
           </div>
         </div>
       </div>
@@ -1377,8 +1597,8 @@
             <li>В контент-продажу</li>
           </ul>
           <div class="mt-4 p-3 bg-gray-50 rounded-lg text-sm">
-            <div class="font-semibold mb-1">Оплата</div>
-            <p class="text-gray-700">Фикс 50–70к + <b>бонус за продление / NPS / удержание</b> + доля от чистой прибыли.</p>
+            <div class="font-semibold mb-1">Оплата — только из чистой прибыли</div>
+            <p class="text-gray-700">Никакой зарплаты, никаких бонусов за KPI. Только доля от чистой прибыли 50/50 с напарницей (после расчёта всех расходов + резерва).</p>
           </div>
         </div>
       </div>
@@ -1460,15 +1680,41 @@
       </div>
     </div>
 
-    <div class="card border-gray-300">
-      <h3 class="font-bold text-base mb-3">Как делить прибыль</h3>
-      <ul class="text-sm text-gray-700 space-y-1 list-disc pl-5">
-        <li>Equity — <b>по вкладу + риску</b>, не «50/50 потому что подруги».</li>
-        <li>Vesting 4 года, cliff 1 год — выход до года = потеря доли.</li>
-        <li>Зарплата кофаундерш — маленькая (50–70к) первые 6 мес.</li>
-        <li>Дивиденды — только после операц. +500к/мес <b>3 месяца подряд</b>.</li>
-        <li>Решения до 100к — каждая в своей зоне. Свыше — только совместно.</li>
-      </ul>
+    <div class="card border-gray-900 bg-gray-900 text-white">
+      <h3 class="font-bold text-base mb-3">💰 Модель оплаты: только из чистой прибыли</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 text-sm">
+        <div class="space-y-2">
+          <p class="text-red-300">❌ Нет фиксированной зарплаты</p>
+          <p class="text-red-300">❌ Нет бонусов за KPI</p>
+          <p class="text-red-300">❌ Нет «3% от выручки сверх плана»</p>
+          <p class="text-green-300">✅ Только % от чистой прибыли (50/50 по умолчанию)</p>
+        </div>
+        <div class="bg-gray-800 rounded-lg p-3 text-sm">
+          <div class="font-semibold mb-2 text-amber-300">Логика модели:</div>
+          <p class="text-gray-300">Бизнес платит зарплаты <b>персоналу</b> (мастера, админ), налоги, аренду, маркетинг и закладывает резерв. Что осталось — чистая прибыль, делится 50/50.</p>
+        </div>
+      </div>
+      <div class="space-y-2 text-sm">
+        <div class="font-semibold text-amber-300">Когда начинаются выплаты:</div>
+        <ul class="text-gray-300 space-y-1 list-disc pl-5">
+          <li><b>М1–М3:</b> операционный убыток → 0 ₽ кофаундерам.</li>
+          <li><b>М4 (первый плюс):</b> 100% реинвест в бизнес (резерв, маркетинг, расширение). Кофаундеры получают 0 ₽.</li>
+          <li><b>М5:</b> 100% реинвест.</li>
+          <li><b>М6:</b> если <b>3 месяца подряд +400к чистой прибыли</b> → начинаем дивиденды 50/50.</li>
+          <li><b>Дальше:</b> 50% в резерв/развитие, 50% дивидендов 50/50 кофаундершам.</li>
+        </ul>
+        <div class="mt-3 p-3 bg-amber-900/30 border border-amber-700 rounded-lg">
+          <div class="font-semibold text-amber-300 mb-1">⚠ Внимание: первые 6 месяцев у обеих НЕТ дохода из бизнеса.</div>
+          <p class="text-gray-300">Это значит: <b>каждая должна иметь личные сбережения или вторую работу на 6 мес жизни</b> до старта. Без этого — конфликт через 3 мес, что подтвердил опытный владелец (см. ниже мультиагентная проверка).</p>
+        </div>
+        <div class="font-semibold text-amber-300 mt-3">Equity и vesting:</div>
+        <ul class="text-gray-300 space-y-1 list-disc pl-5">
+          <li>Equity — <b>по вкладу + риску</b>, не «50/50 потому что подруги».</li>
+          <li>Vesting 4 года, cliff 1 год — выход до года = потеря доли.</li>
+          <li>Решения до 100к — каждая в своей зоне. Свыше — только совместно.</li>
+          <li>Пересмотр модели — каждые 6 мес. Если кто-то систематически перерабатывает — справедливый перерасчёт.</li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -1525,55 +1771,106 @@
   <section id="agents" class="space-y-6">
     <div class="space-y-3">
       <span class="pill">Шаг 11</span>
-      <h2 class="section-title">Мультиагентная проверка плана</h2>
-      <p class="section-sub">План прошёл через 3 параллельных AI-агентов в ролях: исследователь рынка (рыночные бенчмарки), юнит-экономист (расчёт устойчивости), хардкорный критик (поиск дыр). Ниже — реальные findings без сглаживания.</p>
+      <h2 class="section-title">Мультиагентная проверка плана (от тех, кто реально строит и покупает)</h2>
+      <p class="section-sub">План прошёл через <b>5 параллельных AI-агентов</b> в ролях: опытный владелец wellness-студии · операционный директор сети салонов МО · перформанс-маркетолог 14 запусков · хардкорный критик-финансист · реальная целевая клиентка (Марина, 34, Мытищи). Findings без купюр — то, что они написали, то и читаете.</p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <div class="card">
-        <div class="flex items-center justify-between mb-2">
-          <h3 class="font-bold">📊 Исследователь рынка</h3>
-          <span class="pill bg-green-100 text-green-700">Подтверждает</span>
-        </div>
-        <ul class="text-sm text-gray-700 space-y-2 mt-2">
-          <li>✓ Цена <b>22 900 ₽</b> в коридоре между бюджетом (15–18к) и средне-премиумом (24–35к). BodyDream Мытищи берёт 24к за 10 LPG БЕЗ питания.</li>
-          <li>✓ Прямых аналогов формата «питание + комплекс + ведение» в Мытищах <b>нет</b>.</li>
-          <li>✓ CAC для МО: 1 500–2 500 ₽ (fitnessdata.ru 2025).</li>
-          <li>✓ Retention M1→M2 для wellness с замерами: 55–65%.</li>
-          <li>✓ Аренда 70 м² Мытищи: 91–112к ₽/мес (Аструм, ЦИАН).</li>
-          <li>✓ Сезонность: пик январь+сентябрь, провал июнь–июль (−25–35%).</li>
-        </ul>
-      </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
-      <div class="card">
-        <div class="flex items-center justify-between mb-2">
-          <h3 class="font-bold">💰 Юнит-экономист</h3>
-          <span class="pill bg-amber-100 text-amber-700">Усиливает</span>
-        </div>
-        <ul class="text-sm text-gray-700 space-y-2 mt-2">
-          <li>✓ Удержание 50%/45% занижено для «coaching»-модели (+25% LTV над salon walk-in). Можно поднять до 60%/55%.</li>
-          <li>✓ LT 1.8 мес на старте → 3–4 мес к M9.</li>
-          <li>✓ <b>Operating break-even — М3–M6</b>, не М1. Первые 3 мес операц.убыток 200–400к/мес — норма.</li>
-          <li>✓ Окупаемость CAPEX: 9–14 мес. PDF-прогноз «2 мес» — ложь.</li>
-          <li>✓ ФОТ 40–50% от выручки на старте — норма; маркетинг 8–12% на 1-й год.</li>
-          <li>⚠ <b>80% салонов закрываются за 18 мес.</b> Топ-3 причины: cash-flow / маркетинг / HR.</li>
-        </ul>
-      </div>
-
+      <!-- Founder of wellness studio -->
       <div class="card border-red-300 bg-red-50/30">
-        <div class="flex items-center justify-between mb-2">
-          <h3 class="font-bold">🔥 Жёсткий критик</h3>
+        <div class="flex items-center justify-between mb-2 flex-wrap gap-2">
+          <h3 class="font-bold">👵 Опытный владелец wellness-студии (3 года практики)</h3>
+          <span class="pill bg-red-100 text-red-700">Кричит: не вижу мастеров!</span>
+        </div>
+        <ul class="text-sm text-gray-700 space-y-2 mt-2">
+          <li>🚨 <b>В плане забыты мастера как строка.</b> LPG руками не работает сам. ФОТ мастера 80–120к + %, ушёл — минус 8–15 клиенток. «За 3 года у меня ушло четверо».</li>
+          <li>🚨 <b>Чат 24/7 = выгорание</b> второго кофаундера к 4-му месяцу. 50 клиенток × 4 сообщ. = 200/день. Либо нанимать куратора чата 40к, либо вырезать из абонемента.</li>
+          <li>⚠ <b>Расписание «3–4 в час» — миф.</b> Реальный слот: 90 минут с буфером на опоздания, переодевание, дезинфекцию. <b>Не 4/час, а 1.5–2.</b></li>
+          <li>⚠ <b>Гидро 600к и бочка 600к — переплата.</b> Б/у с гарантией от поставщика: −30–40% (≈400к). Berner / Kasco восстановленная — 180–250к.</li>
+          <li>⚠ <b>Возвраты по 2300-ФЗ.</b> В первый год вернул 340к из-за плохого договора. «Невозвратная часть за резерв спеца» — обязательно прописать.</li>
+          <li>⚠ <b>Start 11 900 — мёртвый тариф.</b> Заменить на пробник 2 900 ₽ за визит + диагностика. Конверсия пробника в абонемент — 55%.</li>
+          <li>❌ <b>Реальная подушка до плюса: 3.2–3.8 млн</b>, выход в плюс M8–M11 (не M4–M5).</li>
+          <li>❌ <b>Три гарантии провала:</b> (1) обе без зарплаты — конфликт через 5 мес; (2) нет оперативного директора в зале; (3) чат 24/7 как часть продукта.</li>
+        </ul>
+      </div>
+
+      <!-- Operations Director -->
+      <div class="card">
+        <div class="flex items-center justify-between mb-2 flex-wrap gap-2">
+          <h3 class="font-bold">🎯 Операционный директор сети салонов МО (5 лет)</h3>
+          <span class="pill bg-amber-100 text-amber-700">Регламенты и YCLIENTS</span>
+        </div>
+        <ul class="text-sm text-gray-700 space-y-2 mt-2">
+          <li>📋 <b>10 регламентов до открытия</b>: встреча → подготовка кабинета (7 мин) → первичная консультация → поведение в зале (запрет на «вы поправились») → разговор о результате (визиты 4 и 8) → жалобы → продление → закрытие смены → СанПиН → фото клиенток.</li>
+          <li>🚨 <b>Мощность: 5–6 клиенток/день/мастер, не 8.</b> При 2 спецах × 26 дней = <b>260–310 визитов/мес максимум</b>, а не 400+. Пересчитайте юнит-экономику под это.</li>
+          <li>📊 <b>CRM = YCLIENTS</b> (1.5–3к/мес). Не amoCRM/Bitrix. Это салонная заточка: онлайн-запись, абонементы, расходники, ЗП мастеров, кассовая дисциплина.</li>
+          <li>💼 <b>Договор с мастером:</b> ИП самозанятый + НДА + неконкуренция 5 км × 12 мес + штраф 300к за переманивание. Юридически слабо, но 80% это останавливает.</li>
+          <li>💰 <b>Оплата мастера в Мытищах:</b> фикс 35–45к + 3–5к за каждое продление «его» клиенткой. Не чистый %, не чистый фикс. Гибрид.</li>
+          <li>📦 <b>Себестоимость 1 визита (реально):</b> 410–580 ₽. Одноразка 80–110 + гель 60–90 + химия 40–60 + стирка 50–80 + эквайринг 60 + ком. 90–130. На 280 визитов = <b>168к/мес</b> переменных.</li>
+          <li>🕰 <b>No-show 12–18%</b> на старте, опоздания 10–15 мин — норма Мытищ. Заложить буфер 15 мин между клиентками.</li>
+          <li>👥 <b>Первые 3 мес один кофаундер физически в зале 9–21.</b> Не «заезжаю проверить» — сидит. Иначе мастера и админ построят свой салон внутри вашего.</li>
+        </ul>
+      </div>
+
+      <!-- Performance Marketer -->
+      <div class="card">
+        <div class="flex items-center justify-between mb-2 flex-wrap gap-2">
+          <h3 class="font-bold">📱 Перформанс-маркетолог (14 wellness-запусков в МО)</h3>
+          <span class="pill bg-green-100 text-green-700">Связки конвертят</span>
+        </div>
+        <ul class="text-sm text-gray-700 space-y-2 mt-2">
+          <li>💸 <b>Распределение 180к/мес M1:</b> геосервисы 18к + Я.Директ РСЯ 55к + VK Ads (мамы Мытищ) 45к + микро-блогеры 35к + контент-съёмка 12к + промоутер у ЖК 15к.</li>
+          <li>🎯 <b>Главная связка (40% лидов):</b> VK Ads на «мамы 28–42 Мытищи+Королёв», look-alike Idealica/Tonus, креатив — реальная клиентка с сантиметром «−4 см за месяц», посадочная — квиз на 6 вопросов.</li>
+          <li>📍 <b>CAC по каналам в Мытищах:</b> геосервисы 1.5–3к ⭐ · VK Ads 3.5–5.5к ⭐ · Я.Директ РСЯ 4–6к ⭐ · Я.Директ поиск 7–11к · микро-блогеры 5–9к (лотерея) · крупные блогеры 15к+ (не идти).</li>
+          <li>🤝 <b>5 партнёрок на 60 дней:</b> детские центры (Сёма, Бэби-клуб) + салоны без аппаратной + локальные нутрициологи + УК ЖК «Мытищи Парк»/«Ярославский» + малые фитнес-клубы.</li>
+          <li>🎬 <b>Контент:</b> 4 reels + 3 поста + 5 stories в неделю. Лицо основательницы конвертит в 5 раз лучше любого SMM-агентства. Монтажёр на руки 25–30к/мес.</li>
+          <li>🗣 <b>Скрипт диагностики (5 вопросов):</b> «что хотите изменить за месяц?» → «что не сработало раньше?» → «сколько часов в неделю на себя?» → «что для вас успех в цифрах?» → «готовы стартовать в эти выходные?». Закрытие после демо-процедуры.</li>
+          <li>📈 <b>Прогноз при дисциплине:</b> M1 = 8–12, M3 = 22–28, M6 = 40–50. Критично: <b>опытный администратор-продажник 70к + 3% с абонемента к M2</b> — кофаундеры-новички диагностику завалят.</li>
+          <li>⛔ <b>Топ-5 ошибок маркетинга:</b> Instagram через VPN · «−50% всем» · SMM-агентство за 60к · игнор геосервисов · продажа абонемента в переписке (конверсия 5–8% vs 35–50% с диагностики).</li>
+        </ul>
+      </div>
+
+      <!-- Customer -->
+      <div class="card">
+        <div class="flex items-center justify-between mb-2 flex-wrap gap-2">
+          <h3 class="font-bold">👩 Целевая клиентка Марина, 34 (Мытищи Парк, 2 детей)</h3>
+          <span class="pill bg-amber-100 text-amber-700">22.9 — потолок</span>
+        </div>
+        <ul class="text-sm text-gray-700 space-y-2 mt-2">
+          <li>✅ <b>Что цепляет:</b> «не просто LPG — меня ведут». Замеры в студии. Комбо за 70 мин (не надо думать). Питание + чат — звучит как «не одна с приложением FatSecret».</li>
+          <li>❌ <b>70 мин × 2/нед = когда?</b> Старший в школе до 13:00, младший в саду до 17:30, работа с зумами. Если нет утренних слотов до 9:00 или вечерних после 20:00 — мысленно слилась.</li>
+          <li>💰 <b>Цена 22 900 — потолок.</b> Нормально 16–18к. 25+ = «лучше найму тренера домой». 30+ = «доход мужа, скандал в голове».</li>
+          <li>❓ <b>На диагностике спросит:</b> кто ведёт чат (диплом, не сертификат марафона) · сгорят ли визиты при болезни ребёнка · РЕАЛЬНЫЕ таблицы замеров за 2 мес · сколько клиенток продлили на 3-й месяц · утренние/вечерние слоты · что делаете когда вес стоит 3 нед · можно ли мне с ВСД.</li>
+          <li>📲 <b>Что должно быть в IG:</b> сториз лицом, без музыки и слоумо · скрин из приложения вес/см/жир по неделям (с плато!) · отзывы голосом-кружочки · похожие на меня клиентки · цены сразу.</li>
+          <li>💬 <b>Чат:</b> 1–2 сообщения/день, личный по имени, реакция 3–4ч в рабочее. БЕСИТ: «Доброе утречко, солнышки», стикеры, сообщения после 22:00, общий чат вместо личного.</li>
+          <li>🎁 <b>Лояльность реальная:</b> 3 мес → 4-й бесплатно (НЕ скидка 10%); подружка пришла + купила — 2 визита мне в подарок; ДР — индивид. SPA полежать.</li>
+          <li>🔁 <b>Что заставит продлиться:</b> минус 3 см с талии за 4 нед + реальное чувство «мне не насрать». «Марин, вижу вчера ужин не отметила — что случилось?», а не «как настроение?».</li>
+        </ul>
+      </div>
+
+      <!-- Financial Critic (consolidated) -->
+      <div class="card border-red-300 bg-red-50/30 lg:col-span-2">
+        <div class="flex items-center justify-between mb-2 flex-wrap gap-2">
+          <h3 class="font-bold">🔥 Хардкорный финансист-критик</h3>
           <span class="pill bg-red-100 text-red-700">REJECT в текущей форме</span>
         </div>
-        <ul class="text-sm text-gray-700 space-y-2 mt-2">
-          <li>❌ <b>Body Club 22 900 — субсидируете клиента</b>. 8×(LPG+бочка+гидро) по рознице = 32к. Конверсия будет 3–6%, не 15–20%.</li>
-          <li>❌ <b>«Деньги и спрос» у новичка</b> = почти гарантированный кассовый разрыв. Нужен фракционный финдир (20–30к/мес).</li>
-          <li>❌ Маркетинг 180к × 6 мес = 1.08 млн при CAC ≥10к = ровно 100 клиенток брутто. <b>Запас 8% — нулевой.</b></li>
-          <li>❌ Подушка 4.5 млн на 6 мес = <b>мало</b>. Реально 6.5–7.5 млн на 9 мес OPEX.</li>
-          <li>❌ <b>Уход мастеров с базой</b> — не «средний риск», а почти гарантия к M5. Контракт о неконкуренции в РФ не работает в суде.</li>
-          <li>❌ Каннибализация: Body Club 22.9 → даунгрейд в Start 11.9 = −48% ARPU.</li>
-        </ul>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
+          <ul class="space-y-2">
+            <li>❌ <b>Body Club 22 900 — субсидируете клиента.</b> 8 × (LPG + бочка + гидро) по рознице = 32к. Конверсия будет 3–6%, не 15–20%.</li>
+            <li>❌ <b>Маркетинг 180к × 6 мес = ровно 100 клиенток брутто при CAC ≥ 10к.</b> Запас 8% — нулевой. Партнёрки и органика обязательны.</li>
+            <li>❌ <b>Подушка 4.5 млн = мало.</b> Реально <b>6.5–7.5 млн</b> на 9 мес OPEX.</li>
+            <li>❌ <b>Уход мастеров с базой</b> — почти гарантия к M5. НДА в РФ не работает в суде, нужна структурная защита (бренд впереди мастера, ротация, revenue share через 12 мес).</li>
+          </ul>
+          <ul class="space-y-2">
+            <li>❌ <b>«Деньги и спрос» у новичка</b> = почти гарантированный кассовый разрыв. Фракционный финдир (20–30к/мес) на 6 мес — обязателен.</li>
+            <li>❌ <b>Каннибализация:</b> Body Club 22.9 → даунгрейд в Start 11.9 = −48% ARPU. Ввести Body Club Lite 13 900 как защитную ступень.</li>
+            <li>❌ <b>6 месяцев валидации мало.</b> Cycle покупки в wellness 2–3 мес. Retention видна к M6–M9. Кэш должен быть на 9 мес минимум.</li>
+            <li>❌ <b>Worst case реалистичный:</b> M3 = 15 клиенток → −300к/мес. К M6 cash gap. <b>50% вероятности именно этот сценарий.</b></li>
+          </ul>
+        </div>
       </div>
+
     </div>
 
     <div class="card bg-gray-900 text-white border-gray-900">
