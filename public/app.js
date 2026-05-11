@@ -1,76 +1,108 @@
-// ---------- DEFAULT STATE ----------
+// ---------- DEFAULT STATE (Мытищи, зрелая точка через ~6 мес) ----------
 const DEFAULT_STATE = {
   tariffs: [
-    { id: 'start',    name: 'Start (онлайн питание)', price: 14900, clients: 20, isOffline: false },
-    { id: 'bodyclub', name: 'Body Club',              price: 24900, clients: 40, isOffline: true  },
-    { id: 'pro',      name: 'Pro',                    price: 34900, clients: 15, isOffline: true  },
-    { id: 'vip',      name: 'VIP',                    price: 54900, clients: 5,  isOffline: true  },
+    { id: 'start',    name: 'Start (онлайн питание)', price: 11900, clients: 15, isOffline: false },
+    { id: 'bodyclub', name: 'Body Club',              price: 22900, clients: 36, isOffline: true  },
+    { id: 'pro',      name: 'Pro',                    price: 29900, clients: 8,  isOffline: true  },
+    { id: 'vip',      name: 'VIP',                    price: 44900, clients: 2,  isOffline: true  },
   ],
   fixedCosts: {
-    rent: 200000,
-    salary: 150000,
-    marketing: 300000,
-    other: 0,
+    rent: 95000,       // Мытищи, 60-80 м²
+    salary: 240000,    // 2 спеца + админ, с налогами 30%
+    marketing: 180000, // минимум для Подмосковья (не 0!)
+    other: 35000,      // CRM, эквайринг, бухгалтерия, страховка
   },
-  variableCostOffline: 4000,
+  variableCostOffline: 5500,
   variableCostOnline:  1500,
   funnel: {
-    leadCost: 1500,
-    diagnosticPrice: 2900,
-    leadToDiagnostic: 0.30,
-    diagnosticToSubscription: 0.50,
+    leadCost: 1200,
+    diagnosticPrice: 2500,
+    leadToDiagnostic: 0.28,
+    diagnosticToSubscription: 0.45,
   },
   retention: {
-    m1m2: 0.53,
-    m2m3: 0.50,
+    m1m2: 0.50,
+    m2m3: 0.45,
   },
   capacity: {
-    workingDays: 26,
+    workingDays: 28,
     workingHours: 8,
-    clientsPerHour: 3,
+    clientsPerHour: 4,  // ближе к их схеме с 5 аппаратами
     visitsPerWeek: 2,
   },
 };
 
 const SCENARIOS = {
-  startup: {
-    name: 'Стартовый',
-    description: '30 клиенток · только Body Club',
+  pdfPlan: {
+    name: 'PDF: их план',
+    description: '36 кл × 31 350 ₽, маркетинг 0, отток 0',
     apply: (s) => {
-      s.tariffs[0].clients = 0;
-      s.tariffs[1].clients = 30;
-      s.tariffs[2].clients = 0;
+      s.tariffs = [
+        { id: 'start',    name: 'Start (онлайн питание)', price: 11900, clients: 0,  isOffline: false },
+        { id: 'bodyclub', name: 'Pack 16 визитов + допр.', price: 31350, clients: 36, isOffline: true  },
+        { id: 'pro',      name: 'Pro',                    price: 29900, clients: 0,  isOffline: true  },
+        { id: 'vip',      name: 'VIP',                    price: 44900, clients: 0,  isOffline: true  },
+      ];
+      s.fixedCosts = { rent: 95000, salary: 182000, marketing: 0, other: 35000 };
+      s.variableCostOffline = 8000;
+      s.retention = { m1m2: 0.88, m2m3: 0.88 };
+      s.funnel.leadCost = 1; // чтобы не сломать формулу при maркетинг=0
+    }
+  },
+  realityCheck: {
+    name: 'Реалити-чек PDF',
+    description: 'Их структура с реалистичными правками',
+    apply: (s) => {
+      s.tariffs = [
+        { id: 'start',    name: 'Start (онлайн питание)', price: 11900, clients: 0,  isOffline: false },
+        { id: 'bodyclub', name: 'Pack 16 визитов + допр.', price: 28900, clients: 30, isOffline: true  },
+        { id: 'pro',      name: 'Pro',                    price: 29900, clients: 0,  isOffline: true  },
+        { id: 'vip',      name: 'VIP',                    price: 44900, clients: 0,  isOffline: true  },
+      ];
+      s.fixedCosts = { rent: 95000, salary: 240000, marketing: 180000, other: 35000 };
+      s.variableCostOffline = 8000;
+      s.retention = { m1m2: 0.55, m2m3: 0.50 };
+      s.funnel.leadCost = 1200;
+    }
+  },
+  mityschiM1: {
+    name: 'Мытищи · M1',
+    description: 'Старт: 15 клиенток',
+    apply: (s) => {
+      s.tariffs[0].clients = 5;
+      s.tariffs[1].clients = 8;
+      s.tariffs[2].clients = 2;
       s.tariffs[3].clients = 0;
     }
   },
-  working: {
-    name: 'Рабочий',
-    description: '50 Body Club · ~595к',
+  mityschiM3: {
+    name: 'Мытищи · M3',
+    description: 'Разгон: 30 клиенток',
     apply: (s) => {
-      s.tariffs[0].clients = 0;
-      s.tariffs[1].clients = 50;
-      s.tariffs[2].clients = 0;
-      s.tariffs[3].clients = 0;
+      s.tariffs[0].clients = 8;
+      s.tariffs[1].clients = 22;
+      s.tariffs[2].clients = 4;
+      s.tariffs[3].clients = 1;
     }
   },
-  mix: {
-    name: 'Микс (целевой)',
-    description: '60 офлайн + 20 онлайн',
+  mityschiM6: {
+    name: 'Мытищи · M6',
+    description: 'Зрелая точка: 46 клиенток + 15 онлайн',
     apply: (s) => {
-      s.tariffs[0].clients = 20;
-      s.tariffs[1].clients = 40;
-      s.tariffs[2].clients = 15;
-      s.tariffs[3].clients = 5;
+      s.tariffs[0].clients = 15;
+      s.tariffs[1].clients = 36;
+      s.tariffs[2].clients = 8;
+      s.tariffs[3].clients = 2;
     }
   },
   stretch: {
-    name: 'Stretch',
-    description: 'Максимум загрузки',
+    name: 'Мытищи · Stretch',
+    description: 'Максимум: 70 офлайн + 30 онлайн',
     apply: (s) => {
-      s.tariffs[0].clients = 40;
-      s.tariffs[1].clients = 45;
-      s.tariffs[2].clients = 20;
-      s.tariffs[3].clients = 10;
+      s.tariffs[0].clients = 30;
+      s.tariffs[1].clients = 50;
+      s.tariffs[2].clients = 15;
+      s.tariffs[3].clients = 5;
     }
   },
 };

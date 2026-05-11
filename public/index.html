@@ -39,7 +39,7 @@
     <div>
       <div class="flex items-center gap-2">
         <h1 class="text-xl font-bold">Body Reset Club</h1>
-        <span class="pill">Москва</span>
+        <span class="pill">Мытищи</span>
       </div>
       <p class="text-sm text-gray-500">Финансовая модель · клуб коррекции тела</p>
     </div>
@@ -317,6 +317,142 @@
         </thead>
         <tbody id="cohort-table"></tbody>
       </table>
+    </div>
+  </section>
+
+  <!-- PDF reality check -->
+  <section class="space-y-4">
+    <div>
+      <h2 class="text-lg font-bold">Разбор внешней модели (PDF из ИИ-конструктора)</h2>
+      <p class="text-sm text-gray-500 max-w-3xl">Их модель показывает выручку 1.1 млн ₽, чистую прибыль 410к и окупаемость 2 мес. Цифры выглядят красиво, но 3 фатальные дыры превращают это в презентацию для инвестора, а не в операционный план.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <div class="card border-red-200 bg-red-50/40">
+        <div class="text-xs uppercase tracking-wide text-red-700 font-semibold mb-1">Дыра #1</div>
+        <div class="font-bold text-lg mb-2">Маркетинг = 0 ₽</div>
+        <p class="text-sm text-gray-700">На старте без узнаваемости нельзя нагнать 15 новых клиенток/мес бесплатно. Реалистично для Мытищ: <b>150–200к ₽/мес</b>. Иначе откуда поток?</p>
+      </div>
+      <div class="card border-red-200 bg-red-50/40">
+        <div class="text-xs uppercase tracking-wide text-red-700 font-semibold mb-1">Дыра #2</div>
+        <div class="font-bold text-lg mb-2">Отток = 0 %/мес, LT = 8 мес</div>
+        <p class="text-sm text-gray-700">Wellness retention никогда не идеален. Реалистично: <b>отток 8–15%/мес</b>, средний LT на старте 3–5 мес. LT 8 мес — это после года работы и сильного продукта.</p>
+      </div>
+      <div class="card border-red-200 bg-red-50/40">
+        <div class="text-xs uppercase tracking-wide text-red-700 font-semibold mb-1">Дыра #3</div>
+        <div class="font-bold text-lg mb-2">Окупаемость 2 мес</div>
+        <p class="text-sm text-gray-700">Считают с пика 36 клиенток. На самом деле ramp-up займёт 4–6 мес (М1: 8–12 кл, М3: 22–30, М6: 36+). <b>Реальная окупаемость: 10–14 мес.</b></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 class="font-bold text-base mb-3">Точечный разбор: где их цифры расходятся с реальностью</h3>
+      <table class="w-full text-sm num">
+        <thead class="text-xs text-gray-400 uppercase tracking-wide border-b border-gray-200">
+          <tr>
+            <th class="text-left py-2">Параметр</th>
+            <th class="text-right py-2">PDF</th>
+            <th class="text-right py-2">Реалистично (Мытищи)</th>
+            <th class="text-left py-2 pl-4">Комментарий</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-t border-gray-100">
+            <td class="text-left py-2 font-medium">Аренда</td>
+            <td class="text-right">95 000 ₽</td>
+            <td class="text-right pos">95 000 ₽</td>
+            <td class="text-left pl-4 text-gray-600 num-off" style="font-variant-numeric: normal;">Норм для Мытищ (60–80 м²).</td>
+          </tr>
+          <tr class="border-t border-gray-100">
+            <td class="text-left py-2 font-medium">ФОТ</td>
+            <td class="text-right">182 000 ₽</td>
+            <td class="text-right neg">240 000–280 000 ₽</td>
+            <td class="text-left pl-4 text-gray-600" style="font-variant-numeric: normal;">Нет администратора. Без админа кофаундер тонет в записях и оплатах.</td>
+          </tr>
+          <tr class="border-t border-gray-100">
+            <td class="text-left py-2 font-medium">Маркетинг</td>
+            <td class="text-right neg">0 ₽</td>
+            <td class="text-right pos">150 000–200 000 ₽</td>
+            <td class="text-left pl-4 text-gray-600" style="font-variant-numeric: normal;">Главный провал PDF. Без бюджета 15 новых/мес нереально.</td>
+          </tr>
+          <tr class="border-t border-gray-100">
+            <td class="text-left py-2 font-medium">Расходники / визит</td>
+            <td class="text-right">500 ₽</td>
+            <td class="text-right neg">800–1 200 ₽</td>
+            <td class="text-left pl-4 text-gray-600" style="font-variant-numeric: normal;">Не учтены эквайринг 2–3%, бонусы мастеру, стирка, косметика.</td>
+          </tr>
+          <tr class="border-t border-gray-100">
+            <td class="text-left py-2 font-medium">CAC</td>
+            <td class="text-right neg">0 ₽</td>
+            <td class="text-right pos">6 000–12 000 ₽</td>
+            <td class="text-left pl-4 text-gray-600" style="font-variant-numeric: normal;">Следствие маркетинг=0.</td>
+          </tr>
+          <tr class="border-t border-gray-100">
+            <td class="text-left py-2 font-medium">Отток / мес</td>
+            <td class="text-right neg">0 %</td>
+            <td class="text-right pos">8–15 %</td>
+            <td class="text-left pl-4 text-gray-600" style="font-variant-numeric: normal;">Wellness retention никогда не 100%. Реальная воронка: 15→8→4 (53%/50%).</td>
+          </tr>
+          <tr class="border-t border-gray-100">
+            <td class="text-left py-2 font-medium">Средний LT</td>
+            <td class="text-right neg">8 мес</td>
+            <td class="text-right pos">1.7–2.5 мес</td>
+            <td class="text-left pl-4 text-gray-600" style="font-variant-numeric: normal;">На старте. К году можно вытянуть до 4–5 мес.</td>
+          </tr>
+          <tr class="border-t border-gray-100">
+            <td class="text-left py-2 font-medium">LTV / CAC</td>
+            <td class="text-right neg">∞ (CAC=0)</td>
+            <td class="text-right pos">3–4 x</td>
+            <td class="text-left pl-4 text-gray-600" style="font-variant-numeric: normal;">Здоровый бизнес ≥ 3x. Считается при реальном CAC.</td>
+          </tr>
+          <tr class="border-t border-gray-100">
+            <td class="text-left py-2 font-medium">Загрузка 70% сразу</td>
+            <td class="text-right neg">да</td>
+            <td class="text-right pos">30→50→70% за 4–6 мес</td>
+            <td class="text-left pl-4 text-gray-600" style="font-variant-numeric: normal;">Не бывает «открыли — сразу полная загрузка».</td>
+          </tr>
+          <tr class="border-t border-gray-100">
+            <td class="text-left py-2 font-medium">Окупаемость инвестиций</td>
+            <td class="text-right neg">2 мес</td>
+            <td class="text-right pos">10–14 мес</td>
+            <td class="text-left pl-4 text-gray-600" style="font-variant-numeric: normal;">Считают по пику, а не накопительно с учётом ramp-up.</td>
+          </tr>
+          <tr class="border-t border-gray-100">
+            <td class="text-left py-2 font-medium">Подушка на старт</td>
+            <td class="text-right neg">2.76 млн</td>
+            <td class="text-right pos">4.5–5.5 млн</td>
+            <td class="text-left pl-4 text-gray-600" style="font-variant-numeric: normal;">3 мес OPEX мало. Нужен 6–9 мес запас до выхода на безубыток.</td>
+          </tr>
+          <tr class="border-t border-gray-100">
+            <td class="text-left py-2 font-medium">5 аппаратов в 1 кабинете одновременно</td>
+            <td class="text-right warn">да</td>
+            <td class="text-right">2 кабинета</td>
+            <td class="text-left pl-4 text-gray-600" style="font-variant-numeric: normal;">5 женщин одновременно = шум, тесно, мало интимности. Wellness любит более камерную атмосферу.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card bg-gray-900 text-white border-gray-900">
+      <h3 class="font-bold text-base mb-3">Перевод PDF в честные цифры (нажми сценарий в блоке выше)</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+        <div>
+          <div class="text-xs uppercase tracking-wide text-gray-400 mb-1">PDF: «их план»</div>
+          <div class="text-2xl font-bold pos">+410 000 ₽/мес</div>
+          <div class="text-gray-400 mt-1">Маркетинг 0, CAC 0, отток 0, окуп. 2 мес</div>
+        </div>
+        <div>
+          <div class="text-xs uppercase tracking-wide text-gray-400 mb-1">Реалити-чек</div>
+          <div class="text-2xl font-bold warn">≈ 100–180к ₽/мес</div>
+          <div class="text-gray-400 mt-1">Те же 30–36 клиенток, но маркетинг 180к + ФОТ 240к + расходники 800₽</div>
+        </div>
+        <div>
+          <div class="text-xs uppercase tracking-wide text-gray-400 mb-1">Реалистичный сценарий М6 (Мытищи)</div>
+          <div class="text-2xl font-bold pos">≈ 540 000 ₽/мес</div>
+          <div class="text-gray-400 mt-1">61 клиентка (36 Body Club + 8 Pro + 2 VIP + 15 онлайн), маркетинг 180к</div>
+        </div>
+      </div>
+      <p class="text-xs text-gray-400 mt-4">Нажмите сценарий <b>«PDF: их план»</b> или <b>«Реалити-чек PDF»</b> в блоке готовых сценариев — модель пересоберётся под их цифры, и вы увидите разницу вживую.</p>
     </div>
   </section>
 
